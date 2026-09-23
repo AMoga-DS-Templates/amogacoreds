@@ -58,7 +58,7 @@ export function SubTabsBar({
               onTabChange?.('chats')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'chats' || !activeTab
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -73,7 +73,7 @@ export function SubTabsBar({
               onTabChange?.('chat-contact')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'chat-contact'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -88,7 +88,7 @@ export function SubTabsBar({
               onTabChange?.('chat-groups')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'chat-groups'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -103,7 +103,7 @@ export function SubTabsBar({
               onTabChange?.('chat-folder')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'chat-folder'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -120,7 +120,7 @@ export function SubTabsBar({
               onTabChange?.('ai-chat')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'ai-chat' ||
                 !activeTab ||
                 activeTab === 'inbox' ||
@@ -137,7 +137,7 @@ export function SubTabsBar({
               onTabChange?.('ai-recent')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'ai-recent'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -151,7 +151,7 @@ export function SubTabsBar({
               onTabChange?.('ai-prompts')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'ai-prompts'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -169,7 +169,7 @@ export function SubTabsBar({
               onSelectFile?.()
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'vouchers' ||
                 activeTab === 'file-list' ||
                 !activeTab ||
@@ -187,7 +187,7 @@ export function SubTabsBar({
               onTabChange?.('file-recent')
             }}
             className={cn(
-              'pb-1 border-b-2 transition-all cursor-pointer select-none',
+              'pb-1 border-b-3 transition-all cursor-pointer select-none',
               activeTab === 'file-recent'
                 ? 'border-primary text-foreground font-semibold'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -207,7 +207,7 @@ export function SubTabsBar({
                 onModeChange?.('inbox')
               }}
               className={cn(
-                'pb-1 border-b-2 transition-all cursor-pointer select-none',
+                'pb-1 border-b-3 transition-all cursor-pointer select-none',
                 activeTab === 'inbox' || !activeTab
                   ? 'border-primary text-foreground font-semibold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -223,7 +223,7 @@ export function SubTabsBar({
                 onModeChange?.('done')
               }}
               className={cn(
-                'pb-1 border-b-2 transition-all cursor-pointer select-none',
+                'pb-1 border-b-3 transition-all cursor-pointer select-none',
                 activeTab === 'send'
                   ? 'border-primary text-foreground font-semibold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -237,7 +237,7 @@ export function SubTabsBar({
                 onTabChange?.('folder')
               }}
               className={cn(
-                'pb-1 border-b-2 transition-all cursor-pointer select-none',
+                'pb-1 border-b-3 transition-all cursor-pointer select-none',
                 activeTab === 'folder'
                   ? 'border-primary text-foreground font-semibold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -251,7 +251,7 @@ export function SubTabsBar({
                 onTabChange?.('contact')
               }}
               className={cn(
-                'pb-1 border-b-2 transition-all cursor-pointer select-none',
+                'pb-1 border-b-3 transition-all cursor-pointer select-none',
                 activeTab === 'contact'
                   ? 'border-primary text-foreground font-semibold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -265,7 +265,7 @@ export function SubTabsBar({
                 onTabChange?.('groups')
               }}
               className={cn(
-                'pb-1 border-b-2 transition-all cursor-pointer select-none',
+                'pb-1 border-b-3 transition-all cursor-pointer select-none',
                 activeTab === 'groups'
                   ? 'border-primary text-foreground font-semibold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'

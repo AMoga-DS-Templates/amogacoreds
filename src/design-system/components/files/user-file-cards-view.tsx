@@ -34,6 +34,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from '@/design-system/components/ui/dropdown-menu'
+import { ToggleGroup, ToggleGroupItem } from '@/design-system/components/ui/toggle-group'
+import { Badge } from '@/design-system/components/ui/badge'
 
 export interface UserFileCardsViewProps {
   folder?: FolderItemData | null
@@ -182,7 +184,7 @@ export function UserFileCardsView({
             </button>
           )}
 
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-900/40 shrink-0 shadow-2xs">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20 shrink-0 shadow-2xs">
             <FolderOpen className="h-5 w-5" />
           </div>
 
@@ -191,9 +193,12 @@ export function UserFileCardsView({
               <h2 className="truncate text-base font-bold text-foreground tracking-tight">
                 {folderDisplayName}
               </h2>
-              <span className="px-2 py-0.5 rounded-full bg-muted text-xs font-normal text-muted-foreground shrink-0">
+              <Badge
+                variant="secondary"
+                className="h-6 px-2 text-xs font-normal text-muted-foreground shrink-0"
+              >
                 {filteredFiles.length} files
-              </span>
+              </Badge>
             </div>
             <p className="truncate text-xs text-muted-foreground mt-0.5">
               Storage folder: {folderDisplayPath}
@@ -205,7 +210,7 @@ export function UserFileCardsView({
         <div className="flex items-center gap-1 shrink-0">
           <button
             type="button"
-            className="p-2 rounded-lg text-amber-500 hover:bg-muted transition-colors cursor-pointer"
+            className="p-2 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
             title="Notifications"
           >
             <Bell className="h-4 w-4" />
@@ -314,7 +319,7 @@ export function UserFileCardsView({
         <Button
           onClick={() => setViewMode(viewMode === 'grid' ? 'table' : 'grid')}
           size="sm"
-          className="h-8 gap-1.5 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs px-3.5 shrink-0 cursor-pointer"
+          className="h-8 gap-1.5 text-xs font-bold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-xs px-3.5 shrink-0 cursor-pointer"
         >
           {viewMode === 'grid' ? (
             <>
@@ -332,25 +337,35 @@ export function UserFileCardsView({
 
       {/* ── 2.5 CATEGORY PILLS BAR ─────────────────────────────────────────── */}
       {(!folder || folder.level < 2) && (
-        <div className="flex items-center gap-1.5 px-4 pb-2 overflow-x-auto no-scrollbar shrink-0">
-          {['all', 'Images', 'Pdf', 'Doc', 'Xls', 'Videos', 'Ppt', 'Txt', 'Zip'].map((cat) => (
-            <button
+        <div className="overflow-x-auto px-4 pb-2 no-scrollbar shrink-0">
+          <ToggleGroup
+            type="single"
+            value={selectedCategory}
+            onValueChange={(value) => {
+              if (!value) return
+              setSelectedCategory(value)
+              setCurrentPage(1)
+            }}
+            spacing={2}
+            size="sm"
+            className="w-max"
+          >
+            {['all', 'Images', 'Pdf', 'Doc', 'Xls', 'Videos', 'Ppt', 'Txt', 'Zip'].map((cat) => (
+              <ToggleGroupItem
               key={cat}
-              type="button"
-              onClick={() => {
-                setSelectedCategory(cat)
-                setCurrentPage(1)
-              }}
-              className={cn(
-                "px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer",
-                selectedCategory.toLowerCase() === cat.toLowerCase()
-                  ? "bg-indigo-600 text-white shadow-xs"
-                  : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
+              value={cat}
+              aria-label={`Filter by ${cat === 'all' ? 'all files' : cat}`}
+              className="h-8 min-w-0 rounded-full bg-transparent p-0 hover:bg-transparent data-[state=on]:bg-transparent"
             >
-              {cat === 'all' ? 'All Files' : cat}
-            </button>
-          ))}
+              <Badge
+                variant={selectedCategory === cat ? 'default' : 'secondary'}
+                className="h-8 cursor-pointer px-3 text-xs font-semibold hover:bg-accent hover:text-accent-foreground"
+              >
+                {cat === 'all' ? 'All Files' : cat}
+              </Badge>
+            </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
         </div>
       )}
 
@@ -365,7 +380,7 @@ export function UserFileCardsView({
               setCurrentPage(1)
             }}
             placeholder="Search files by name, format, or sender..."
-            className="h-10 pl-10 pr-9 text-sm rounded-xl bg-background border-border/80 focus-visible:ring-1 focus-visible:ring-indigo-500"
+            className="h-10 pl-10 pr-9 text-sm rounded-xl bg-background border-border/80 focus-visible:ring-1 focus-visible:ring-ring"
           />
           {searchQuery && (
             <button
@@ -418,7 +433,7 @@ export function UserFileCardsView({
       <div className="min-h-0 flex-1 overflow-y-auto p-4">
         {paginatedFiles.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-64 text-center p-6 rounded-2xl border border-dashed border-border/80 bg-muted/5">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-600 mb-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary mb-3">
               <FolderOpen className="h-6 w-6" />
             </div>
             <h3 className="text-sm font-bold text-foreground">No files found</h3>
@@ -431,7 +446,7 @@ export function UserFileCardsView({
               <Button
                 size="sm"
                 onClick={onUploadClick}
-                className="mt-4 gap-1.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-xs"
+                className="mt-4 gap-1.5 text-xs font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-xs"
               >
                 <Upload className="h-3.5 w-3.5" />
                 Upload First File

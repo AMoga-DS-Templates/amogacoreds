@@ -276,11 +276,11 @@ function SideListCardPreview({ stateIndex }: { stateIndex: number }) {
   const [isClicked, setIsClicked] = React.useState(false)
 
   return (
-    <div className='w-full flex flex-col items-start justify-start select-none font-sans'>
+    <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8 select-none font-sans'>
       <div
         onClick={() => setIsClicked((prev) => !prev)}
         className={cn(
-          'group relative flex flex-col gap-1.5 rounded-xl p-4 transition-all duration-200 cursor-pointer border w-full',
+          'group relative flex w-full max-w-2xl cursor-pointer flex-col gap-1.5 rounded-xl border p-4 transition-all duration-200',
           stateIndex === 1
             ? 'border-purple-300 dark:border-purple-700 bg-purple-500/15 shadow-sm'
             : 'border-purple-200/60 dark:border-purple-900/40 bg-purple-500/10 hover:bg-purple-500/15'
@@ -445,7 +445,7 @@ export const galleryRegistry: GalleryEntry[] = [
       { label: 'Empty Folder State', description: 'Folder empty fallback state with upload call to action' },
     ],
     renderPreview: (si) => (
-      <div className='w-full max-w-4xl h-[600px] flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-background shadow-md'>
+      <div className='mx-auto my-auto w-full max-w-4xl h-[600px] min-w-0 flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-background shadow-md'>
         <DsUserFileCardsView
           folder={
             si === 2
@@ -539,7 +539,7 @@ export default function FileManagerDemo() {
 
       if (si === 4) {
         return (
-          <div className='w-full max-w-2xl overflow-hidden rounded-2xl border border-border/80 bg-card p-2 shadow-sm'>
+          <div className='mx-auto my-auto w-full max-w-2xl min-w-0 overflow-hidden rounded-2xl border border-border/80 bg-card p-2 shadow-sm'>
             <table className='w-full text-left text-xs border-collapse'>
               <tbody>
                 {sampleFiles.map((f) => (
@@ -559,7 +559,7 @@ export default function FileManagerDemo() {
       }
 
       return (
-        <div className='w-72'>
+        <div className='mx-auto my-auto w-72 max-w-full'>
           <DsFileCardItem
             file={activeFile as any}
             viewMode='grid'
@@ -603,7 +603,7 @@ export default function FileCardDemo() {
       { label: 'File Upload Form', description: 'Interactive upload form directly from the Message page file section' },
     ],
     renderPreview: (si) => (
-      <div className='w-full max-w-4xl h-[650px] flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-background shadow-md'>
+      <div className='mx-auto my-auto w-full max-w-4xl h-[650px] min-w-0 flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-background shadow-md'>
         <FileUploadFormPreview stateIndex={si} />
       </div>
     ),
@@ -643,7 +643,7 @@ export default function UploadDemo() {
       ]
       const folder = sampleFolders[Math.min(si, 3)]
       return (
-        <div className='w-80 p-3 bg-muted/10 rounded-2xl border border-border/80 shadow-xs'>
+        <div className='mx-auto my-auto w-80 max-w-full p-3 bg-muted/10 rounded-2xl border border-border/80 shadow-xs'>
           <DsFolderTreeItem
             folder={folder}
             isFolderActive={si === 3}
@@ -2057,7 +2057,8 @@ export default function MapScreen() {
       { label: 'Settings Active', description: 'Settings icon highlighted' },
     ],
     renderPreview: (si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='w-full max-w-2xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6'>
         <SidebarHeader
           unreadCount={si === 1 ? 3 : 0}
           isEmailSettingsSelected={si === 2}
@@ -2065,6 +2066,7 @@ export default function MapScreen() {
           onSelectEmailSettings={() => toast.info('Settings (preview only)')}
           onSelectNotification={() => toast.info('Notifications (preview only)')}
         />
+        </div>
       </div>
     ),
     usageCode: (si) => `<SidebarHeader
@@ -2092,8 +2094,9 @@ export default function MapScreen() {
     renderPreview: (si) => {
       const filters = ['tasks', 'mail', 'chat', 'ai'] as const
       return (
-        <div className='w-full flex flex-col items-start justify-start'>
-          <CategoryToolbar
+        <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+          <div className='w-full max-w-2xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6'>
+            <CategoryToolbar
             categoryFilter={filters[si]}
             onSelectTasks={() => toast.info('Tasks (preview only)')}
             onSelectMail={() => toast.info('Mail (preview only)')}
@@ -2101,7 +2104,8 @@ export default function MapScreen() {
             onSelectAi={() => toast.info('AI Chat (preview only)')}
             onSelectAiAssistant={() => toast.info('AI Assistant (preview only)')}
             onSelectVouchers={() => toast.info('Files (preview only)')}
-          />
+            />
+          </div>
         </div>
       )
     },
@@ -2136,8 +2140,9 @@ export default function MapScreen() {
       const filters = ['mail', 'chat', 'ai', 'vouchers'] as const
       const tabs = ['inbox', 'chats', 'ai-chat', 'file'] as const
       return (
-        <div className='w-full flex flex-col items-start justify-start'>
-          <SubTabsBar
+        <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+          <div className='w-full max-w-2xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6'>
+            <SubTabsBar
             categoryFilter={filters[si]}
             activeTab={tabs[si]}
             total={si === 0 ? 48 : 0}
@@ -2145,7 +2150,8 @@ export default function MapScreen() {
             limit={20}
             hasMore={si === 0}
             onTabChange={(tab) => toast.info(`Tab: ${tab} (preview only)`)}
-          />
+            />
+          </div>
         </div>
       )
     },
@@ -2180,15 +2186,17 @@ export default function MapScreen() {
       const cats = ['mail', 'vouchers', 'chat'] as const
       const modes = ['mail', 'mail', 'chat'] as const
       return (
-        <div className='w-full flex flex-col items-start justify-start'>
-          <SidebarSearchBar
-            searchQuery=''
-            setSearchQuery={noop}
-            categoryFilter={cats[si]}
-            sectionMode={modes[si]}
-            onComposeChange={() => toast.info('Compose (preview only)')}
-            onUploadFileClick={() => toast.info('Upload (preview only)')}
-          />
+        <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+          <div className='w-full max-w-2xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6'>
+            <SidebarSearchBar
+              searchQuery=''
+              setSearchQuery={noop}
+              categoryFilter={cats[si]}
+              sectionMode={modes[si]}
+              onComposeChange={() => toast.info('Compose (preview only)')}
+              onUploadFileClick={() => toast.info('Upload (preview only)')}
+            />
+          </div>
         </div>
       )
     },
@@ -2218,15 +2226,17 @@ export default function MapScreen() {
       { label: 'Last Page', description: 'Next disabled' },
     ],
     renderPreview: (si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
-        <SidebarPagination
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='w-full max-w-xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5'>
+          <SidebarPagination
           page={si + 1}
           limit={20}
           total={48}
           hasMore={si < 2}
           onPrevPage={() => toast.info('Prev page (preview only)')}
           onNextPage={() => toast.info('Next page (preview only)')}
-        />
+          />
+        </div>
       </div>
     ),
     usageCode: (si) => `<SidebarPagination
@@ -2250,8 +2260,8 @@ export default function MapScreen() {
       { label: 'Default Header Actions', description: 'Act on this + Quick Flag action + 3-Dot More options dropdown menu' },
     ],
     renderPreview: (_si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
-        <div className='flex items-center justify-between p-3 border border-border rounded-xl bg-card w-full'>
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='flex w-full max-w-xl items-center justify-between gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5'>
           <span className='text-sm font-semibold text-muted-foreground mr-auto'>Header Actions →</span>
           <HeaderActions
             onDelete={() => toast.info('Delete clicked (preview only)')}
@@ -2284,8 +2294,9 @@ export default function MapScreen() {
       { label: 'Default Header', description: 'Clean email header with sender info, exact 3-dot menu items, and close trigger' },
     ],
     renderPreview: (_si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
-        <div className='flex items-center justify-between gap-3 border-b border-border pb-3 w-full'>
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='w-full max-w-3xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5'>
+          <div className='flex w-full items-center justify-between gap-3 border-b border-border pb-3'>
           <div className='flex items-center gap-3 flex-1 min-w-0'>
             <div className='w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border border-border shrink-0 bg-pink-200 text-pink-800 dark:bg-pink-900/40 dark:text-pink-200'>
               JL
@@ -2312,6 +2323,7 @@ export default function MapScreen() {
             >
               <X className='h-5 w-5' />
             </button>
+          </div>
           </div>
         </div>
       </div>
@@ -2346,7 +2358,7 @@ export default function MapScreen() {
       { label: 'Default Toolbar Pill', description: 'Rounded floating pill with audio trigger & message actions' },
     ],
     renderPreview: (_si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
         <div className='flex items-center gap-1 rounded-full border border-border/80 bg-background/95 px-3 py-1.5 shadow-md text-muted-foreground select-none backdrop-blur-xs'>
           <button
             type='button'
@@ -2413,8 +2425,8 @@ export default function MapScreen() {
       { label: 'Default Menu', description: 'Clickable standalone 3-Dot trigger opening full 9-item menu' },
     ],
     renderPreview: (_si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
-        <div className='flex items-center gap-3 p-2.5 border border-border rounded-xl bg-background shadow-xs'>
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='flex items-center gap-3 rounded-xl border border-border bg-background p-2.5 shadow-xs'>
           <span className='text-xs text-muted-foreground font-medium'>Click 3-Dot Menu →</span>
           <ThreeDotMenu />
         </div>
@@ -2476,8 +2488,10 @@ export default function MapScreen() {
       { label: 'Default View', description: 'Attachment list with Q3-Update.pdf card & Attach Files button' },
     ],
     renderPreview: (_si) => (
-      <div className='w-full flex flex-col items-start justify-start'>
-        <AttachmentCardUploader />
+      <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
+        <div className='w-full max-w-2xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6'>
+          <AttachmentCardUploader />
+        </div>
       </div>
     ),
     usageCode: (_si) => `<AttachmentCardUploader

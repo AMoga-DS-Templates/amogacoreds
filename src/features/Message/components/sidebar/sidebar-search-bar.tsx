@@ -1,5 +1,6 @@
 import React from 'react'
 import { Search, X, Mail, Upload, Plus } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CategoryFilterType, SectionMode } from '../../types/message.types'
 
@@ -26,24 +27,28 @@ export function SidebarSearchBar({
     return (
       <div className='flex justify-center w-full'>
         {(categoryFilter === 'mail' || (!categoryFilter && sectionMode === 'mail')) && (
-          <button
+          <Button
             type='button'
+            variant='default'
+            size='icon'
             onClick={() => onComposeChange?.(true)}
-            className='flex items-center justify-center p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all select-none cursor-pointer active:scale-95 shrink-0 shadow-md shadow-primary/20 border border-transparent'
+            className='size-8 rounded-lg shadow-md shadow-primary/20'
             title='Compose New Email'
           >
             <Mail className='h-3.5 w-3.5' />
-          </button>
+          </Button>
         )}
         {categoryFilter === 'vouchers' && (
-          <button
+          <Button
             type='button'
+            variant='default'
+            size='icon'
             onClick={() => onUploadFileClick?.()}
-            className='flex items-center justify-center p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all select-none cursor-pointer active:scale-95 shrink-0 shadow-md shadow-primary/20 border border-transparent'
+            className='size-8 rounded-lg shadow-md shadow-primary/20'
             title='Upload New File'
           >
             <Upload className='h-3.5 w-3.5' />
-          </button>
+          </Button>
         )}
       </div>
     )
@@ -60,42 +65,49 @@ export function SidebarSearchBar({
           className='h-8 w-full rounded-md border-border bg-muted/10 pr-7 pl-8 text-xs focus-visible:ring-1 focus-visible:ring-ring'
         />
         {searchQuery && (
-          <button
+          <Button
             type='button'
+            variant='ghost'
+            size='icon'
             onClick={() => setSearchQuery('')}
-            className='absolute top-1/2 right-2 -translate-y-1/2 rounded-full p-0.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground cursor-pointer'
+            className='absolute top-1/2 right-1 size-6 -translate-y-1/2 rounded-full p-0 text-muted-foreground hover:bg-muted hover:text-foreground'
+            aria-label='Clear search'
           >
             <X className='h-3 w-3' />
-          </button>
+          </Button>
         )}
       </div>
 
       {/* Mail Section: New Compose Email Button */}
       {(categoryFilter === 'mail' || (!categoryFilter && sectionMode === 'mail')) && (
-        <button
+        <Button
           type='button'
+          variant='default'
+          size='sm'
           onClick={() => onComposeChange?.(true)}
-          className='inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-xs transition-all select-none cursor-pointer active:scale-95 shrink-0 shadow-md shadow-primary/20 border border-transparent'
+          className='shrink-0 rounded-lg text-xs font-semibold shadow-md shadow-primary/20'
           title='Compose New Email'
         >
           <Mail className='h-3.5 w-3.5' />
           <span>New</span>
           <Plus className='h-3 w-3' />
-        </button>
+        </Button>
       )}
 
       {/* File Section: Upload File Button */}
       {categoryFilter === 'vouchers' && (
-        <button
+        <Button
           type='button'
+          variant='default'
+          size='sm'
           onClick={() => onUploadFileClick?.()}
-          className='inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-xs transition-all select-none cursor-pointer active:scale-95 shrink-0 shadow-md shadow-primary/20 border border-transparent'
+          className='shrink-0 rounded-lg text-xs font-semibold shadow-md shadow-primary/20'
           title='Upload New File'
         >
           <Upload className='h-3.5 w-3.5' />
           <span>Upload</span>
           <Plus className='h-3 w-3' />
-        </button>
+        </Button>
       )}
     </div>
   )

@@ -19,7 +19,9 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/design-system/components/ui/button'
+import { Card } from '@/design-system/components/ui/card'
 import { Label } from '@/design-system/components/ui/label'
+import { Textarea } from '@/design-system/components/ui/textarea'
 import {
   Select,
   SelectContent,
@@ -220,9 +222,9 @@ export function FileUploadForm({
   }
 
   return (
-    <div
+    <Card
       className={cn(
-        'flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden bg-background select-none font-sans',
+        'flex h-full min-h-0 w-full flex-1 flex-col gap-0 overflow-hidden bg-background py-0 select-none font-sans',
         className
       )}
     >
@@ -232,14 +234,16 @@ export function FileUploadForm({
           New File Upload
         </h1>
         {onClose && (
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="sm"
             onClick={onClose}
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            className="h-8 gap-1.5 text-sm font-medium text-muted-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>Back to Storage</span>
-          </button>
+          </Button>
         )}
       </div>
 
@@ -250,12 +254,18 @@ export function FileUploadForm({
             <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500" />
             <span>{warningMessage}</span>
           </div>
-          <a
+          <Button
+            asChild
+            variant="secondary"
+            size="sm"
+            className="h-7 shrink-0 text-[11px] font-semibold"
+          >
+            <a
             href="/app-settings"
-            className="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-700 dark:text-amber-300 font-semibold transition-colors text-[11px] shrink-0"
           >
             Go to App Settings
-          </a>
+            </a>
+          </Button>
         </div>
       )}
 
@@ -302,12 +312,12 @@ export function FileUploadForm({
         {/* Remarks */}
         <div className="space-y-1.5">
           <Label className="text-xs font-semibold text-foreground">Remarks</Label>
-          <textarea
+          <Textarea
             rows={3}
             placeholder="Add a note about these attachments..."
             value={remarks}
             onChange={(e) => setRemarks(e.target.value)}
-            className="w-full rounded-xl border border-border/80 bg-background p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-indigo-500 shadow-2xs resize-y"
+            className="min-h-20 resize-y rounded-xl border-border/80 bg-background p-3 text-xs shadow-2xs"
           />
         </div>
 
@@ -317,60 +327,72 @@ export function FileUploadForm({
           <div className="overflow-hidden rounded-xl border border-border/80 bg-background shadow-2xs">
             {/* Toolbar */}
             <div className="flex items-center gap-1 px-3 py-2 border-b border-border/60 bg-muted/20 flex-wrap">
-              <button
+              <Button
                 type="button"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Bold"
               >
                 <Bold className="h-3.5 w-3.5" />
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Italic"
               >
                 <Italic className="h-3.5 w-3.5" />
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Underline"
               >
                 <Underline className="h-3.5 w-3.5" />
-              </button>
+              </Button>
               <div className="h-4 w-[1px] bg-border mx-1.5" />
-              <button
+              <Button
                 type="button"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Bullet List"
               >
                 <List className="h-3.5 w-3.5" />
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Numbered List"
               >
                 <ListOrdered className="h-3.5 w-3.5" />
-              </button>
+              </Button>
               <div className="h-4 w-[1px] bg-border mx-1.5" />
-              <button
+              <Button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground text-xs font-bold transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon-sm"
+                className="h-7 w-7 rounded-lg text-muted-foreground text-xs font-bold"
                 title="Attach File"
               >
                 <Paperclip className="h-3.5 w-3.5" />
-              </button>
+              </Button>
             </div>
 
             {/* Editable Content */}
-            <textarea
+            <Textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Type description, remarks, or notes here..."
               rows={5}
-              className="w-full bg-transparent p-3.5 text-xs leading-relaxed outline-none resize-y border-0 focus:ring-0 text-foreground placeholder:text-muted-foreground"
+              className="min-h-32 w-full resize-y rounded-none border-0 bg-transparent p-3.5 text-xs leading-relaxed shadow-none focus-visible:ring-0"
             />
           </div>
         </div>
@@ -471,11 +493,12 @@ export function FileUploadForm({
             multiple
             onChange={handleFileUpload}
           />
-          <button
+          <Button
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-border/80 bg-background py-2.5 text-xs font-medium text-foreground hover:bg-muted/40 transition-all cursor-pointer shadow-2xs"
+            variant="outline"
+            className="h-auto w-full rounded-xl border-border/80 py-2.5 text-xs font-medium shadow-2xs"
           >
             {isUploading ? (
               <>
@@ -488,7 +511,7 @@ export function FileUploadForm({
                 <span>Attach Files</span>
               </>
             )}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -517,7 +540,7 @@ export function FileUploadForm({
             onClick={handleSaveDocument}
             disabled={isSaving}
             size="sm"
-            className="h-9 px-5 rounded-xl text-xs font-semibold gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs cursor-pointer min-w-[80px]"
+          className="h-9 min-w-[80px] rounded-xl px-5 text-xs font-semibold gap-1.5 shadow-xs"
           >
             {isSaving ? (
               <>
@@ -533,6 +556,6 @@ export function FileUploadForm({
           </Button>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

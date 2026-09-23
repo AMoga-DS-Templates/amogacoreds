@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/design-system/components/ui/button'
+import { Card } from '@/design-system/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -78,54 +79,54 @@ export function getFileCategoryTheme(category: string | FileCategoryType) {
     return {
       name: 'Pdf',
       icon: FileText,
-      badgeColor: 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-200/50',
-      iconColor: 'text-red-500',
-      bgColor: 'bg-red-50 dark:bg-red-950/30',
+      badgeColor: 'bg-destructive/10 text-destructive border-destructive/20',
+      iconColor: 'text-destructive',
+      bgColor: 'bg-destructive/10',
     }
   }
   if (cat.includes('doc') || cat.includes('word') || cat.includes('txt')) {
     return {
       name: 'Doc',
       icon: FileText,
-      badgeColor: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200/50',
-      iconColor: 'text-blue-500',
-      bgColor: 'bg-blue-50 dark:bg-blue-950/30',
+      badgeColor: 'bg-secondary text-secondary-foreground border-border',
+      iconColor: 'text-secondary-foreground',
+      bgColor: 'bg-secondary/60',
     }
   }
   if (cat.includes('xls') || cat.includes('csv') || cat.includes('sheet')) {
     return {
       name: 'Spreadsheet',
       icon: FileSpreadsheet,
-      badgeColor: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200/50',
-      iconColor: 'text-emerald-500',
-      bgColor: 'bg-emerald-50 dark:bg-emerald-950/30',
+      badgeColor: 'bg-accent text-accent-foreground border-border',
+      iconColor: 'text-accent-foreground',
+      bgColor: 'bg-accent/60',
     }
   }
   if (cat.includes('image') || cat.includes('img') || cat.includes('png') || cat.includes('jpg')) {
     return {
       name: 'Images',
       icon: ImageIcon,
-      badgeColor: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200/50',
-      iconColor: 'text-amber-500',
-      bgColor: 'bg-amber-50 dark:bg-amber-950/30',
+      badgeColor: 'bg-primary/10 text-primary border-primary/20',
+      iconColor: 'text-primary',
+      bgColor: 'bg-primary/10',
     }
   }
   if (cat.includes('video') || cat.includes('mp4') || cat.includes('mov')) {
     return {
       name: 'Videos',
       icon: Film,
-      badgeColor: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200/50',
-      iconColor: 'text-purple-500',
-      bgColor: 'bg-purple-50 dark:bg-purple-950/30',
+      badgeColor: 'bg-muted text-muted-foreground border-border',
+      iconColor: 'text-muted-foreground',
+      bgColor: 'bg-muted/60',
     }
   }
   if (cat.includes('zip') || cat.includes('rar') || cat.includes('tar')) {
     return {
       name: 'Archives',
       icon: Archive,
-      badgeColor: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-200/50',
-      iconColor: 'text-orange-500',
-      bgColor: 'bg-orange-50 dark:bg-orange-950/30',
+      badgeColor: 'bg-secondary text-secondary-foreground border-border',
+      iconColor: 'text-secondary-foreground',
+      bgColor: 'bg-secondary/60',
     }
   }
   return {
@@ -219,7 +220,7 @@ export function FileCardItem({
               size="sm"
               variant="ghost"
               onClick={() => onPreview?.(file)}
-              className="h-7 px-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 text-xs font-semibold gap-1.5"
+              className="h-7 px-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 text-xs font-semibold gap-1.5"
             >
               <Eye className="h-3.5 w-3.5" /> Preview
             </Button>
@@ -268,10 +269,10 @@ export function FileCardItem({
 
   // ─── Grid View Card (Matches Screenshot 1 Exactly) ─────────────────────────
   return (
-    <div
+    <Card
       className={cn(
-        'group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-2.5 shadow-2xs hover:shadow-md transition-all hover:border-indigo-300 dark:hover:border-indigo-700 select-none',
-        isSelected && 'ring-2 ring-indigo-500 bg-indigo-500/5',
+        'group relative flex flex-col justify-between gap-0 rounded-2xl border-border/80 p-2.5 shadow-2xs hover:shadow-md transition-all hover:border-primary/50 select-none',
+        isSelected && 'ring-2 ring-ring bg-primary/5',
         className
       )}
     >
@@ -322,7 +323,7 @@ export function FileCardItem({
           size="sm"
           variant="ghost"
           onClick={() => onPreview?.(file)}
-          className="h-7 px-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 text-xs font-semibold gap-1.5 flex-1 justify-center cursor-pointer"
+          className="h-7 px-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 text-xs font-semibold gap-1.5 flex-1 justify-center cursor-pointer"
         >
           <Eye className="h-3.5 w-3.5" /> Preview
         </Button>
@@ -378,6 +379,6 @@ export function FileCardItem({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </Card>
   )
 }

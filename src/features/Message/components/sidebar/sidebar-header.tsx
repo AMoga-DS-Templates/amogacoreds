@@ -1,6 +1,7 @@
 import React from 'react'
 import { Settings, Bell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { SidebarHeader as UiSidebarHeader } from '@/components/ui/sidebar'
 import { cn } from '@/lib/utils'
 
 interface SidebarHeaderProps {
@@ -19,7 +20,7 @@ export function SidebarHeader({
   onSelectNotification,
 }: SidebarHeaderProps) {
   return (
-    <div className='hidden md:flex items-center justify-between pb-0.5 border-b border-border/40'>
+    <UiSidebarHeader className='hidden md:flex w-full flex-row items-center justify-between gap-0 p-0 pb-0.5 border-b border-border/40'>
       <h1 className='text-base font-bold tracking-tight text-foreground sm:text-lg'>
         Messages
       </h1>
@@ -57,6 +58,6 @@ export function SidebarHeader({
           )}
         </Button>
       </div>
-    </div>
+    </UiSidebarHeader>
   )
 }

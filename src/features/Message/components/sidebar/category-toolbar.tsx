@@ -1,5 +1,7 @@
 import React from 'react'
 import { Calendar, Mail, MessageSquare, Sparkles, Bot, FileText } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { cn } from '@/lib/utils'
 import { CategoryFilterType } from '../../types/message.types'
 
@@ -13,6 +15,10 @@ interface CategoryToolbarProps {
   onSelectVouchers: () => void
 }
 
+type ToolbarCategory = Exclude<CategoryFilterType, 'notification'>
+
+const buttonClass = 'flex min-w-[34px] flex-1 cursor-pointer rounded-lg border-0 px-0 py-1.5 transition-all duration-200 hover:bg-accent hover:text-accent-foreground active:scale-95'
+
 export function CategoryToolbar({
   categoryFilter,
   onSelectTasks,
@@ -22,91 +28,60 @@ export function CategoryToolbar({
   onSelectAiAssistant,
   onSelectVouchers,
 }: CategoryToolbarProps) {
+  const handlers: Record<ToolbarCategory, () => void> = {
+    tasks: onSelectTasks,
+    mail: onSelectMail,
+    chat: onSelectChat,
+    ai: onSelectAi,
+    'ai-assistant': onSelectAiAssistant,
+    vouchers: onSelectVouchers,
+  }
+
   return (
-    <div className='w-full max-w-full overflow-x-auto scrollbar-none rounded-xl bg-muted/20 p-1 flex items-center justify-between gap-0.5 sm:gap-1 border-0 min-w-0 select-none'>
-      {/* 1st Icon: Task / Kanban (visually Calendar icon) */}
-      <button
-        type='button'
-        onClick={onSelectTasks}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'tasks' &&
-            'bg-purple-500/15 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400 font-semibold shadow-2xs'
-        )}
-        title='Tasks / Kanban Board'
-      >
-        <Calendar className='h-4 w-4' />
-      </button>
+    <ToggleGroup
+      type='single'
+      value={categoryFilter}
+      onValueChange={(value) => {
+        if (value && value in handlers) handlers[value as ToolbarCategory]()
+      }}
+      aria-label='Message categories'
+      className='flex w-full min-w-0 max-w-full select-none justify-between gap-0.5 overflow-x-auto rounded-xl border-0 bg-muted/20 p-1 scrollbar-none sm:gap-1'
+    >
+      <ToggleGroupItem value='tasks' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'tasks' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='Tasks / Kanban Board' title='Tasks / Kanban Board' className={buttonClass}>
+          <Calendar className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
 
-      {/* 2nd Icon: Email */}
-      <button
-        type='button'
-        onClick={onSelectMail}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'mail' &&
-            'bg-indigo-500/15 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 font-semibold shadow-2xs'
-        )}
-        title='Mail Items'
-      >
-        <Mail className='h-4 w-4' />
-      </button>
+      <ToggleGroupItem value='mail' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'mail' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='Mail Items' title='Mail Items' className={buttonClass}>
+          <Mail className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
 
-      {/* 3rd Icon: Chat */}
-      <button
-        type='button'
-        onClick={onSelectChat}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'chat' &&
-            'bg-emerald-500/15 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 font-semibold shadow-2xs'
-        )}
-        title='Chats & Direct Messages'
-      >
-        <MessageSquare className='h-4 w-4' />
-      </button>
+      <ToggleGroupItem value='chat' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'chat' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='Chats & Direct Messages' title='Chats & Direct Messages' className={buttonClass}>
+          <MessageSquare className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
 
-      {/* 4th Icon: AI Chat */}
-      <button
-        type='button'
-        onClick={onSelectAi}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'ai' &&
-            'bg-indigo-500/15 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 font-semibold shadow-2xs'
-        )}
-        title='AI Chat'
-      >
-        <Sparkles className='h-4 w-4' />
-      </button>
+      <ToggleGroupItem value='ai' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'ai' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='AI Chat' title='AI Chat' className={buttonClass}>
+          <Sparkles className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
 
-      {/* 5th Icon: AI Assistant */}
-      <button
-        type='button'
-        onClick={onSelectAiAssistant}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'ai-assistant' &&
-            'bg-indigo-500/15 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 font-semibold shadow-2xs'
-        )}
-        title='AI Assistant'
-      >
-        <Bot className='h-4 w-4' />
-      </button>
+      <ToggleGroupItem value='ai-assistant' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'ai-assistant' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='AI Assistant' title='AI Assistant' className={buttonClass}>
+          <Bot className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
 
-      {/* 6th Icon: Vouchers / Files */}
-      <button
-        type='button'
-        onClick={onSelectVouchers}
-        className={cn(
-          'flex flex-1 min-w-[34px] items-center justify-center rounded-lg py-1.5 transition-all duration-200 cursor-pointer text-muted-foreground hover:text-foreground hover:bg-muted/50 active:scale-95 border-0 shrink-0',
-          categoryFilter === 'vouchers' &&
-            'bg-indigo-500/15 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400 font-semibold shadow-2xs'
-        )}
-        title='Vouchers'
-      >
-        <FileText className='h-4 w-4' />
-      </button>
-    </div>
+      <ToggleGroupItem value='vouchers' asChild className={cn('flex min-w-[34px] flex-1 rounded-lg px-0', categoryFilter === 'vouchers' && 'bg-accent text-accent-foreground font-semibold shadow-2xs')}>
+        <Button type='button' variant='ghost' size='icon' aria-label='Vouchers' title='Vouchers' className={buttonClass}>
+          <FileText className='h-4 w-4' />
+        </Button>
+      </ToggleGroupItem>
+    </ToggleGroup>
   )
 }
