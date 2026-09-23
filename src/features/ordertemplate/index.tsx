@@ -3,7 +3,7 @@
 import { useMemo, useState, type ChangeEvent } from 'react'
 import { toast } from 'sonner'
 import { mockPurchaseOrder, type PurchaseOrderMockItem } from '@/features/MessageComponentGallery/mocks'
-import { ItemsForm } from './components/items-form'
+import { AddItems } from './components/add-items'
 import { OrderForm } from './components/order-form'
 import { OrderTabs, type OrderTemplateStep } from './components/order-tabs'
 import { OrderPdfView } from './components/order-pdf-view'
@@ -87,7 +87,7 @@ export default function PurchaseOrderTemplate() {
           onRemoveAttachment={removeAttachment}
           onSaveAndReview={() => { setSavedStepOne(true); setStep('items') }}
         />}
-        {step === 'items' && <ItemsForm
+        {step === 'items' && <AddItems
           supplier={supplier}
           documentDate={documentDate}
           status={status}

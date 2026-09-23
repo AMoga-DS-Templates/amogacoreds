@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { mockPurchaseOrderProducts } from '@/features/MessageComponentGallery/mocks'
 import type { OrderTemplateItem } from './order-types'
 
-export interface ItemsFormProps {
+export interface AddItemsProps {
   supplier: string
   documentDate: string
   status: string
@@ -22,7 +22,7 @@ export interface ItemsFormProps {
   onSaveAndNext: () => void
 }
 
-export function ItemsForm({
+export function AddItems({
   supplier,
   documentDate,
   status,
@@ -34,7 +34,7 @@ export function ItemsForm({
   onAddItem,
   onBack,
   onSaveAndNext,
-}: ItemsFormProps) {
+}: AddItemsProps) {
   return (
     <section className='space-y-5 p-4 sm:p-7'>
       <Card className='rounded-2xl p-5 shadow-sm sm:p-7'><div className='grid gap-4 sm:grid-cols-4'><Summary label='Supplier' value={supplier || '-'} /><Summary label='Document Date' value={documentDate || '-'} /><Summary label='Status' value={status} /><Summary label='Order No.' value={orderNumber || '-'} /></div></Card>
