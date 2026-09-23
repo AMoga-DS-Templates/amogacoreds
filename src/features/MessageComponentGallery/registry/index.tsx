@@ -10,6 +10,8 @@
 import React from 'react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import PurchaseOrderTemplate from '@/features/ordertemplate'
+import MockZrimoViewer from '@/features/zrimo-viewer/MockZrimoViewer'
 import {
   X,
   Volume2,
@@ -21,7 +23,6 @@ import {
   Phone,
   Video,
 } from 'lucide-react'
-
 import {
   ChatSidebar as DsChatSidebar,
   ChatCardItem as DsChatCardItem,
@@ -157,6 +158,8 @@ export type GalleryCategory =
   | 'Calendar'
   | 'Rich Editor'
   | 'Theme'
+  | 'Order Template'
+  | 'Zrimo Viewer'
 
 export interface ComponentState {
   label: string
@@ -727,6 +730,69 @@ export default function NewVoucherPage() {
     ],
     renderPreview: (stateIndex) => <NewVouncher stateIndex={stateIndex} />,
     usageCode: () => `import { NewVouncher } from '@/features/MessageComponentGallery/previews'\n\nexport default function Page() {\n  return <NewVouncher />\n}`,
+  },
+
+  /*
+  {
+    id: 'order-template',
+    name: 'Order Template',
+    category: 'Order Template',
+    badge: 'Order Template',
+    description: 'PurchaseOrder page cloned from the reference application. Mock-data conversion comes next.',
+    filePath: 'src/features/ordertemplate/index.tsx',
+    states: [
+      { label: 'PurchaseOrder Clone', description: 'Reference PurchaseOrder workspace copied into the feature folder' },
+    ],
+    renderPreview: () => <PurchaseOrderTemplate />,
+    /*
+      <div className='flex min-h-[360px] w-full items-center justify-center rounded-xl border border-dashed border-orange-300 bg-orange-50/40 p-8 text-center dark:border-orange-800 dark:bg-orange-950/20'>
+        <div className='space-y-2'>
+          <h2 className='text-lg font-semibold text-foreground'>Order Template</h2>
+          <p className='text-sm text-muted-foreground'>Template placeholder — content will be added later.</p>
+        </div>
+      </div>
+    ),
+    //
+    usageCode: () => `export default function OrderTemplate() {
+  return <div>Order Template</div>
+}`,
+  },
+  */
+
+  {
+    id: 'new-order',
+    name: 'New Order',
+    category: 'Order Template',
+    badge: 'New Order',
+    description: 'Standalone order creation form with mock supplier, product, approval, item, and total fields.',
+    filePath: 'src/features/ordertemplate/index.tsx',
+    states: [
+      { label: 'New Order Form', description: 'Direct form view without extra tabs or order tables' },
+    ],
+    renderPreview: () => <PurchaseOrderTemplate />,
+    usageCode: () => `import PurchaseOrderTemplate from '@/features/ordertemplate'
+
+export default function NewOrder() {
+  return <PurchaseOrderTemplate />
+}`,
+  },
+
+  {
+    id: 'zrimo-viewer-mock',
+    name: 'Zrimo Viewer',
+    category: 'Zrimo Viewer',
+    badge: 'Zrimo Viewer',
+    description: 'Reusable Zrimo document viewer with one mock Order PDF.',
+    filePath: 'src/features/zrimo-viewer/MockZrimoViewer.tsx',
+    states: [
+      { label: 'Mock PDF Viewer', description: 'One mock PDF rendered through Zrimo Viewer' },
+    ],
+    renderPreview: () => <MockZrimoViewer />,
+    usageCode: () => `import MockZrimoViewer from '@/features/zrimo-viewer/MockZrimoViewer'
+
+export default function ViewerPage() {
+  return <MockZrimoViewer />
+}`,
   },
 
 
@@ -2733,4 +2799,6 @@ export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'Calendar',
   'Rich Editor',
   'Theme',
+  'Order Template',
+  'Zrimo Viewer',
 ]
