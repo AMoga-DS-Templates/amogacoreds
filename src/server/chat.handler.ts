@@ -53,13 +53,14 @@ export async function handleChatPost(request: NextRequest) {
 
     const isUiRender = tool === 'ui-render'
 
-    const { text } = await generateText({
+    const result = await generateText({
       model: openrouter.chat(model || 'google/gemini-2.5-flash'),
-      system: isUiRender ? UI_RENDER_SYSTEM_PROMPT : undefined,
+      // AI SDK 7 uses `instructions` for trusted server-side instructions.
+      instructions: isUiRender ? UI_RENDER_SYSTEM_PROMPT : undefined,
       prompt: message,
     })
 
-    return NextResponse.json({ text })
+    return NextResponse.json({ text: result.text })
   } catch (error: any) {
     console.error('Error in handleChatPost:', error)
     return NextResponse.json(
