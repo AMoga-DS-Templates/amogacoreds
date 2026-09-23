@@ -12,6 +12,7 @@ import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PurchaseOrderTemplate from '@/features/ordertemplate'
 import MockZrimoViewer from '@/features/zrimo-viewer/MockZrimoViewer'
+import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
   X,
   Volume2,
@@ -160,6 +161,7 @@ export type GalleryCategory =
   | 'Theme'
   | 'Order Template'
   | 'Zrimo Viewer'
+  | 'Base Components'
 
 export interface ComponentState {
   label: string
@@ -177,6 +179,18 @@ export interface GalleryEntry {
   renderPreview: (stateIndex: number, options?: { viewport?: string; isMobileView?: boolean }) => React.ReactNode
   usageCode: (stateIndex: number) => string
 }
+
+const baseComponentGalleryEntries: GalleryEntry[] = baseComponents.map(([name, file]) => ({
+  id: `base-component-${file.replace(/\.tsx$/, '')}`,
+  name,
+  category: 'Base Components',
+  badge: 'Base UI',
+  description: `${name} component imported from src/components/ui/${file}.`,
+  filePath: `src/components/ui/${file}`,
+  states: [{ label: name, description: `Imported ${name} preview` }],
+  renderPreview: () => <BaseComponentPreview name={name} />,
+  usageCode: () => `import { ${name.replace(/\s+/g, '')} } from '@/components/ui/${file.replace(/\.tsx$/, '')}'`,
+}))
 
 // ─── Shared no-op helpers ─────────────────────────────────────────────────────
 const noop = () => { }
@@ -794,6 +808,8 @@ export default function ViewerPage() {
   return <MockZrimoViewer />
 }`,
   },
+
+  ...baseComponentGalleryEntries,
 
 
 
@@ -2801,4 +2817,5 @@ export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'Theme',
   'Order Template',
   'Zrimo Viewer',
+  'Base Components',
 ]

@@ -86,6 +86,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Theme: 'bg-violet-500/10 text-violet-600 border-violet-200/50 dark:border-violet-900/40 dark:text-violet-400',
   'Order Template': 'bg-orange-500/10 text-orange-600 border-orange-200/50 dark:border-orange-900/40 dark:text-orange-400',
   'Zrimo Viewer': 'bg-cyan-500/10 text-cyan-600 border-cyan-200/50 dark:border-cyan-900/40 dark:text-cyan-400',
+  'Base Components': 'bg-slate-500/10 text-slate-600 border-slate-200/50 dark:border-slate-800 dark:text-slate-400',
 }
 
 // ─── Category icons & styles matching Message Page CategoryToolbar ────────────
@@ -228,6 +229,12 @@ const CATEGORY_CONFIG: Record<
     activeClass:
       'bg-cyan-500/15 text-cyan-600 dark:bg-cyan-950/40 dark:text-cyan-400 border-cyan-300/60 dark:border-cyan-800/40 font-semibold shadow-2xs',
     badgeClass: 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400',
+  },
+  'Base Components': {
+    icon: Layers,
+    activeClass:
+      'bg-slate-500/15 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700 font-semibold shadow-2xs',
+    badgeClass: 'bg-slate-500/20 text-slate-700 dark:text-slate-300',
   },
 }
 
@@ -530,7 +537,7 @@ export function GalleryPage() {
                               className='cursor-pointer gap-2 py-1.5 text-xs font-medium'
                             >
                               <Eye className='h-3.5 w-3.5 text-indigo-500' />
-                              <span>Preview</span>
+                              <span>{activeCategory === 'Base Components' ? 'UI' : 'Preview'}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={(e) => {
@@ -629,7 +636,7 @@ export function GalleryPage() {
                         )}
                       >
                         <Eye className='h-3.5 w-3.5' />
-                        <span>Preview</span>
+                        <span>{activeCategory === 'Base Components' ? 'UI' : 'Preview'}</span>
                       </button>
 
                       <button
