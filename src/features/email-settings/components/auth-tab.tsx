@@ -168,7 +168,7 @@ export function AuthTab() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
         <div className="space-y-1">
           <CardTitle className="text-xl flex items-center gap-2">
-            <ShieldCheck className="h-5 w-5 text-sky-500" />
+            <ShieldCheck className="h-5 w-5 text-primary" />
             Auth Provider Manager
           </CardTitle>
           <CardDescription className="text-xs sm:text-sm">
@@ -184,7 +184,7 @@ export function AuthTab() {
             <Button
               onClick={openAddModal}
               variant="outline"
-              className="gap-1 border-sky-500/30 text-sky-400 hover:bg-sky-500/10 text-xs cursor-pointer"
+              className="gap-1 border-primary/30 text-primary hover:bg-primary/10 text-xs cursor-pointer"
             >
               <Plus className="h-4 w-4" /> Add your first Auth provider
             </Button>
@@ -202,7 +202,7 @@ export function AuthTab() {
                   {/* Header Row */}
                   <div className="flex items-center justify-between p-3 gap-2 bg-muted/10">
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="h-9 w-9 flex items-center justify-center shrink-0 rounded-lg bg-sky-500/10 border border-sky-500/20 overflow-hidden">
+                      <div className="h-9 w-9 flex items-center justify-center shrink-0 rounded-lg bg-primary/10 border border-primary/20 overflow-hidden">
                         {provider.iconUrl ? (
                           <img
                             src={provider.iconUrl}
@@ -210,7 +210,7 @@ export function AuthTab() {
                             className="h-full w-full object-contain p-1"
                           />
                         ) : (
-                          <ShieldCheck className="h-5 w-5 text-sky-400" />
+                          <ShieldCheck className="h-5 w-5 text-primary" />
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -219,7 +219,7 @@ export function AuthTab() {
                           <span
                             className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-semibold uppercase tracking-wider ${
                               provider.isEnabled
-                                ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/20'
+                                ? 'bg-primary/15 text-primary border border-primary/20'
                                 : 'bg-muted text-muted-foreground'
                             }`}
                           >
@@ -249,7 +249,7 @@ export function AuthTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-blue-500 hover:text-blue-600 hover:bg-blue-500/10 shrink-0 cursor-pointer"
+                        className="h-7 w-7 text-primary hover:text-primary hover:bg-primary/10 shrink-0 cursor-pointer"
                         onClick={() => openEditModal(provider)}
                         title="Edit Provider"
                       >
@@ -260,7 +260,7 @@ export function AuthTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0 cursor-pointer"
+                        className="h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0 cursor-pointer"
                         onClick={() => removeAuthProvider(provider.id)}
                         title="Delete Provider"
                       >
@@ -277,7 +277,7 @@ export function AuthTab() {
               <Button
                 onClick={openAddModal}
                 size="sm"
-                className="w-full gap-1 bg-sky-600 hover:bg-sky-700 text-white cursor-pointer"
+                className="w-full gap-1 bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
               >
                 <Plus className="h-4 w-4" />
                 Add Auth Provider
@@ -292,7 +292,7 @@ export function AuthTab() {
         <DialogContent className="sm:max-w-[620px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-sky-500" />
+              <ShieldCheck className="h-5 w-5 text-primary" />
               {editingProviderId === 'new' ? 'Add Auth Provider' : 'Edit Auth Provider'}
             </DialogTitle>
             <DialogDescription>
@@ -359,7 +359,7 @@ export function AuthTab() {
                     </div>
 
                     <div className="flex-1 space-y-1">
-                      <input
+                      <Input
                         ref={fileInputRef}
                         type="file"
                         accept="image/png,image/jpeg,image/svg+xml,image/webp"
@@ -384,7 +384,7 @@ export function AuthTab() {
                             variant="ghost"
                             size="sm"
                             onClick={removeIcon}
-                            className="text-xs text-red-500 hover:text-red-600 hover:bg-red-500/10 h-8 cursor-pointer"
+                            className="text-xs text-destructive hover:text-destructive hover:bg-destructive/10 h-8 cursor-pointer"
                           >
                             Remove
                           </Button>
@@ -441,13 +441,16 @@ export function AuthTab() {
                         onChange={(e) => handleEditFieldChange('clientSecret', e.target.value)}
                         className="bg-background/80 h-9 text-sm font-mono text-xs pr-9"
                       />
-                      <button
+                      <Button
                         type="button"
                         onClick={() => setShowSecret(!showSecret)}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                        aria-label={showSecret ? 'Hide client secret' : 'Show client secret'}
                       >
                         {showSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -483,13 +486,16 @@ export function AuthTab() {
                           onChange={(e) => handleEditFieldChange('password', e.target.value)}
                           className="bg-background h-8 text-xs pr-8"
                         />
-                        <button
+                        <Button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                          variant="ghost"
+                          size="icon"
+                          className="absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                          aria-label={showPassword ? 'Hide password' : 'Show password'}
                         >
                           {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -523,7 +529,7 @@ export function AuthTab() {
                 <Button
                   onClick={saveEdit}
                   disabled={!editFormData.name?.trim()}
-                  className="gap-1 bg-sky-600 hover:bg-sky-700 text-white cursor-pointer"
+                  className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
                 >
                   <Save className="h-4 w-4" />
                   {editingProviderId === 'new' ? 'Add Provider' : 'Save Changes'}

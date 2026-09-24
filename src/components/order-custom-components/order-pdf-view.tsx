@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Document, Page, Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
-import { ZrimoViewer } from '@/features/zrimo-viewer'
+import { ZrimoViewer } from '@/components/zrimo-viewer'
 import type { OrderTemplateItem, OrderTemplateParty } from './order-types'
 
 export interface OrderPdfViewProps {
@@ -64,5 +64,4 @@ function PdfPreview(props: OrderPdfViewProps) {
 export function OrderPdfView(props: OrderPdfViewProps) {
   return <section className='flex h-[calc(100vh-120px)] min-h-[650px] flex-col overflow-hidden bg-slate-100'><div className='min-h-0 flex-1 overflow-hidden'><PdfPreview {...props} /></div></section>
 }
-
 

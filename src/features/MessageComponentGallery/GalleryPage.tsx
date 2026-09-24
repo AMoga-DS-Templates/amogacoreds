@@ -84,7 +84,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Calendar: 'bg-blue-500/10 text-blue-600 border-blue-200/50 dark:border-blue-900/40 dark:text-blue-400',
   'Rich Editor': 'bg-pink-500/10 text-pink-600 border-pink-200/50 dark:border-pink-900/40 dark:text-pink-400',
   Theme: 'bg-violet-500/10 text-violet-600 border-violet-200/50 dark:border-violet-900/40 dark:text-violet-400',
-  'Order Template': 'bg-orange-500/10 text-orange-600 border-orange-200/50 dark:border-orange-900/40 dark:text-orange-400',
+  'Order Custom UI': 'bg-orange-500/10 text-orange-600 border-orange-200/50 dark:border-orange-900/40 dark:text-orange-400',
   'Zrimo Viewer': 'bg-cyan-500/10 text-cyan-600 border-cyan-200/50 dark:border-cyan-900/40 dark:text-cyan-400',
   'Base Components': 'bg-slate-500/10 text-slate-600 border-slate-200/50 dark:border-slate-800 dark:text-slate-400',
 }
@@ -218,7 +218,7 @@ const CATEGORY_CONFIG: Record<
       'bg-violet-500/15 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400 border-violet-300/60 dark:border-violet-800/40 font-semibold shadow-2xs',
     badgeClass: 'bg-violet-500/20 text-violet-600 dark:text-violet-400',
   },
-  'Order Template': {
+  'Order Custom UI': {
     icon: ShoppingCart,
     activeClass:
       'bg-orange-500/15 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400 border-orange-300/60 dark:border-orange-800/40 font-semibold shadow-2xs',

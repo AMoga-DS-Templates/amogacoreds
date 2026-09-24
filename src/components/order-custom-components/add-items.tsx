@@ -6,7 +6,6 @@ import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { mockPurchaseOrderProducts } from './order-mock'
 import type { OrderTemplateItem } from './order-types'
 
 export interface AddItemsProps {
@@ -15,6 +14,7 @@ export interface AddItemsProps {
   status: string
   orderNumber: string
   items: OrderTemplateItem[]
+  products: string[]
   total: number
   onUpdateItem: (id: number, key: keyof OrderTemplateItem, value: string) => void
   onRemoveItem: (id: number) => void
@@ -29,6 +29,7 @@ export function AddItems({
   status,
   orderNumber,
   items,
+  products,
   total,
   onUpdateItem,
   onRemoveItem,
@@ -44,7 +45,7 @@ export function AddItems({
         <div className='overflow-x-auto'>
           <Table className='min-w-[650px] text-left text-sm'><TableHeader><TableRow className='text-xs text-muted-foreground'><TableHead className='pb-3 pr-3'>Product</TableHead><TableHead className='pb-3 pr-3'>Qty</TableHead><TableHead className='pb-3 pr-3'>Price</TableHead><TableHead className='pb-3 pr-3'>Amount</TableHead><TableHead className='pb-3 text-right'>Action</TableHead></TableRow></TableHeader>
             <TableBody>{items.map((item) => <TableRow key={item.id}>
-              <TableCell className='py-3 pr-3'><Select value={item.product || 'none'} onValueChange={(value) => onUpdateItem(item.id, 'product', value === 'none' ? '' : value)}><SelectTrigger className='h-9 w-full text-xs'><SelectValue placeholder='Select product' /></SelectTrigger><SelectContent><SelectItem value='none'>Select product</SelectItem>{mockPurchaseOrderProducts.map((product) => <SelectItem key={product} value={product}>{product}</SelectItem>)}</SelectContent></Select></TableCell>
+              <TableCell className='py-3 pr-3'><Select value={item.product || 'none'} onValueChange={(value) => onUpdateItem(item.id, 'product', value === 'none' ? '' : value)}><SelectTrigger aria-label='Select product' className='h-9 w-full text-xs'><SelectValue placeholder='Select product' /></SelectTrigger><SelectContent position='popper' className='w-[var(--radix-select-trigger-width)]'><SelectItem value='none'>Select product</SelectItem>{products.map((product) => <SelectItem key={product} value={product}>{product}</SelectItem>)}</SelectContent></Select></TableCell>
               <TableCell className='py-3 pr-3'><Input type='number' value={item.quantity} onChange={(event) => onUpdateItem(item.id, 'quantity', event.target.value)} placeholder='Enter qty' /></TableCell>
               <TableCell className='py-3 pr-3'><Input type='number' value={item.price} onChange={(event) => onUpdateItem(item.id, 'price', event.target.value)} placeholder='Enter price' /></TableCell>
               <TableCell className='py-3 pr-3'><Input value={((Number(item.quantity) || 0) * (Number(item.price) || 0)).toFixed(2)} readOnly /></TableCell>
@@ -63,5 +64,3 @@ export function AddItems({
 function Summary({ label, value }: { label: string; value: string }) {
   return <div><p className='text-xs text-muted-foreground'>{label}</p><p className='mt-1 font-semibold capitalize'>{value}</p></div>
 }
-
-

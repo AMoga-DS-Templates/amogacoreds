@@ -96,7 +96,7 @@ export function ChatTab() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
         <div className="space-y-1">
           <CardTitle className="text-xl flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-emerald-500" />
+            <MessageSquare className="h-5 w-5 text-primary" />
             Chat Credentials Manager
           </CardTitle>
           <CardDescription className="text-xs sm:text-sm">
@@ -112,7 +112,7 @@ export function ChatTab() {
             <Button
               onClick={openAddModal}
               variant="outline"
-              className="gap-1 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 text-xs cursor-pointer"
+              className="gap-1 border-primary/30 text-primary hover:bg-primary/10 text-xs cursor-pointer"
             >
               <Plus className="h-4 w-4" /> Add your first Chat Supabase credential
             </Button>
@@ -130,8 +130,8 @@ export function ChatTab() {
                   {/* Header Row */}
                   <div className="flex items-center justify-between p-3 gap-2 bg-muted/10">
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-emerald-500/10">
-                        <MessageSquare className="h-4.5 w-4.5 text-emerald-400" />
+                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-primary/10">
+                        <MessageSquare className="h-4.5 w-4.5 text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-semibold text-sm truncate">
@@ -158,7 +158,7 @@ export function ChatTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-blue-500 hover:text-blue-600 hover:bg-blue-500/10 shrink-0 cursor-pointer"
+                        className="h-7 w-7 text-primary hover:text-primary hover:bg-primary/10 shrink-0 cursor-pointer"
                         onClick={() => openEditModal(account)}
                         title="Edit Credential"
                       >
@@ -169,7 +169,7 @@ export function ChatTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0 cursor-pointer"
+                        className="h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0 cursor-pointer"
                         onClick={() => removeChatAccount(account.id)}
                         title="Delete Credential"
                       >
@@ -186,7 +186,7 @@ export function ChatTab() {
               <Button
                 onClick={openAddModal}
                 size="sm"
-                className="w-full gap-1 bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                className="w-full gap-1 bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
               >
                 <Plus className="h-4 w-4" />
                 Add Your Chat Credential
@@ -201,7 +201,7 @@ export function ChatTab() {
         <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-emerald-500" />
+              <MessageSquare className="h-5 w-5 text-primary" />
               {editingAccountId === 'new' ? 'Add Chat Supabase Credential' : 'Edit Chat Supabase Credential'}
             </DialogTitle>
             <DialogDescription>
@@ -214,7 +214,7 @@ export function ChatTab() {
               {/* Account Credentials */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Lock className="w-4 h-4 text-emerald-400" />
+                      <Lock className="w-4 h-4 text-primary" />
                   Account Credentials
                 </h3>
 
@@ -257,13 +257,16 @@ export function ChatTab() {
                         onChange={(e) => handleEditFieldChange('supabaseAnonKey', e.target.value)}
                         className="bg-background/80 h-9 text-sm font-mono text-xs pr-9"
                       />
-                      <button
+                      <Button
                         type="button"
                         onClick={() => setShowKey(!showKey)}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                        aria-label={showKey ? 'Hide Supabase key' : 'Show Supabase key'}
                       >
                         {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -282,7 +285,7 @@ export function ChatTab() {
                 <Button
                   onClick={saveEdit}
                   disabled={!editFormData.supabaseUrl?.trim() || !editFormData.supabaseAnonKey?.trim()}
-                  className="gap-1 bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                  className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
                 >
                   <Save className="h-4 w-4" />
                   {editingAccountId === 'new' ? 'Add Credential' : 'Save Changes'}

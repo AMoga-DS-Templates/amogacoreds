@@ -91,7 +91,7 @@ export function FilesTab() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
         <div className="space-y-1">
           <CardTitle className="text-xl flex items-center gap-2">
-            <Database className="h-5 w-5 text-indigo-500" />
+            <Database className="h-5 w-5 text-primary" />
             Supabase Credentials Manager
           </CardTitle>
           <CardDescription className="text-xs sm:text-sm">
@@ -104,7 +104,7 @@ export function FilesTab() {
         {storageAccounts.length === 0 ? (
           <div className="text-center py-10 border-2 border-dashed border-muted rounded-xl bg-muted/10">
             <p className="text-muted-foreground mb-4 text-sm">No Supabase credentials added yet.</p>
-            <Button onClick={openAddModal} variant="outline" className="gap-1 border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/10 text-xs">
+            <Button onClick={openAddModal} variant="outline" className="gap-1 border-primary/30 text-primary hover:bg-primary/10 text-xs">
               <Plus className="h-4 w-4" /> Add your first Supabase credential
             </Button>
           </div>
@@ -121,8 +121,8 @@ export function FilesTab() {
                   {/* Header Row */}
                   <div className="flex items-center justify-between p-3 gap-2 bg-muted/10">
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-indigo-500/10">
-                        <Database className="h-4.5 w-4.5 text-indigo-450" />
+                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-primary/10">
+                        <Database className="h-4.5 w-4.5 text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-semibold text-sm truncate">
@@ -147,7 +147,7 @@ export function FilesTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-blue-500 hover:text-blue-600 hover:bg-blue-500/10 shrink-0"
+                        className="h-7 w-7 text-primary hover:text-primary hover:bg-primary/10 shrink-0"
                         onClick={() => openEditModal(account)}
                         title="Edit Credential"
                       >
@@ -158,7 +158,7 @@ export function FilesTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0"
+                        className="h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0"
                         onClick={() => removeStorageAccount(account.id)}
                         title="Delete Credential"
                       >
@@ -175,7 +175,7 @@ export function FilesTab() {
               <Button
                 onClick={openAddModal}
                 size="sm"
-                className="w-full gap-1 bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="w-full gap-1 bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <Plus className="h-4 w-4" />
                 Add Your Supabase Credential
@@ -190,7 +190,7 @@ export function FilesTab() {
         <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Database className="h-5 w-5 text-indigo-500" />
+              <Database className="h-5 w-5 text-primary" />
               {editingAccountId === 'new' ? 'Add Supabase Credential' : 'Edit Supabase Credential'}
             </DialogTitle>
             <DialogDescription>
@@ -203,7 +203,7 @@ export function FilesTab() {
               {/* Account Credentials */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Lock className="w-4 h-4 text-indigo-400" />
+                  <Lock className="w-4 h-4 text-primary" />
                   Account Credentials
                 </h3>
 
@@ -241,13 +241,16 @@ export function FilesTab() {
                         onChange={(e) => handleEditFieldChange('supabaseAnonKey', e.target.value)}
                         className="bg-background/80 h-9 text-sm font-mono text-xs pr-9"
                       />
-                      <button
+                      <Button
                         type="button"
+                        variant="ghost"
+                        size="icon"
                         onClick={() => setShowKey(!showKey)}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        className="absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        aria-label={showKey ? 'Hide Supabase key' : 'Show Supabase key'}
                       >
                         {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -256,7 +259,7 @@ export function FilesTab() {
               {/* Storage Bucket Settings */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Server className="w-4 h-4 text-indigo-400" />
+                  <Server className="w-4 h-4 text-primary" />
                   Storage Settings
                 </h3>
 
@@ -296,7 +299,7 @@ export function FilesTab() {
                 <Button
                   onClick={saveEdit}
                   disabled={!editFormData.supabaseUrl || !editFormData.supabaseAnonKey}
-                  className="gap-1 bg-blue-600 hover:bg-blue-700 text-white"
+                  className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   <Save className="h-4 w-4" />
                   {editingAccountId === 'new' ? 'Add Credential' : 'Save Changes'}

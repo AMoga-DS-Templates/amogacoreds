@@ -112,7 +112,7 @@ export function LinksTab() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <div className="space-y-1">
           <CardTitle className="text-xl flex items-center gap-2">
-            <Mail className="h-5 w-5 text-indigo-500" />
+            <Mail className="h-5 w-5 text-primary" />
             Email Accounts Manager
           </CardTitle>
           <CardDescription>
@@ -124,7 +124,7 @@ export function LinksTab() {
         {accounts.length === 0 ? (
           <div className="text-center py-12 border-2 border-dashed border-muted rounded-xl bg-muted/10">
             <p className="text-muted-foreground mb-4">No email accounts added yet.</p>
-            <Button onClick={openAddModal} variant="outline" className="gap-1 border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/10">
+            <Button onClick={openAddModal} variant="outline" className="gap-1 border-primary/30 text-primary hover:bg-primary/10">
               <Plus className="h-4 w-4" /> Add your first account
             </Button>
           </div>
@@ -141,8 +141,8 @@ export function LinksTab() {
                   {/* Header Row */}
                   <div className="flex items-center justify-between p-3 gap-2 bg-muted/10">
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-indigo-500/10">
-                        <Mail className="h-4.5 w-4.5 text-indigo-450" />
+                      <div className="h-8 w-8 flex items-center justify-center shrink-0 rounded-lg bg-primary/10">
+                        <Mail className="h-4.5 w-4.5 text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-semibold text-sm truncate">{account.email || 'Untitled Account'}</p>
@@ -165,7 +165,7 @@ export function LinksTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-blue-500 hover:text-blue-600 hover:bg-blue-500/10 shrink-0"
+                        className="h-7 w-7 text-primary hover:text-primary hover:bg-primary/10 shrink-0"
                         onClick={() => openEditModal(account)}
                         title="Edit Account"
                       >
@@ -176,7 +176,7 @@ export function LinksTab() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 text-red-500 hover:text-red-600 hover:bg-red-500/10 shrink-0"
+                        className="h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0"
                         onClick={() => removeAccount(account.id)}
                         title="Delete Account"
                       >
@@ -193,7 +193,7 @@ export function LinksTab() {
               <Button 
                 onClick={openAddModal} 
                 size="sm" 
-                className="w-full gap-1 bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="w-full gap-1 bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <Plus className="h-4 w-4" />
                 Add Email Account
@@ -208,7 +208,7 @@ export function LinksTab() {
         <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Mail className="h-5 w-5 text-indigo-500" />
+              <Mail className="h-5 w-5 text-primary" />
               {editingAccountId === 'new' ? 'Add Email Account' : 'Edit Email Account'}
             </DialogTitle>
             <DialogDescription>
@@ -231,7 +231,7 @@ export function LinksTab() {
                       className={cn(
                         "h-9 text-xs transition-all",
                         preset === key 
-                          ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400 font-semibold'
+                          ? 'border-primary bg-primary/10 text-primary font-semibold'
                           : 'hover:bg-muted/50'
                       )}
                     >
@@ -246,7 +246,7 @@ export function LinksTab() {
               {/* Email & Password */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Lock className="w-4 h-4 text-indigo-400" />
+                  <Lock className="w-4 h-4 text-primary" />
                   Account Credentials
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -279,14 +279,15 @@ export function LinksTab() {
                 <Label className="text-xs font-semibold">Email Protocol</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {['IMAP', 'POP3'].map((proto) => (
-                    <button
+                    <Button
                       key={proto}
                       type="button"
+                      variant="outline"
                       onClick={() => handleEditFieldChange('protocol', proto)}
                       className={cn(
                         "p-3 rounded-lg border-2 text-left transition-all cursor-pointer",
                         editFormData.protocol === proto
-                          ? 'border-indigo-500 bg-indigo-500/5 text-indigo-400'
+                          ? 'border-primary bg-primary/5 text-primary'
                           : 'border-muted hover:border-muted-foreground/30 hover:bg-muted/10'
                       )}
                     >
@@ -294,7 +295,7 @@ export function LinksTab() {
                       <div className="text-[10px] text-muted-foreground mt-0.5">
                         {proto === 'IMAP' ? 'Sync folders, fast' : 'Download and local storage'}
                       </div>
-                    </button>
+                    </Button>
                   ))}
                 </div>
               </div>
@@ -302,7 +303,7 @@ export function LinksTab() {
               {/* Incoming Server */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Server className="w-4 h-4 text-indigo-400" />
+                  <Server className="w-4 h-4 text-primary" />
                   Incoming Server ({editFormData.protocol})
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
@@ -353,7 +354,7 @@ export function LinksTab() {
               {/* Outgoing Server */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold flex items-center gap-2 text-foreground">
-                  <Server className="w-4 h-4 text-indigo-400" />
+                  <Server className="w-4 h-4 text-primary" />
                   Outgoing Server (SMTP)
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
@@ -392,7 +393,7 @@ export function LinksTab() {
                 <Button
                   onClick={saveEdit}
                   disabled={!editFormData.email}
-                  className="gap-1 bg-blue-600 hover:bg-blue-700 text-white"
+                  className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   <Save className="h-4 w-4" />
                   {editingAccountId === 'new' ? 'Add Account' : 'Save Changes'}

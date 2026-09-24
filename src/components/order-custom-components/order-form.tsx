@@ -8,7 +8,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { mockPurchaseOrderSuppliers } from './order-mock'
 import { OrderFileUpload } from './order-file-upload'
 import type { OrderTemplateAttachment, OrderTemplateParty } from './order-types'
 
@@ -18,6 +17,7 @@ function Field({ label, children }: { label: ReactNode; children: ReactNode }) {
 
 export interface OrderFormProps {
   supplier: string
+  suppliers: string[]
   onSupplierChange: (value: string) => void
   onSupplierDetailsChange: (value: OrderTemplateParty) => void
   supplierDetails: OrderTemplateParty
@@ -39,6 +39,7 @@ export interface OrderFormProps {
 
 export function OrderForm({
   supplier,
+  suppliers,
   onSupplierChange,
   onSupplierDetailsChange,
   supplierDetails,
@@ -65,7 +66,7 @@ export function OrderForm({
           <Field label='Select'>
             <Select value={supplier} onValueChange={(value) => { onSupplierChange(value); onSupplierDetailsChange({ ...supplierDetails, name: value }) }}>
               <SelectTrigger aria-label='Select supplier' className='h-12 w-full'><SelectValue placeholder='Select supplier' /></SelectTrigger>
-              <SelectContent>{mockPurchaseOrderSuppliers.map((supplierOption) => <SelectItem key={supplierOption} value={supplierOption}>{supplierOption}</SelectItem>)}</SelectContent>
+              <SelectContent>{suppliers.map((supplierOption) => <SelectItem key={supplierOption} value={supplierOption}>{supplierOption}</SelectItem>)}</SelectContent>
             </Select>
           </Field>
           <Field label={<>Order No. <span className='text-destructive'>*</span></>}><Input value={orderNumber} onChange={(event) => onOrderNumberChange(event.target.value)} className='h-12' /></Field>
@@ -88,5 +89,4 @@ export function OrderForm({
     </section>
   )
 }
-
 

@@ -10,6 +10,7 @@ import {
   Route,
   Link,
   Ticket,
+  ClipboardList,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -51,6 +52,11 @@ export const sidebarData: SidebarData = {
           title: 'Vouchers',
           url: '/vouchers',
           icon: Ticket,
+        },
+        {
+          title: 'Order Template',
+          url: '/ordertemplate',
+          icon: ClipboardList,
         },
         {
           title: 'AI Chat',

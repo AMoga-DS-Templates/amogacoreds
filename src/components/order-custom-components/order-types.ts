@@ -1,6 +1,13 @@
-import type { PurchaseOrderMockItem } from './order-mock'
-
-export type OrderTemplateItem = PurchaseOrderMockItem
+export type OrderTemplateItem = {
+  id: number
+  product: string
+  quantity: string
+  price: string
+  description: string
+  deliveryDate?: string
+  unit?: string
+  discount?: string
+}
 
 export type OrderTemplateParty = {
   name: string
@@ -18,5 +25,4 @@ export type OrderTemplateAttachment = {
   type: string
   url: string
 }
-
 

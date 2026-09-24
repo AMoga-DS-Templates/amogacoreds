@@ -1,12 +1,9 @@
 'use client'
 
 import { OrderRecords } from './index'
-import { mockOrderRecords } from './mock'
+import type { OrderRecord } from './types'
 
-const approvedOrderRecords = mockOrderRecords.filter((record) => record.status === 'approved')
-
-export function OrderApprovedRecords() {
-  return <OrderRecords records={approvedOrderRecords} title='Order Approved' description='View and filter approved order records.' />
+export function OrderApprovedRecords({ records = [] }: { records?: OrderRecord[] }) {
+  return <OrderRecords records={records} title='Order Approved' description='View and filter approved order records.' />
 }
-
 

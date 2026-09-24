@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button'
 
 export type OrderTemplateStep = 'order' | 'items' | 'view' | 'pdf'
 
-const STEP_ITEMS: Array<[OrderTemplateStep, string]> = [
-  ['order', 'Order'],
+export const ORDER_STEP_ITEMS: Array<[OrderTemplateStep, string]> = [
+  ['order', 'Purchase Order'],
   ['items', 'Add Items'],
   ['view', 'View'],
   ['pdf', 'PDF View'],
@@ -14,6 +14,7 @@ const STEP_ITEMS: Array<[OrderTemplateStep, string]> = [
 interface OrderTabsProps {
   step: OrderTemplateStep
   onStepChange: (step: OrderTemplateStep) => void
+  items?: Array<[OrderTemplateStep, string]>
 }
 
 function OrderTemplateTab({
@@ -46,10 +47,10 @@ function OrderTemplateTab({
   )
 }
 
-export function OrderTabs({ step, onStepChange }: OrderTabsProps) {
+export function OrderTabs({ step, onStepChange, items = ORDER_STEP_ITEMS }: OrderTabsProps) {
   return (
     <nav className='sticky top-0 z-30 flex shrink-0 overflow-x-auto border-b bg-background px-5 shadow-sm' aria-label='Order steps'>
-      {STEP_ITEMS.map(([value, label], index) => (
+      {items.map(([value, label], index) => (
         <OrderTemplateTab
           key={value}
           step={step}
@@ -62,5 +63,3 @@ export function OrderTabs({ step, onStepChange }: OrderTabsProps) {
     </nav>
   )
 }
-
-

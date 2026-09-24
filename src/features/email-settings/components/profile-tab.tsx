@@ -37,7 +37,7 @@ export function ProfileTab() {
     <Card className="border-muted bg-card/60 backdrop-blur-md">
       <CardHeader>
         <CardTitle className="text-xl flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-indigo-500" />
+          <Sparkles className="h-5 w-5 text-primary" />
           Profile Customization
         </CardTitle>
         <CardDescription>
@@ -48,7 +48,7 @@ export function ProfileTab() {
         <div className="flex items-center gap-6 p-4 rounded-xl border border-dashed border-muted bg-muted/30">
           <Avatar className="h-20 w-20 border-2 border-primary/20 shadow-md">
             <AvatarImage src={avatarUrl} alt={name} />
-            <AvatarFallback className="bg-gradient-to-tr from-indigo-500 to-fuchsia-500 text-white text-xl font-bold">
+            <AvatarFallback className="bg-primary text-primary-foreground text-xl font-bold">
               {getInitials(name)}
             </AvatarFallback>
           </Avatar>

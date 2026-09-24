@@ -2,6 +2,7 @@ import React from 'react'
 import { useEmailSettingsStore } from '../store'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
 import { colorThemes, useColorTheme } from '@/context/color-theme-provider'
 import { Palette, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -19,7 +20,7 @@ export function ThemesTab() {
     <Card className="border-muted bg-card/60 backdrop-blur-md">
       <CardHeader>
         <CardTitle className="text-xl flex items-center gap-2">
-          <Palette className="h-5 w-5 text-indigo-500" />
+          <Palette className="h-5 w-5 text-primary" />
           Themes & Design Settings
         </CardTitle>
         <CardDescription>
@@ -34,14 +35,16 @@ export function ThemesTab() {
             {colorThemes.map((ct) => {
               const isActive = colorTheme === ct.name
               return (
-                <button
+                <Button
                   key={ct.name}
+                  type="button"
+                  variant="outline"
                   onClick={() => handleColorChange(ct.name)}
                   className={cn(
-                    'flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-all duration-150 cursor-pointer',
+                    'h-auto w-full justify-start gap-3 rounded-lg border p-3 text-left transition-all duration-150 cursor-pointer',
                     isActive
-                      ? 'border-indigo-500 bg-indigo-500/5 text-indigo-500 shadow-sm font-semibold'
-                      : 'border-muted hover:border-indigo-500/50 hover:bg-muted/10'
+                      ? 'border-primary bg-primary/5 text-primary shadow-sm font-semibold'
+                      : 'border-muted hover:border-primary/50 hover:bg-muted/10'
                   )}
                 >
                   {/* Color dots preview */}
@@ -51,7 +54,7 @@ export function ThemesTab() {
                         key={i}
                         className={cn(
                           'size-3.5 rounded-full ring-1 ring-background',
-                          isActive ? 'ring-indigo-500/20' : 'ring-border/40'
+                          isActive ? 'ring-primary/20' : 'ring-border/40'
                         )}
                         style={{ backgroundColor: color }}
                       />
@@ -59,9 +62,9 @@ export function ThemesTab() {
                   </div>
                   <span className="text-xs truncate">{ct.label}</span>
                   {isActive && (
-                    <Check className="ml-auto size-4 text-indigo-500 shrink-0" strokeWidth={3} />
+                    <Check className="ml-auto size-4 text-primary shrink-0" strokeWidth={3} />
                   )}
-                </button>
+                </Button>
               )
             })}
           </div>

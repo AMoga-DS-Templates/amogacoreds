@@ -1121,8 +1121,8 @@ export const colorThemes: ColorThemeDefinition[] = [
     },
   },
   {
-    name: 'catppuccin',
-    label: 'Catppuccin',
+    name: 'catppuccin-alt',
+    label: 'Catppuccin Alt',
     preview: '#cba6f7',
     colors: ['#cba6f7', '#f5c2e7', '#89b4fa', '#a6e3a1', '#1e1e2e'],
     tokens: {
