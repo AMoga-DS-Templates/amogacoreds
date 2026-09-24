@@ -1,3 +1,5 @@
+'use client'
+
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { OrderStatusBadge } from './status-badge'
@@ -11,3 +13,5 @@ export function OrderTable({ records, visibleColumns }: { records: OrderRecord[]
     <TableBody>{records.map((record) => <TableRow key={record.id} className='transition-colors hover:bg-muted/30'><TableCell className='px-3 py-3'><Checkbox aria-label={`Select ${record.voucherNumber}`} /></TableCell>{visibleColumns.voucherNumber && <TableCell className='px-3 py-3 font-medium'>{record.voucherNumber}</TableCell>}{visibleColumns.documentDate && <TableCell className='px-3 py-3'>{formatDate(record.documentDate)}</TableCell>}{visibleColumns.narration && <TableCell className='max-w-[24rem] truncate px-3 py-3 text-muted-foreground'>{record.narration}</TableCell>}{visibleColumns.totalAmount && <TableCell className='px-3 py-3 text-right font-medium'>{formatAmount(record.totalAmount)}</TableCell>}{visibleColumns.dueDate && <TableCell className='px-3 py-3'>{formatDate(record.dueDate)}</TableCell>}{visibleColumns.status && <TableCell className='px-3 py-3'><OrderStatusBadge status={record.status} /></TableCell>}<TableCell className='px-3 py-3'><OrderTableRowMenu record={record} /></TableCell></TableRow>)}</TableBody>
   </Table></div>
 }
+
+

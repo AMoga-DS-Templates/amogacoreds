@@ -2,13 +2,13 @@
 
 import { useMemo, useState, type ChangeEvent } from 'react'
 import { toast } from 'sonner'
-import { mockPurchaseOrder, type PurchaseOrderMockItem } from '@/features/MessageComponentGallery/mocks'
-import { AddItems } from './components/add-items'
-import { OrderForm } from './components/order-form'
-import { OrderTabs, type OrderTemplateStep } from './components/order-tabs'
-import { OrderPdfView } from './components/order-pdf-view'
-import { OrderView } from './components/order-view'
-import type { OrderTemplateAttachment, OrderTemplateParty } from './components/order-types'
+import { mockPurchaseOrder, type PurchaseOrderMockItem } from '@/components/order-custom-components/order-mock'
+import { AddItems } from '@/components/order-custom-components/add-items'
+import { OrderForm } from '@/components/order-custom-components/order-form'
+import { OrderTabs, type OrderTemplateStep } from '@/components/order-custom-components/order-tabs'
+import { OrderPdfView } from '@/components/order-custom-components/order-pdf-view'
+import { OrderView } from '@/components/order-custom-components/order-view'
+import type { OrderTemplateAttachment, OrderTemplateParty } from '@/components/order-custom-components/order-types'
 
 type Step = OrderTemplateStep
 type Item = PurchaseOrderMockItem

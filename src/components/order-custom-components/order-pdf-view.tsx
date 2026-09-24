@@ -57,10 +57,12 @@ function PdfPreview(props: OrderPdfViewProps) {
     }
   }, [dataKey])
 
-  if (!blobUrl) return <div className='flex min-h-[650px] items-center justify-center text-sm text-muted-foreground'>Preparing PDF preview…</div>
+  if (!blobUrl) return <div className='flex min-h-[650px] items-center justify-center text-sm text-muted-foreground'>Preparing PDF previewÃ¢â‚¬Â¦</div>
   return <ZrimoViewer file={{ id: `order-${dataKey}`, name: `Order-${props.orderNumber || 'preview'}.pdf`, url: blobUrl, directUrl: true, type: 'pdf' }} />
 }
 
 export function OrderPdfView(props: OrderPdfViewProps) {
   return <section className='flex h-[calc(100vh-120px)] min-h-[650px] flex-col overflow-hidden bg-slate-100'><div className='min-h-0 flex-1 overflow-hidden'><PdfPreview {...props} /></div></section>
 }
+
+

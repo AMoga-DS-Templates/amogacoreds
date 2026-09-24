@@ -349,7 +349,31 @@ export function StatisticsCardPreview() {
     </div>
   )
 }
-
+/** 7. Card 07 - Financial Overview Card */
+export function FinancialCardPreview() {
+  return (
+    <div className="w-full max-w-sm mx-auto">
+      <Card className="min-w-0 rounded-xl border-border/80 shadow-xs">
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <CardTitle className="break-words text-base">INV-2026-0048</CardTitle>
+              <p className="mt-1 text-xs text-muted-foreground">Order · FY 2026</p>
+            </div>
+            <Badge variant="outline" className="shrink-0 text-[10px] text-emerald-600">Paid</Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="grid grid-cols-1 gap-x-4 gap-y-3 text-xs sm:grid-cols-2">
+          <span><span className="text-muted-foreground">Document Date</span><br />Aug 18, 2026</span>
+          <span><span className="text-muted-foreground">Due Date</span><br />Sep 18, 2026</span>
+          <span><span className="text-muted-foreground">Total Amount</span><br /><strong>$12,480.00</strong></span>
+          <span><span className="text-muted-foreground">Status</span><br /><span className="font-semibold text-emerald-600">Completed</span></span>
+          <span className="col-span-1 break-words sm:col-span-2"><span className="text-muted-foreground">Narration</span><br />Annual software licensing and support</span>
+        </CardContent>
+        </Card>
+    </div>
+  )
+}
 /** 7. Data Cards Suite Overview */
 export function DataCardsPreview() {
   return (
@@ -361,9 +385,11 @@ export function DataCardsPreview() {
         <AssignTaskCardPreview />
         <AppointmentCardPreview />
         <StatisticsCardPreview />
+        <FinancialCardPreview />
       </div>
     </div>
   )
 }
+
 
 export default DataCardsPreview

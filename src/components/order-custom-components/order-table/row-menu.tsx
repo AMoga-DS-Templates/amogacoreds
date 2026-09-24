@@ -1,3 +1,5 @@
+'use client'
+
 import { FileText, MoreHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -9,3 +11,5 @@ export function OrderTableRowMenu({ record }: { record: OrderRecord }) {
     <DropdownMenuContent align='end' className='w-44'><DropdownMenuItem><FileText className='size-4' />Open order</DropdownMenuItem><DropdownMenuItem>Duplicate order</DropdownMenuItem><DropdownMenuSeparator /><DropdownMenuItem>Archive order</DropdownMenuItem></DropdownMenuContent>
   </DropdownMenu>
 }
+
+

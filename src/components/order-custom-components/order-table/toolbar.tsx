@@ -1,3 +1,5 @@
+'use client'
+
 import { CalendarDays, Columns3, Grid3x3, Layers2, ListFilter } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -37,3 +39,5 @@ export function OrderTableToolbar(props: OrderTableToolbarProps) {
     </div></div>
   </>
 }
+
+

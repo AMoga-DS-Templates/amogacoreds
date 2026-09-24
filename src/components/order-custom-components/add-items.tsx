@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { mockPurchaseOrderProducts } from '@/features/MessageComponentGallery/mocks'
+import { mockPurchaseOrderProducts } from './order-mock'
 import type { OrderTemplateItem } from './order-types'
 
 export interface AddItemsProps {
@@ -63,3 +63,5 @@ export function AddItems({
 function Summary({ label, value }: { label: string; value: string }) {
   return <div><p className='text-xs text-muted-foreground'>{label}</p><p className='mt-1 font-semibold capitalize'>{value}</p></div>
 }
+
+

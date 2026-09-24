@@ -31,3 +31,5 @@ export const columnLabels: Record<ColumnKey, string> = {
 export const formatDate = (value: string) => new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(`${value}T00:00:00`))
 export const formatAmount = (value: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 }).format(value)
 export const displayValue = (value: string | number | null | undefined) => value === null || value === undefined || value === '' ? '-' : String(value)
+
+

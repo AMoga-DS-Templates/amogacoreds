@@ -16,7 +16,7 @@ import { OrderFileUpload } from '../order-file-upload'
 import type { OrderTemplateAttachment } from '../order-types'
 import { OrderPdfView } from '../order-pdf-view'
 import { OrderView } from '../order-view'
-import { mockPurchaseOrder } from '@/features/MessageComponentGallery/mocks'
+import { mockPurchaseOrder } from '../order-mock'
 
 const previewRecords = mockOrderRecords.filter((record) => record.status !== 'approved')
 const previewColumns: Record<ColumnKey, boolean> = {
@@ -154,3 +154,5 @@ export function OrderStatusBadgePreview() {
 }
 
 export { columnLabels }
+
+

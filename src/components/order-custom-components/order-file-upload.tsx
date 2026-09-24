@@ -18,9 +18,11 @@ export function OrderFileUpload({ attachments, onAddAttachments, onRemoveAttachm
     </Button>
     {attachments.length > 0 && <div className='mt-4 overflow-hidden rounded-lg border bg-background'>
       {attachments.map((attachment) => <div key={attachment.id} className='flex items-center justify-between gap-3 border-b p-3 last:border-b-0'>
-        <div className='flex min-w-0 items-center gap-3'><div className='flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary'><FileText className='size-4' /></div><div className='min-w-0'><p className='truncate text-xs font-semibold'>{attachment.name}</p><p className='text-[10px] text-muted-foreground'>{attachment.type} · {(attachment.size / 1024).toFixed(1)} KB</p></div></div>
+        <div className='flex min-w-0 items-center gap-3'><div className='flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary'><FileText className='size-4' /></div><div className='min-w-0'><p className='truncate text-xs font-semibold'>{attachment.name}</p><p className='text-[10px] text-muted-foreground'>{attachment.type} Ã‚Â· {(attachment.size / 1024).toFixed(1)} KB</p></div></div>
         <div className='flex shrink-0 items-center gap-1'><Button type='button' variant='ghost' size='icon' className='size-8' title='View attachment' onClick={() => window.open(attachment.url, '_blank', 'noopener,noreferrer')}><Eye className='size-4' /></Button><Button asChild type='button' variant='ghost' size='icon' className='size-8 text-muted-foreground' title='Download attachment'><a href={attachment.url} download={attachment.name}><Download className='size-4' /></a></Button><Button type='button' variant='ghost' size='icon' className='size-8 text-muted-foreground hover:text-destructive' title='Remove attachment' onClick={() => onRemoveAttachment(attachment)}><X className='size-4' /></Button></div>
       </div>)}
     </div>}
   </div>
 }
+
+

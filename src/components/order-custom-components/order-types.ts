@@ -1,4 +1,4 @@
-import type { PurchaseOrderMockItem } from '@/features/MessageComponentGallery/mocks'
+import type { PurchaseOrderMockItem } from './order-mock'
 
 export type OrderTemplateItem = PurchaseOrderMockItem
 
@@ -18,3 +18,5 @@ export type OrderTemplateAttachment = {
   type: string
   url: string
 }
+
+

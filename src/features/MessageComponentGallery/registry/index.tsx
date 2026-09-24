@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Message Component Gallery — Registry
+ * Message Component Gallery â€” Registry
  *
  * Central registry of all Message Page components and full section layout views.
  * 100% mock data, zero Supabase calls, zero production modifications.
@@ -11,8 +11,8 @@ import React from 'react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PurchaseOrderTemplate from '@/features/ordertemplate'
-import { OrderRecords } from '@/features/ordertemplate/components/order-table'
-import { OrderApprovedRecords } from '@/features/ordertemplate/components/order-table/approved'
+import { OrderRecords } from '@/components/order-custom-components/order-table'
+import { OrderApprovedRecords } from '@/components/order-custom-components/order-table/approved'
 import {
   OrderCardPreview,
   OrderFileUploadPreview,
@@ -25,7 +25,7 @@ import {
   OrderTableToolbarPreview,
   OrderTableTopBarPreview,
   OrderViewPreview,
-} from '@/features/ordertemplate/components/order-table/gallery-previews'
+} from '@/components/order-custom-components/order-table/gallery-previews'
 import MockZrimoViewer from '@/features/zrimo-viewer/MockZrimoViewer'
 import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
@@ -64,7 +64,7 @@ import {
   Button as DsButton,
 } from '@/design-system'
 
-// ─── Existing Message Page Components (unchanged) ────────────────────────────
+// â”€â”€â”€ Existing Message Page Components (unchanged) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 import { ChatView } from '@/features/Message/components/chat/chat-view'
 import { MessageBubble } from '@/features/Message/components/chat/message-bubble'
 import { MessageInput } from '@/features/Message/components/chat/message-input'
@@ -83,7 +83,7 @@ import { SubTabsBar } from '@/features/Message/components/sidebar/sub-tabs-bar'
 import { SidebarSearchBar } from '@/features/Message/components/sidebar/sidebar-search-bar'
 import { SidebarPagination } from '@/features/Message/components/sidebar/sidebar-pagination'
 
-// ─── Rich Full-View Section Previews ─────────────────────────────────────────
+// â”€â”€â”€ Rich Full-View Section Previews â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 import {
   CompleteTaskPagePreview,
   CompleteMailPagePreview,
@@ -106,6 +106,7 @@ import {
   CompleteVouchersPagePreview,
   AnalyticsPreview,
   StatsPreview,
+  FinancialCardPreview,
   AreaChartPreview,
   BarChartPreview,
   LineChartPreview,
@@ -138,7 +139,7 @@ import {
   CalendarEventsPreview,
 } from '../previews/DatePickerAndCalendarPreviews'
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Mock Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 import {
   mockChatEmails,
   mockChatMessages,
@@ -152,7 +153,7 @@ import {
   mockStorageFiles,
 } from '../mocks'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export type GalleryCategory =
   | 'All'
   | 'Wizards'
@@ -207,7 +208,7 @@ const baseComponentGalleryEntries: GalleryEntry[] = baseComponents.map(([name, f
   usageCode: () => `import { ${name.replace(/\s+/g, '')} } from '@/components/ui/${file.replace(/\.tsx$/, '')}'`,
 }))
 
-// ─── Shared no-op helpers ─────────────────────────────────────────────────────
+// â”€â”€â”€ Shared no-op helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const noop = () => { }
 
 function FloatingChatToolbarPill({ isCardClicked }: { isCardClicked?: boolean }) {
@@ -332,9 +333,9 @@ function SideListCardPreview({ stateIndex }: { stateIndex: number }) {
   )
 }
 
-// ─── Registry Definition ──────────────────────────────────────────────────────
+// â”€â”€â”€ Registry Definition â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const galleryRegistry: GalleryEntry[] = [
-  // ───────────────────────── TASK SECTION ───────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ TASK SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-task-page',
@@ -386,7 +387,7 @@ export const galleryRegistry: GalleryEntry[] = [
 />`,
   },
 
-  // ───────────────────────── NOTIFICATIONS SECTION ────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ NOTIFICATIONS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-notification-page',
@@ -443,9 +444,9 @@ export const galleryRegistry: GalleryEntry[] = [
 />`,
   },
 
-  // ───────────────────────── FILES SECTION ───────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FILES SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-  // ───────────────────────── FILES & DOCUMENTS SECTION ──────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FILES & DOCUMENTS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'file-manager-view',
@@ -684,7 +685,7 @@ export default function FolderTreeDemo() {
 }`,
   },
 
-  // ───────────────────────── KANBAN BOARD SECTION ─────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ KANBAN BOARD SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-kanban-board',
@@ -705,7 +706,7 @@ export default function KanbanPage() {
 }`,
   },
 
-  // ───────────────────────── VOUCHERS SECTION ───────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ VOUCHERS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-vouchers-page',
@@ -777,7 +778,7 @@ export default function NewVoucherPage() {
       <div className='flex min-h-[360px] w-full items-center justify-center rounded-xl border border-dashed border-orange-300 bg-orange-50/40 p-8 text-center dark:border-orange-800 dark:bg-orange-950/20'>
         <div className='space-y-2'>
           <h2 className='text-lg font-semibold text-foreground'>Order Template</h2>
-          <p className='text-sm text-muted-foreground'>Template placeholder — content will be added later.</p>
+          <p className='text-sm text-muted-foreground'>Template placeholder â€” content will be added later.</p>
         </div>
       </div>
     ),
@@ -794,12 +795,12 @@ export default function NewVoucherPage() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Order records table with search, status, date filters, columns, cards, and row actions.',
-    filePath: 'src/features/ordertemplate/components/order-table/index.tsx',
+    filePath: 'src/components/order-custom-components/order-table/index.tsx',
     states: [
       { label: 'Purchase Order Records', description: 'Mock Purchase Order records with table and card views' },
     ],
     renderPreview: () => <OrderRecords />,
-    usageCode: () => `import { OrderRecords } from '@/features/ordertemplate/components/order-table'
+    usageCode: () => `import { OrderRecords } from '@/components/order-custom-components/order-table'
 
 export default function OrderTable() {
   return <OrderRecords />
@@ -812,10 +813,10 @@ export default function OrderTable() {
     category: 'Order Template',
     badge: 'Order Approved',
     description: 'Approved order records table with search and filters.',
-    filePath: 'src/features/ordertemplate/components/order-table/approved.tsx',
+    filePath: 'src/components/order-custom-components/order-table/approved.tsx',
     states: [{ label: 'Approved Orders', description: 'Approved order records without internal tabs' }],
     renderPreview: () => <OrderApprovedRecords />,
-    usageCode: () => `import { OrderApprovedRecords } from '@/features/ordertemplate/components/order-table/approved'
+    usageCode: () => `import { OrderApprovedRecords } from '@/components/order-custom-components/order-table/approved'
 
 export default function OrderApproved() {
   return <OrderApprovedRecords />
@@ -828,10 +829,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Reusable order title and description bar.',
-    filePath: 'src/features/ordertemplate/components/order-table/top-bar.tsx',
+    filePath: 'src/components/order-custom-components/order-table/top-bar.tsx',
     states: [{ label: 'Order Header', description: 'Title and supporting description' }],
     renderPreview: () => <OrderTableTopBarPreview />,
-    usageCode: () => `import { OrderTableTopBar } from '@/features/ordertemplate/components/order-table/top-bar'
+    usageCode: () => `import { OrderTableTopBar } from '@/components/order-custom-components/order-table/top-bar'
 
 <OrderTableTopBar title='Order' description='View and filter order records.' />`,
   },
@@ -842,10 +843,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Search input used by the order records view.',
-    filePath: 'src/features/ordertemplate/components/order-table/search.tsx',
+    filePath: 'src/components/order-custom-components/order-table/search.tsx',
     states: [{ label: 'Search Orders', description: 'Controlled order search field' }],
     renderPreview: () => <OrderTableSearchPreview />,
-    usageCode: () => `import { OrderTableSearch } from '@/features/ordertemplate/components/order-table/search'
+    usageCode: () => `import { OrderTableSearch } from '@/components/order-custom-components/order-table/search'
 
 <OrderTableSearch value={query} onChange={setQuery} />`,
   },
@@ -856,10 +857,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Order status, date, column, and table/card view controls.',
-    filePath: 'src/features/ordertemplate/components/order-table/toolbar.tsx',
+    filePath: 'src/components/order-custom-components/order-table/toolbar.tsx',
     states: [{ label: 'Table Controls', description: 'Search, filters, columns, and view switcher' }],
     renderPreview: () => <OrderTableToolbarPreview />,
-    usageCode: () => `import { OrderTableToolbar } from '@/features/ordertemplate/components/order-table/toolbar'
+    usageCode: () => `import { OrderTableToolbar } from '@/components/order-custom-components/order-table/toolbar'
 
 <OrderTableToolbar {...toolbarProps} />`,
   },
@@ -870,10 +871,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Shadcn table component for purchase order records.',
-    filePath: 'src/features/ordertemplate/components/order-table/table.tsx',
+    filePath: 'src/components/order-custom-components/order-table/table.tsx',
     states: [{ label: 'Records Grid', description: 'Checkboxes, columns, status badges, and row actions' }],
     renderPreview: () => <OrderTablePreview />,
-    usageCode: () => `import { OrderTable } from '@/features/ordertemplate/components/order-table/table'
+    usageCode: () => `import { OrderTable } from '@/components/order-custom-components/order-table/table'
 
 <OrderTable records={records} visibleColumns={visibleColumns} />`,
   },
@@ -884,10 +885,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Responsive card layout for order records.',
-    filePath: 'src/features/ordertemplate/components/order-table/cards.tsx',
+    filePath: 'src/components/order-custom-components/order-table/cards.tsx',
     states: [{ label: 'Card Records', description: 'Responsive order card collection' }],
     renderPreview: () => <OrderTableCardsPreview />,
-    usageCode: () => `import { OrderTableCards } from '@/features/ordertemplate/components/order-table/cards'
+    usageCode: () => `import { OrderTableCards } from '@/components/order-custom-components/order-table/cards'
 
 <OrderTableCards records={records} />`,
   },
@@ -898,10 +899,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Single purchase order card with metadata and actions.',
-    filePath: 'src/features/ordertemplate/components/order-table/card.tsx',
+    filePath: 'src/components/order-custom-components/order-table/card.tsx',
     states: [{ label: 'Single Order Card', description: 'Responsive record card' }],
     renderPreview: () => <OrderCardPreview />,
-    usageCode: () => `import { OrderCard } from '@/features/ordertemplate/components/order-table/card'
+    usageCode: () => `import { OrderCard } from '@/components/order-custom-components/order-table/card'
 
 <OrderCard record={record} />`,
   },
@@ -912,10 +913,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Three-dot menu for order row and card actions.',
-    filePath: 'src/features/ordertemplate/components/order-table/row-menu.tsx',
+    filePath: 'src/components/order-custom-components/order-table/row-menu.tsx',
     states: [{ label: 'Three Dot Menu', description: 'Open, duplicate, and archive actions' }],
     renderPreview: () => <OrderTableRowMenuPreview />,
-    usageCode: () => `import { OrderTableRowMenu } from '@/features/ordertemplate/components/order-table/row-menu'
+    usageCode: () => `import { OrderTableRowMenu } from '@/components/order-custom-components/order-table/row-menu'
 
 <OrderTableRowMenu record={record} />`,
   },
@@ -926,10 +927,10 @@ export default function OrderApproved() {
     category: 'Order Template',
     badge: 'Order Table',
     description: 'Reusable status badge for order records.',
-    filePath: 'src/features/ordertemplate/components/order-table/status-badge.tsx',
+    filePath: 'src/components/order-custom-components/order-table/status-badge.tsx',
     states: [{ label: 'Order Statuses', description: 'Draft, active, posted, and approved' }],
     renderPreview: () => <OrderStatusBadgePreview />,
-    usageCode: () => `import { OrderStatusBadge } from '@/features/ordertemplate/components/order-table/status-badge'
+    usageCode: () => `import { OrderStatusBadge } from '@/components/order-custom-components/order-table/status-badge'
 
 <OrderStatusBadge status='active' />`,
   },
@@ -958,10 +959,10 @@ export default function NewOrder() {
     category: 'Order Template',
     badge: 'New Order',
     description: 'Reusable file upload and attachment list for the Order form.',
-    filePath: 'src/features/ordertemplate/components/order-file-upload.tsx',
+    filePath: 'src/components/order-custom-components/order-file-upload.tsx',
     states: [{ label: 'Attachment Upload', description: 'Upload, view, download, and remove files' }],
     renderPreview: () => <OrderFileUploadPreview />,
-    usageCode: () => `import { OrderFileUpload } from '@/features/ordertemplate/components/order-file-upload'
+    usageCode: () => `import { OrderFileUpload } from '@/components/order-custom-components/order-file-upload'
 
 <OrderFileUpload attachments={attachments} onAddAttachments={handleUpload} onRemoveAttachment={handleRemove} />`,
   },
@@ -989,7 +990,7 @@ export default function ViewerPage() {
 
 
 
-  // ───────────────────────── ANALYTICS SECTION ──────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ANALYTICS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-analytics-dashboard',
@@ -1010,7 +1011,7 @@ export default function AnalyticsPage() {
 }`,
   },
 
-  // ───────────────────────── STATS SECTION ──────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ STATS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-stats-blocks',
@@ -1031,7 +1032,7 @@ export default function StatsPage() {
 }`,
   },
 
-  // ───────────────────────── DATA CARDS SECTION ─────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ DATA CARDS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'card-19-integration',
@@ -1117,7 +1118,20 @@ export default function StatsPage() {
     usageCode: () => `import { StatisticsCardPreview } from '@/features/MessageComponentGallery/previews'\n\nexport default function CardPage() {\n  return <StatisticsCardPreview />\n}`,
   },
 
-  // ───────────────────────── CHARTS SECTION ─────────────────────────────────
+  {
+    id: 'card-07-financial-metrics',
+    name: 'Card 07 - Financial Metrics Card',
+    category: 'Data Cards',
+    badge: 'Financial',
+    description: 'Financial metrics card featuring key performance indicators, revenue projections, and budget variance visualization.',
+    filePath: 'src/features/MessageComponentGallery/previews/DataCardsPreview.tsx',
+    states: [
+      { label: 'Financial Metrics Card', description: 'Financial metric card with performance indicators' },
+    ],
+    renderPreview: () =>  <FinancialCardPreview/>,
+    usageCode: () => `import { FinancialCardPreview } from '@/features/MessageComponentGallery/previews'\n\nexport default function CardPage() {\n  return <FinancialCardPreview />\n}`,
+  },
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CHARTS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'area-chart-card',
@@ -1217,7 +1231,7 @@ export default function StatsPage() {
     usageCode: () => `import { TooltipChartCard } from '@/features/charttemplate/components/TooltipChartCard'\n\nexport default function ChartPage() {\n  return <TooltipChartCard />\n}`,
   },
 
-  // ───────────────────────── MAPS SECTION ───────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MAPS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-map-template',
@@ -1238,7 +1252,7 @@ export default function MapScreen() {
 }`,
   },
 
-  // ───────────────────────── MAIL SECTION ───────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MAIL SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'complete-mail-page',
@@ -1405,7 +1419,7 @@ export default function MapScreen() {
 {isEmailsLoading && <EmailListSkeleton />}`,
   },
 
-  // ───────────────────────── CHAT SECTION ───────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CHAT SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'chat-sidebar',
@@ -1451,7 +1465,7 @@ export default function MapScreen() {
             time="10 days ago"
             membersCount={3}
             onlineCount={0}
-            lastMessage="Contact Created 🟢 Contact Added By: Bhanuprasad..."
+            lastMessage="Contact Created ðŸŸ¢ Contact Added By: Bhanuprasad..."
             isActive={false}
             onClick={() => toast.info('Selected DB Alerts')}
           />
@@ -1495,7 +1509,7 @@ export default function MapScreen() {
     name: 'Chat Card Item',
     category: 'Chat',
     badge: 'Chat Card',
-    description: 'Conversation preview card for sidebar list. Displays contact name, pill badge (💬 Chat), timestamp, member & online counter, and last message snippet with active left accent stripe.',
+    description: 'Conversation preview card for sidebar list. Displays contact name, pill badge (ðŸ’¬ Chat), timestamp, member & online counter, and last message snippet with active left accent stripe.',
     filePath: 'src/design-system/components/chat/chat-card-item.tsx',
     states: [
       { label: 'Active / Selected', description: 'With purple left stripe and tinted background' },
@@ -1511,7 +1525,7 @@ export default function MapScreen() {
           time={si === 1 ? 'about 3 hours ago' : si === 2 ? '10 days ago' : 'about 3 hours ago'}
           membersCount={si === 2 ? 3 : 2}
           onlineCount={0}
-          lastMessage={si === 2 ? 'Contact Created 🟢 Contact Added By: Bhanuprasad...' : 'images (1).jpg'}
+          lastMessage={si === 2 ? 'Contact Created ðŸŸ¢ Contact Added By: Bhanuprasad...' : 'images (1).jpg'}
           isActive={si === 0}
           onClick={() => toast.info('Conversation clicked')}
         />
@@ -1803,8 +1817,8 @@ export default function MapScreen() {
             time="09:55 AM"
             status="read"
             reactions={[
-              { emoji: '👍', count: 2 },
-              { emoji: '🚀', count: 1 },
+              { emoji: 'ðŸ‘', count: 2 },
+              { emoji: 'ðŸš€', count: 1 },
             ]}
           />
         )}
@@ -1965,7 +1979,7 @@ export default function MapScreen() {
 />`,
   },
 
-  // ───────────────────────── AI ASSISTANT SECTION ───────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ AI ASSISTANT SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'ai-chat-input',
@@ -2188,7 +2202,7 @@ export default function MapScreen() {
       <div className='w-full max-w-xl bg-background border border-border/80 rounded-2xl overflow-hidden shadow-xs'>
         <DsAiChatHeader
           title="AI Assistant"
-          subtitle="Powered by AI · Ask anything"
+          subtitle="Powered by AI Â· Ask anything"
           onNotificationClick={() => toast.info('Act on this clicked')}
           onFlagClick={() => toast.info('Flagged message')}
           onReply={() => toast.info('Reply clicked')}
@@ -2204,7 +2218,7 @@ export default function MapScreen() {
     ),
     usageCode: () => `<AiChatHeader
   title="AI Assistant"
-  subtitle="Powered by AI · Ask anything"
+  subtitle="Powered by AI Â· Ask anything"
   onNotificationClick={() => handleActionThis()}
   onFlagClick={() => handleFlag()}
   onReply={() => handleReply()}
@@ -2217,7 +2231,7 @@ export default function MapScreen() {
 />`,
   },
 
-  // ─────────────────────── SHARED / TOOLBARS SECTION ────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ SHARED / TOOLBARS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: 'sidebar-header',
@@ -2393,7 +2407,7 @@ export default function MapScreen() {
     name: 'Sidebar Pagination',
     category: 'Shared',
     badge: 'Pagination',
-    description: 'Compact pagination controls showing "1–20 of 48" with prev/next buttons. Used in the mail sidebar.',
+    description: 'Compact pagination controls showing "1â€“20 of 48" with prev/next buttons. Used in the mail sidebar.',
     filePath: 'src/features/Message/components/sidebar/sidebar-pagination.tsx',
     states: [
       { label: 'Page 1', description: 'First page, prev disabled' },
@@ -2437,7 +2451,7 @@ export default function MapScreen() {
     renderPreview: (_si) => (
       <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
         <div className='flex w-full max-w-xl items-center justify-between gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5'>
-          <span className='text-sm font-semibold text-muted-foreground mr-auto'>Header Actions →</span>
+          <span className='text-sm font-semibold text-muted-foreground mr-auto'>Header Actions â†’</span>
           <HeaderActions
             onDelete={() => toast.info('Delete clicked (preview only)')}
             onReply={() => toast.info('Reply clicked')}
@@ -2602,7 +2616,7 @@ export default function MapScreen() {
     renderPreview: (_si) => (
       <div className='flex min-h-48 w-full items-center justify-center p-4 sm:p-8'>
         <div className='flex items-center gap-3 rounded-xl border border-border bg-background p-2.5 shadow-xs'>
-          <span className='text-xs text-muted-foreground font-medium'>Click 3-Dot Menu →</span>
+          <span className='text-xs text-muted-foreground font-medium'>Click 3-Dot Menu â†’</span>
           <ThreeDotMenu />
         </div>
       </div>
@@ -2707,10 +2721,10 @@ export function ProgressDemo() {
     category: 'Order Template',
     badge: 'New Order',
     description: 'Reviewable order summary with editable parties, items, terms, totals, and approval details.',
-    filePath: 'src/features/ordertemplate/components/order-view.tsx',
+    filePath: 'src/components/order-custom-components/order-view.tsx',
     states: [{ label: 'Order Review', description: 'Order review step before PDF generation' }],
     renderPreview: () => <OrderViewPreview />,
-    usageCode: () => `import { OrderView } from '@/features/ordertemplate/components/order-view'
+    usageCode: () => `import { OrderView } from '@/components/order-custom-components/order-view'
 
 <OrderView {...orderViewProps} />`,
   },
@@ -2721,10 +2735,10 @@ export function ProgressDemo() {
     category: 'Order Template',
     badge: 'New Order',
     description: 'Generated purchase order PDF preview shown through the document viewer.',
-    filePath: 'src/features/ordertemplate/components/order-pdf-view.tsx',
+    filePath: 'src/components/order-custom-components/order-pdf-view.tsx',
     states: [{ label: 'PDF View', description: 'Order PDF document preview' }],
     renderPreview: () => <OrderPdfViewPreview />,
-    usageCode: () => `import { OrderPdfView } from '@/features/ordertemplate/components/order-pdf-view'
+    usageCode: () => `import { OrderPdfView } from '@/components/order-custom-components/order-pdf-view'
 
 <OrderPdfView {...orderPdfViewProps} />`,
   },
@@ -2771,7 +2785,7 @@ export default function RadialDemo() {
 }`,
   },
 
-  // ───────────────────────── WIZARDS SECTION ─────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ WIZARDS SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: 'questionnaire-wizard',
     name: 'Questionnaire & Onboarding Wizard',
@@ -2793,7 +2807,7 @@ export default function QuestionnairePage() {
 }`,
   },
 
-  // ───────────────────────── DATE PICKER SECTION ─────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ DATE PICKER SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: 'date-picker-simple',
     name: 'Date Picker - Simple',
@@ -2906,7 +2920,7 @@ export default function QuestionnairePage() {
 </div>`,
   },
 
-  // ───────────────────────── CALENDAR SECTION ────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CALENDAR SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: 'calendar-single',
     name: 'Calendar - Single Selection',
@@ -2967,7 +2981,7 @@ export default function QuestionnairePage() {
 </div>`,
   },
 
-  // ───────────────────────── RICH EDITOR SECTION ────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ RICH EDITOR SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: 'minimal-tiptap-editor',
     name: 'Minimal Tiptap Editor',
@@ -2982,7 +2996,7 @@ export default function QuestionnairePage() {
     usageCode: () => `import { MinimalTiptapEditor } from '@/components/ui/minimal-tiptap'\n\nexport default function EditorPage() {\n  const [value, setValue] = useState('')\n  return <MinimalTiptapEditor value={value} onChange={setValue} />\n}`,
   },
 
-  // ───────────────────────── THEME SECTION ──────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ THEME SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: 'lucide-icons-gallery',
     name: 'Lucide Icons Gallery',
@@ -3010,7 +3024,6 @@ export default function QuestionnairePage() {
     usageCode: () => `import { ThemesTab } from '@/features/email-settings/components/themes-tab'\n\nexport default function ThemePage() {\n  return <ThemesTab />\n}`,
   },
 ]
-
 export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'All',
   'Wizards',
