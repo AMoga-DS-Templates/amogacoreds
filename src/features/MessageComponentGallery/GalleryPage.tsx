@@ -537,7 +537,7 @@ export function GalleryPage() {
                               className='cursor-pointer gap-2 py-1.5 text-xs font-medium'
                             >
                               <Eye className='h-3.5 w-3.5 text-indigo-500' />
-                              <span>{activeCategory === 'Base Components' ? 'UI' : 'Preview'}</span>
+                              <span>{['Base Components', 'Charts'].includes(activeCategory) ? 'UI' : 'Preview'}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={(e) => {
@@ -636,7 +636,7 @@ export function GalleryPage() {
                         )}
                       >
                         <Eye className='h-3.5 w-3.5' />
-                        <span>{activeCategory === 'Base Components' ? 'UI' : 'Preview'}</span>
+                        <span>{['Base Components', 'Charts'].includes(activeCategory) ? 'UI' : 'Preview'}</span>
                       </button>
 
                       <button

@@ -141,6 +141,37 @@ import {
   CalendarEventsPreview,
 } from '../previews/DatePickerAndCalendarPreviews'
 
+import {
+  AreaChart,
+  AreaChartAxes,
+  AreaChartCondensed,
+  AreaChartGradient,
+  BarChart,
+  BarChartMixed,
+  BarChartCondensed,
+  BarChartMultiple,
+  GanttTaskChart,
+  GaugeChartLiveUpdates,
+  GaugeChartTwentyLevels,
+  LineChart,
+  LineChartCondensed,
+  LineChartDotsColors,
+  LineChartLabel,
+  PieChart,
+  PieChartDonut,
+  PieChartDonutActive,
+  RadarChart,
+  RadialChart,
+  RadialChartStacked,
+  RadialChartText,
+  ScatterChart,
+  StatsUsageDashboard,
+  StatswithAreaChart,
+  StatswithBarChart,
+  StatswithLineChart,
+  StatswithPieChart,
+} from '@/components/base-charts'
+
 // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Mock Data Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 import {
   mockChatEmails,
@@ -336,7 +367,97 @@ function SideListCardPreview({ stateIndex }: { stateIndex: number }) {
 }
 
 // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Registry Definition Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-export const galleryRegistry: GalleryEntry[] = [
+const galleryChartData = [
+  { month: 'Jan', desktop: 186, mobile: 120, revenue: 4200 },
+  { month: 'Feb', desktop: 238, mobile: 158, revenue: 5100 },
+  { month: 'Mar', desktop: 214, mobile: 176, revenue: 4800 },
+  { month: 'Apr', desktop: 292, mobile: 204, revenue: 6300 },
+  { month: 'May', desktop: 326, mobile: 248, revenue: 7200 },
+]
+
+const galleryPieData = [
+  { name: 'Desktop', value: 58 },
+  { name: 'Mobile', value: 32 },
+  { name: 'Tablet', value: 10 },
+]
+
+const galleryStatsSummary = [
+  { name: 'Revenue', tickerSymbol: 'REV', value: '$24.8k', percentageChange: '+12.4%', labels: ['Jan', 'Feb', 'Mar', 'Apr'], values: [18, 22, 20, 28] },
+  { name: 'Orders', tickerSymbol: 'ORD', value: '1,284', percentageChange: '+8.1%', labels: ['Jan', 'Feb', 'Mar', 'Apr'], values: [42, 48, 45, 61] },
+  { name: 'Conversion', tickerSymbol: 'CVR', value: '6.8%', percentageChange: '-1.2%', changeType: 'negative' as const, labels: ['Jan', 'Feb', 'Mar', 'Apr'], values: [8, 7, 7.5, 6.8] },
+]
+
+const galleryGanttTasks = [
+  { id: 'research', name: 'Research', start: '2026-01-01', end: '2026-01-12' },
+  { id: 'design', name: 'Design system', start: '2026-01-08', end: '2026-01-24' },
+  { id: 'build', name: 'Implementation', start: '2026-01-20', end: '2026-02-14' },
+]
+
+type BaseChartGallerySpec = {
+  name: string
+  fileName: string
+  exportName: string
+  description: string
+  component: React.ComponentType<any>
+  props: Record<string, unknown>
+  usageProps: string
+  namedImport?: boolean
+}
+
+const baseChartGallerySpecs: BaseChartGallerySpec[] = [
+  { name: 'Area Chart', fileName: 'area-chart', exportName: 'AreaChart', description: 'Reusable responsive area chart with optional grid and legend.', component: AreaChart, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'mobile', label: 'Mobile' }], showLegend: true }, usageProps: 'data={data} categoryKey="month" series={series} showLegend' },
+  { name: 'Area Chart Axes', fileName: 'area-chart-axes', exportName: 'AreaChartAxes', description: 'Area chart variant for dashboards that need visible axes.', component: AreaChartAxes, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'revenue', label: 'Revenue' }] }, usageProps: 'data={data} categoryKey="month"' },
+  { name: 'Area Chart Condensed', fileName: 'area-chart-condensed', exportName: 'AreaChartCondensed', description: 'Compact area chart variant for smaller dashboard spaces.', component: AreaChartCondensed, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'revenue', label: 'Revenue' }], height: 220 }, usageProps: 'data={data} categoryKey="month" height={220}' },
+  { name: 'Area Chart Gradient', fileName: 'area-chart-gradient', exportName: 'AreaChartGradient', description: 'Gradient-filled area chart for trend visualization.', component: AreaChartGradient, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'mobile', label: 'Mobile' }] }, usageProps: 'data={data} categoryKey="month"' },
+  { name: 'Bar Chart', fileName: 'bar-chart', exportName: 'BarChart', description: 'Reusable bar chart with one or more data series.', component: BarChart, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'mobile', label: 'Mobile' }], showLegend: true }, usageProps: 'data={data} categoryKey="month" series={series} showLegend' },
+  { name: 'Bar Chart Condensed', fileName: 'bar-chart-condensed', exportName: 'BarChartCondensed', description: 'Compact bar chart variant for cards and summaries.', component: BarChartCondensed, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'revenue', label: 'Revenue' }], height: 220 }, usageProps: 'data={data} categoryKey="month" height={220}' },
+  { name: 'Bar Chart Mixed', fileName: 'bar-chart-mixed', exportName: 'BarChartMixed', description: 'Combined bar and line chart for comparing related metrics.', component: BarChartMixed, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'revenue', label: 'Revenue' }], showLegend: true }, usageProps: 'data={data} categoryKey="month" series={series} showLegend' },
+  { name: 'Bar Chart Multiple', fileName: 'bar-chart-multiple', exportName: 'BarChartMultiple', description: 'Multiple-series bar chart for side-by-side comparison.', component: BarChartMultiple, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'mobile', label: 'Mobile' }] }, usageProps: 'data={data} categoryKey="month" series={series}' },
+  { name: 'Line Chart', fileName: 'line-chart', exportName: 'LineChart', description: 'Reusable line chart for time-series trends.', component: LineChart, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'mobile', label: 'Mobile' }], showLegend: true }, usageProps: 'data={data} categoryKey="month" series={series} showLegend' },
+  { name: 'Line Chart Condensed', fileName: 'line-chart-condensed', exportName: 'LineChartCondensed', description: 'Compact line chart variant for metric cards.', component: LineChartCondensed, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'revenue', label: 'Revenue' }], height: 220 }, usageProps: 'data={data} categoryKey="month" height={220}' },
+  { name: 'Line Chart Dots Colors', fileName: 'line-chart-dots-colors', exportName: 'LineChartDotsColors', description: 'Line chart variant for color-coded data series.', component: LineChartDotsColors, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'desktop', label: 'Desktop' }, { dataKey: 'mobile', label: 'Mobile' }] }, usageProps: 'data={data} categoryKey="month" series={series}' },
+  { name: 'Line Chart Label', fileName: 'line-chart-label', exportName: 'LineChartLabel', description: 'Line chart variant with labeled series support.', component: LineChartLabel, props: { data: galleryChartData, categoryKey: 'month', series: [{ dataKey: 'revenue', label: 'Revenue' }] }, usageProps: 'data={data} categoryKey="month" series={series}' },
+  { name: 'Pie Chart', fileName: 'pie-chart', exportName: 'PieChart', description: 'Reusable pie chart for category distributions.', component: PieChart, props: { data: galleryPieData }, usageProps: 'data={slices}' },
+  { name: 'Pie Chart Donut', fileName: 'pie-chart-donut', exportName: 'PieChartDonut', description: 'Donut chart variant with an inner radius.', component: PieChartDonut, props: { data: galleryPieData }, usageProps: 'data={slices}' },
+  { name: 'Pie Chart Donut Active', fileName: 'pie-chart-donut-active', exportName: 'PieChartDonutActive', description: 'Active donut chart variant for interactive category emphasis.', component: PieChartDonutActive, props: { data: galleryPieData }, usageProps: 'data={slices}' },
+  { name: 'Radar Chart', fileName: 'radar-chart', exportName: 'RadarChart', description: 'Radar chart for comparing multiple dimensions.', component: RadarChart, props: { data: [{ metric: 'Speed', score: 82 }, { metric: 'Quality', score: 94 }, { metric: 'Support', score: 76 }, { metric: 'Value', score: 88 }], categoryKey: 'metric', series: [{ dataKey: 'score', label: 'Score' }] }, usageProps: 'data={metrics} categoryKey="metric" series={[{ dataKey: "score", label: "Score" }]}' },
+  { name: 'Radial Chart', fileName: 'radial-chart', exportName: 'RadialChart', description: 'Radial distribution chart with an optional center label.', component: RadialChart, props: { data: galleryPieData, centerLabel: '58%' }, usageProps: 'data={slices} centerLabel="58%"' },
+  { name: 'Radial Chart Stacked', fileName: 'radial-chart-stacked', exportName: 'RadialChartStacked', description: 'Stacked radial chart variant for progress summaries.', component: RadialChartStacked, props: { data: galleryPieData, centerLabel: '100%' }, usageProps: 'data={slices} centerLabel="100%"' },
+  { name: 'Radial Chart Text', fileName: 'radial-chart-text', exportName: 'RadialChartText', description: 'Radial chart variant with centered text.', component: RadialChartText, props: { data: galleryPieData, centerLabel: '58%' }, usageProps: 'data={slices} centerLabel="58%"' },
+  { name: 'Scatter Chart', fileName: 'scatter-chart', exportName: 'ScatterChart', description: 'Scatter plot for numeric correlation and distribution data.', component: ScatterChart, props: { data: [{ x: 12, y: 28 }, { x: 22, y: 41 }, { x: 34, y: 36 }, { x: 46, y: 62 }, { x: 58, y: 76 }] }, usageProps: 'data={points}' },
+  { name: 'Gauge Chart Live Updates', fileName: 'gauge-chart-live-updates', exportName: 'GaugeChartLiveUpdates', description: 'Theme-aware gauge chart for live completion percentages.', component: GaugeChartLiveUpdates, props: { percent: 72, label: 'Completion' }, usageProps: 'percent={72} label="Completion"' },
+  { name: 'Gauge Chart Twenty Levels', fileName: 'gauge-chart-twenty-levels', exportName: 'GaugeChartTwentyLevels', description: 'Gauge chart variant for level-based progress indicators.', component: GaugeChartTwentyLevels, props: { percent: 84, label: 'Health score' }, usageProps: 'percent={84} label="Health score"' },
+  { name: 'Gantt Task Chart', fileName: 'gantt-task-chart', exportName: 'GanttTaskChart', description: 'Reusable task timeline chart for project schedules.', component: GanttTaskChart, props: { tasks: galleryGanttTasks, title: 'Project delivery timeline' }, usageProps: 'tasks={tasks} title="Project delivery timeline"', namedImport: true },
+  { name: 'Stats Usage Dashboard', fileName: 'stats-usage-dashboard', exportName: 'StatsUsageDashboard', description: 'Metric cards with compact usage pie charts.', component: StatsUsageDashboard, props: { summary: galleryStatsSummary }, usageProps: 'summary={summary}' },
+  { name: 'Stats with Area Chart', fileName: 'stats-with-area-chart', exportName: 'StatswithAreaChart', description: 'Metric cards with compact area chart trends.', component: StatswithAreaChart, props: { summary: galleryStatsSummary }, usageProps: 'summary={summary}' },
+  { name: 'Stats with Bar Chart', fileName: 'stats-with-bar-chart', exportName: 'StatswithBarChart', description: 'Metric cards with compact bar chart trends.', component: StatswithBarChart, props: { summary: galleryStatsSummary }, usageProps: 'summary={summary}' },
+  { name: 'Stats with Line Chart', fileName: 'stats-with-line-chart', exportName: 'StatswithLineChart', description: 'Metric cards with compact line chart trends.', component: StatswithLineChart, props: { summary: galleryStatsSummary }, usageProps: 'summary={summary}' },
+  { name: 'Stats with Pie Chart', fileName: 'stats-with-pie-chart', exportName: 'StatswithPieChart', description: 'Metric cards with compact pie chart breakdowns.', component: StatswithPieChart, props: { summary: galleryStatsSummary }, usageProps: 'summary={summary}' },
+]
+
+const baseChartGalleryEntries: GalleryEntry[] = baseChartGallerySpecs.map((spec) => {
+  const importStatement = spec.namedImport
+    ? `import { ${spec.exportName} } from '@/components/base-charts/${spec.fileName}'`
+    : `import ${spec.exportName} from '@/components/base-charts/${spec.fileName}'`
+
+  return {
+    id: `base-chart-${spec.fileName}`,
+    name: spec.name,
+    category: 'Charts',
+    badge: 'Base Chart',
+    description: spec.description,
+    filePath: `src/components/base-charts/${spec.fileName}.tsx`,
+    states: [{ label: spec.name, description: spec.description }],
+    renderPreview: () => (
+      <div className='flex w-full max-w-4xl items-center justify-center p-4 sm:p-8'>
+        <spec.component {...spec.props} />
+      </div>
+    ),
+    usageCode: () => `${importStatement}\n\nexport default function ChartExample() {\n  return <${spec.exportName} ${spec.usageProps} />\n}`,
+  }
+})
+
+const registeredGalleryEntries: GalleryEntry[] = [
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ TASK SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
   {
@@ -1208,6 +1329,8 @@ export default function StatsPage() {
   },
 
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ MAPS SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+
+  ...baseChartGalleryEntries,
 
   {
     id: 'complete-map-template',
@@ -3000,6 +3123,17 @@ export default function QuestionnairePage() {
     usageCode: () => `import { ThemesTab } from '@/features/email-settings/components/themes-tab'\n\nexport default function ThemePage() {\n  return <ThemesTab />\n}`,
   },
 ]
+
+export const galleryRegistry: GalleryEntry[] = registeredGalleryEntries.filter((entry) => ![
+  'area-chart-card',
+  'bar-chart-card',
+  'line-chart-card',
+  'pie-chart-card',
+  'radar-chart-card',
+  'radial-chart-card',
+  'tooltip-chart-card',
+].includes(entry.id))
+
 export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'All',
   'Wizards',
