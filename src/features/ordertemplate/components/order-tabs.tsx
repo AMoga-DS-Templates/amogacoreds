@@ -36,7 +36,7 @@ function OrderTemplateTab({
       type='button'
       variant='ghost'
       onClick={() => onStepChange(value)}
-      className={`relative h-auto min-h-[58px] min-w-0 flex-1 rounded-none border-b-2 px-2 text-sm font-semibold transition hover:bg-transparent ${isActive ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'}`}
+      className={`relative h-auto min-h-[58px] w-28 flex-none rounded-none border-b-2 px-2 text-sm font-semibold transition hover:bg-transparent sm:w-auto sm:min-w-0 sm:flex-1 ${isActive ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'}`}
     >
       <span className={`flex size-6 items-center justify-center rounded-full text-xs ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
         {index + 1}
@@ -48,7 +48,7 @@ function OrderTemplateTab({
 
 export function OrderTabs({ step, onStepChange }: OrderTabsProps) {
   return (
-    <nav className='sticky top-0 z-30 flex shrink-0 border-b bg-background px-5 shadow-sm' aria-label='Order steps'>
+    <nav className='sticky top-0 z-30 flex shrink-0 overflow-x-auto border-b bg-background px-5 shadow-sm' aria-label='Order steps'>
       {STEP_ITEMS.map(([value, label], index) => (
         <OrderTemplateTab
           key={value}

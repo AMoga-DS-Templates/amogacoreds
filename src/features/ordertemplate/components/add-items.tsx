@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { mockPurchaseOrderProducts } from '@/features/MessageComponentGallery/mocks'
 import type { OrderTemplateItem } from './order-types'
 
@@ -41,15 +42,15 @@ export function AddItems({
       <Card className='rounded-2xl p-5 shadow-sm sm:p-7'>
         <h2 className='mb-5 font-semibold'>Add Items</h2>
         <div className='overflow-x-auto'>
-          <table className='w-full min-w-[650px] text-left text-sm'><thead><tr className='border-b text-xs text-muted-foreground'><th className='pb-3 pr-3'>Product</th><th className='pb-3 pr-3'>Qty</th><th className='pb-3 pr-3'>Price</th><th className='pb-3 pr-3'>Amount</th><th className='pb-3 text-right'>Action</th></tr></thead>
-            <tbody>{items.map((item) => <tr key={item.id} className='border-b'>
-              <td className='py-3 pr-3'><Select value={item.product || 'none'} onValueChange={(value) => onUpdateItem(item.id, 'product', value === 'none' ? '' : value)}><SelectTrigger className='h-9 w-full text-xs'><SelectValue placeholder='Select product' /></SelectTrigger><SelectContent><SelectItem value='none'>Select product</SelectItem>{mockPurchaseOrderProducts.map((product) => <SelectItem key={product} value={product}>{product}</SelectItem>)}</SelectContent></Select></td>
-              <td className='py-3 pr-3'><Input type='number' value={item.quantity} onChange={(event) => onUpdateItem(item.id, 'quantity', event.target.value)} placeholder='Enter qty' /></td>
-              <td className='py-3 pr-3'><Input type='number' value={item.price} onChange={(event) => onUpdateItem(item.id, 'price', event.target.value)} placeholder='Enter price' /></td>
-              <td className='py-3 pr-3'><Input value={((Number(item.quantity) || 0) * (Number(item.price) || 0)).toFixed(2)} readOnly /></td>
-              <td className='py-3 text-right'><Button type='button' variant='ghost' size='icon' onClick={() => onRemoveItem(item.id)}><Trash2 className='size-4' /></Button></td>
-            </tr>)}</tbody>
-          </table>
+          <Table className='min-w-[650px] text-left text-sm'><TableHeader><TableRow className='text-xs text-muted-foreground'><TableHead className='pb-3 pr-3'>Product</TableHead><TableHead className='pb-3 pr-3'>Qty</TableHead><TableHead className='pb-3 pr-3'>Price</TableHead><TableHead className='pb-3 pr-3'>Amount</TableHead><TableHead className='pb-3 text-right'>Action</TableHead></TableRow></TableHeader>
+            <TableBody>{items.map((item) => <TableRow key={item.id}>
+              <TableCell className='py-3 pr-3'><Select value={item.product || 'none'} onValueChange={(value) => onUpdateItem(item.id, 'product', value === 'none' ? '' : value)}><SelectTrigger className='h-9 w-full text-xs'><SelectValue placeholder='Select product' /></SelectTrigger><SelectContent><SelectItem value='none'>Select product</SelectItem>{mockPurchaseOrderProducts.map((product) => <SelectItem key={product} value={product}>{product}</SelectItem>)}</SelectContent></Select></TableCell>
+              <TableCell className='py-3 pr-3'><Input type='number' value={item.quantity} onChange={(event) => onUpdateItem(item.id, 'quantity', event.target.value)} placeholder='Enter qty' /></TableCell>
+              <TableCell className='py-3 pr-3'><Input type='number' value={item.price} onChange={(event) => onUpdateItem(item.id, 'price', event.target.value)} placeholder='Enter price' /></TableCell>
+              <TableCell className='py-3 pr-3'><Input value={((Number(item.quantity) || 0) * (Number(item.price) || 0)).toFixed(2)} readOnly /></TableCell>
+              <TableCell className='py-3 text-right'><Button type='button' variant='ghost' size='icon' onClick={() => onRemoveItem(item.id)}><Trash2 className='size-4' /></Button></TableCell>
+            </TableRow>)}</TableBody>
+          </Table>
         </div>
         <Button type='button' variant='outline' className='mt-5 gap-2' onClick={onAddItem}><Plus className='size-4' />Add New</Button>
         <div className='mt-6 flex justify-end border-t pt-5 text-sm'><div className='flex w-[300px] max-w-full justify-between rounded-lg bg-muted/40 p-3'><span className='text-muted-foreground'>Total Amount</span><strong>{total.toFixed(2)}</strong></div></div>

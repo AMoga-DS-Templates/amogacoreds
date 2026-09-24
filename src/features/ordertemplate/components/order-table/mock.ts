@@ -1,0 +1,8 @@
+import type { OrderRecord } from './types'
+
+export const mockOrderRecords: OrderRecord[] = [
+  { id: 'po-2026-004', voucherNumber: 'PO-2026-004', voucherGroup: 'Purchase Order', voucherType: 'Purchase Order', financialYear: '2026', periodName: 'September', monthName: 'September', documentDate: '2026-09-23', transactionDate: '2026-09-23', postingDate: '2026-09-23', narration: 'Office laptops and accessories for the operations team.', totalAmount: 2500, dueDate: '2026-10-15', status: 'draft' },
+  { id: 'po-2026-003', voucherNumber: 'PO-2026-003', voucherGroup: 'Purchase Order', voucherType: 'Purchase Order', financialYear: '2026', periodName: 'August', monthName: 'August', documentDate: '2026-08-18', transactionDate: '2026-08-18', postingDate: '2026-08-19', narration: 'Wireless keyboards and USB-C docking stations.', totalAmount: 780, dueDate: '2026-09-10', status: 'approved' },
+  { id: 'po-2026-002', voucherNumber: 'PO-2026-002', voucherGroup: 'Purchase Order', voucherType: 'Purchase Order', financialYear: '2026', periodName: 'July', monthName: 'July', documentDate: '2026-07-11', transactionDate: '2026-07-11', postingDate: '2026-07-12', narration: 'Annual stationery and printing supplies.', totalAmount: 415, dueDate: '2026-08-01', status: 'posted' },
+  { id: 'po-2026-001', voucherNumber: 'PO-2026-001', voucherGroup: 'Purchase Order', voucherType: 'Purchase Order', financialYear: '2026', periodName: 'June', monthName: 'June', documentDate: '2026-06-05', transactionDate: '2026-06-05', postingDate: '2026-06-05', narration: 'New employee equipment and onboarding materials.', totalAmount: 1320, dueDate: '2026-06-30', status: 'active' },
+]

@@ -1,0 +1,13 @@
+import { Checkbox } from '@/components/ui/checkbox'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { OrderStatusBadge } from './status-badge'
+import { OrderTableRowMenu } from './row-menu'
+import { columnLabels, formatAmount, formatDate, type ColumnKey, type OrderRecord } from './types'
+
+export function OrderTable({ records, visibleColumns }: { records: OrderRecord[]; visibleColumns: Record<ColumnKey, boolean> }) {
+  if (!records.length) return <div className='rounded-lg border border-dashed p-10 text-center text-sm text-muted-foreground'>No purchase orders match the selected filters.</div>
+  return <div className='w-full max-w-full overflow-x-auto rounded-lg border'><Table className='min-w-[760px] text-left text-sm sm:min-w-[820px]'>
+    <TableHeader className='bg-muted/50 text-xs text-muted-foreground'><TableRow><TableHead className='w-10 px-3 py-3'><Checkbox aria-label='Select all orders' /></TableHead>{visibleColumns.voucherNumber && <TableHead className='px-3 py-3'>{columnLabels.voucherNumber}</TableHead>}{visibleColumns.documentDate && <TableHead className='px-3 py-3'>{columnLabels.documentDate}</TableHead>}{visibleColumns.narration && <TableHead className='px-3 py-3'>{columnLabels.narration}</TableHead>}{visibleColumns.totalAmount && <TableHead className='px-3 py-3 text-right'>{columnLabels.totalAmount}</TableHead>}{visibleColumns.dueDate && <TableHead className='px-3 py-3'>{columnLabels.dueDate}</TableHead>}{visibleColumns.status && <TableHead className='px-3 py-3'>{columnLabels.status}</TableHead>}<TableHead className='w-12 px-3 py-3' /></TableRow></TableHeader>
+    <TableBody>{records.map((record) => <TableRow key={record.id} className='transition-colors hover:bg-muted/30'><TableCell className='px-3 py-3'><Checkbox aria-label={`Select ${record.voucherNumber}`} /></TableCell>{visibleColumns.voucherNumber && <TableCell className='px-3 py-3 font-medium'>{record.voucherNumber}</TableCell>}{visibleColumns.documentDate && <TableCell className='px-3 py-3'>{formatDate(record.documentDate)}</TableCell>}{visibleColumns.narration && <TableCell className='max-w-[24rem] truncate px-3 py-3 text-muted-foreground'>{record.narration}</TableCell>}{visibleColumns.totalAmount && <TableCell className='px-3 py-3 text-right font-medium'>{formatAmount(record.totalAmount)}</TableCell>}{visibleColumns.dueDate && <TableCell className='px-3 py-3'>{formatDate(record.dueDate)}</TableCell>}{visibleColumns.status && <TableCell className='px-3 py-3'><OrderStatusBadge status={record.status} /></TableCell>}<TableCell className='px-3 py-3'><OrderTableRowMenu record={record} /></TableCell></TableRow>)}</TableBody>
+  </Table></div>
+}

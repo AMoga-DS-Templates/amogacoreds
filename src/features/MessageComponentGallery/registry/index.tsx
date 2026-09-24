@@ -11,6 +11,21 @@ import React from 'react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import PurchaseOrderTemplate from '@/features/ordertemplate'
+import { OrderRecords } from '@/features/ordertemplate/components/order-table'
+import { OrderApprovedRecords } from '@/features/ordertemplate/components/order-table/approved'
+import {
+  OrderCardPreview,
+  OrderFileUploadPreview,
+  OrderPdfViewPreview,
+  OrderStatusBadgePreview,
+  OrderTableCardsPreview,
+  OrderTablePreview,
+  OrderTableRowMenuPreview,
+  OrderTableSearchPreview,
+  OrderTableToolbarPreview,
+  OrderTableTopBarPreview,
+  OrderViewPreview,
+} from '@/features/ordertemplate/components/order-table/gallery-previews'
 import MockZrimoViewer from '@/features/zrimo-viewer/MockZrimoViewer'
 import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
@@ -774,6 +789,152 @@ export default function NewVoucherPage() {
   */
 
   {
+    id: 'order-table',
+    name: 'Order Table',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Order records table with search, status, date filters, columns, cards, and row actions.',
+    filePath: 'src/features/ordertemplate/components/order-table/index.tsx',
+    states: [
+      { label: 'Purchase Order Records', description: 'Mock Purchase Order records with table and card views' },
+    ],
+    renderPreview: () => <OrderRecords />,
+    usageCode: () => `import { OrderRecords } from '@/features/ordertemplate/components/order-table'
+
+export default function OrderTable() {
+  return <OrderRecords />
+}`,
+  },
+
+  {
+    id: 'order-approved',
+    name: 'Order Approved',
+    category: 'Order Template',
+    badge: 'Order Approved',
+    description: 'Approved order records table with search and filters.',
+    filePath: 'src/features/ordertemplate/components/order-table/approved.tsx',
+    states: [{ label: 'Approved Orders', description: 'Approved order records without internal tabs' }],
+    renderPreview: () => <OrderApprovedRecords />,
+    usageCode: () => `import { OrderApprovedRecords } from '@/features/ordertemplate/components/order-table/approved'
+
+export default function OrderApproved() {
+  return <OrderApprovedRecords />
+    }`,
+  },
+
+  {
+    id: 'order-table-top-bar',
+    name: 'Order Top Bar',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Reusable order title and description bar.',
+    filePath: 'src/features/ordertemplate/components/order-table/top-bar.tsx',
+    states: [{ label: 'Order Header', description: 'Title and supporting description' }],
+    renderPreview: () => <OrderTableTopBarPreview />,
+    usageCode: () => `import { OrderTableTopBar } from '@/features/ordertemplate/components/order-table/top-bar'
+
+<OrderTableTopBar title='Order' description='View and filter order records.' />`,
+  },
+
+  {
+    id: 'order-table-search',
+    name: 'Order Search',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Search input used by the order records view.',
+    filePath: 'src/features/ordertemplate/components/order-table/search.tsx',
+    states: [{ label: 'Search Orders', description: 'Controlled order search field' }],
+    renderPreview: () => <OrderTableSearchPreview />,
+    usageCode: () => `import { OrderTableSearch } from '@/features/ordertemplate/components/order-table/search'
+
+<OrderTableSearch value={query} onChange={setQuery} />`,
+  },
+
+  {
+    id: 'order-table-toolbar',
+    name: 'Order Toolbar',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Order status, date, column, and table/card view controls.',
+    filePath: 'src/features/ordertemplate/components/order-table/toolbar.tsx',
+    states: [{ label: 'Table Controls', description: 'Search, filters, columns, and view switcher' }],
+    renderPreview: () => <OrderTableToolbarPreview />,
+    usageCode: () => `import { OrderTableToolbar } from '@/features/ordertemplate/components/order-table/toolbar'
+
+<OrderTableToolbar {...toolbarProps} />`,
+  },
+
+  {
+    id: 'order-table-grid',
+    name: 'Order Table Grid',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Shadcn table component for purchase order records.',
+    filePath: 'src/features/ordertemplate/components/order-table/table.tsx',
+    states: [{ label: 'Records Grid', description: 'Checkboxes, columns, status badges, and row actions' }],
+    renderPreview: () => <OrderTablePreview />,
+    usageCode: () => `import { OrderTable } from '@/features/ordertemplate/components/order-table/table'
+
+<OrderTable records={records} visibleColumns={visibleColumns} />`,
+  },
+
+  {
+    id: 'order-table-cards',
+    name: 'Order Table Cards',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Responsive card layout for order records.',
+    filePath: 'src/features/ordertemplate/components/order-table/cards.tsx',
+    states: [{ label: 'Card Records', description: 'Responsive order card collection' }],
+    renderPreview: () => <OrderTableCardsPreview />,
+    usageCode: () => `import { OrderTableCards } from '@/features/ordertemplate/components/order-table/cards'
+
+<OrderTableCards records={records} />`,
+  },
+
+  {
+    id: 'order-card',
+    name: 'Order Card',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Single purchase order card with metadata and actions.',
+    filePath: 'src/features/ordertemplate/components/order-table/card.tsx',
+    states: [{ label: 'Single Order Card', description: 'Responsive record card' }],
+    renderPreview: () => <OrderCardPreview />,
+    usageCode: () => `import { OrderCard } from '@/features/ordertemplate/components/order-table/card'
+
+<OrderCard record={record} />`,
+  },
+
+  {
+    id: 'order-table-row-menu',
+    name: 'Order Row Menu',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Three-dot menu for order row and card actions.',
+    filePath: 'src/features/ordertemplate/components/order-table/row-menu.tsx',
+    states: [{ label: 'Three Dot Menu', description: 'Open, duplicate, and archive actions' }],
+    renderPreview: () => <OrderTableRowMenuPreview />,
+    usageCode: () => `import { OrderTableRowMenu } from '@/features/ordertemplate/components/order-table/row-menu'
+
+<OrderTableRowMenu record={record} />`,
+  },
+
+  {
+    id: 'order-status-badge',
+    name: 'Order Status Badge',
+    category: 'Order Template',
+    badge: 'Order Table',
+    description: 'Reusable status badge for order records.',
+    filePath: 'src/features/ordertemplate/components/order-table/status-badge.tsx',
+    states: [{ label: 'Order Statuses', description: 'Draft, active, posted, and approved' }],
+    renderPreview: () => <OrderStatusBadgePreview />,
+    usageCode: () => `import { OrderStatusBadge } from '@/features/ordertemplate/components/order-table/status-badge'
+
+<OrderStatusBadge status='active' />`,
+  },
+
+  {
     id: 'new-order',
     name: 'New Order',
     category: 'Order Template',
@@ -788,7 +949,21 @@ export default function NewVoucherPage() {
 
 export default function NewOrder() {
   return <PurchaseOrderTemplate />
-}`,
+    }`,
+  },
+
+  {
+    id: 'order-file-upload',
+    name: 'Order File Upload',
+    category: 'Order Template',
+    badge: 'New Order',
+    description: 'Reusable file upload and attachment list for the Order form.',
+    filePath: 'src/features/ordertemplate/components/order-file-upload.tsx',
+    states: [{ label: 'Attachment Upload', description: 'Upload, view, download, and remove files' }],
+    renderPreview: () => <OrderFileUploadPreview />,
+    usageCode: () => `import { OrderFileUpload } from '@/features/ordertemplate/components/order-file-upload'
+
+<OrderFileUpload attachments={attachments} onAddAttachments={handleUpload} onRemoveAttachment={handleRemove} />`,
   },
 
   {
@@ -2523,7 +2698,35 @@ export default function MapScreen() {
 
 export function ProgressDemo() {
   return <Progress value={45} className="w-full" />
-}`,
+    }`,
+  },
+
+  {
+    id: 'order-view',
+    name: 'Order View',
+    category: 'Order Template',
+    badge: 'New Order',
+    description: 'Reviewable order summary with editable parties, items, terms, totals, and approval details.',
+    filePath: 'src/features/ordertemplate/components/order-view.tsx',
+    states: [{ label: 'Order Review', description: 'Order review step before PDF generation' }],
+    renderPreview: () => <OrderViewPreview />,
+    usageCode: () => `import { OrderView } from '@/features/ordertemplate/components/order-view'
+
+<OrderView {...orderViewProps} />`,
+  },
+
+  {
+    id: 'order-pdf-view',
+    name: 'Order PDF View',
+    category: 'Order Template',
+    badge: 'New Order',
+    description: 'Generated purchase order PDF preview shown through the document viewer.',
+    filePath: 'src/features/ordertemplate/components/order-pdf-view.tsx',
+    states: [{ label: 'PDF View', description: 'Order PDF document preview' }],
+    renderPreview: () => <OrderPdfViewPreview />,
+    usageCode: () => `import { OrderPdfView } from '@/features/ordertemplate/components/order-pdf-view'
+
+<OrderPdfView {...orderPdfViewProps} />`,
   },
 
   {
