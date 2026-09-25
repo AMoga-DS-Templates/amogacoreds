@@ -104,7 +104,7 @@ export function CustomUiPreview({ component }: { component: CustomUiComponentNam
     case 'CalendarBlock':
       return <CalendarBlock mode='single' selected={new Date(2026, 8, 25)} />
     case 'CardHeader':
-      return <div className='w-full max-w-md rounded-lg border bg-card'><CardHeader title='Project overview' description='Track the latest project activity.' /></div>
+      return <div className='w-full min-w-[300px] max-w-md rounded-lg border bg-card'><CardHeader title='Project overview' description='Track the latest project activity.' /></div>
     case 'CheckBoxGroup':
       return <CheckBoxGroup items={[{ label: 'Email alerts', value: 'email' }, { label: 'Weekly digest', value: 'weekly' }]} values={['email']} />
     case 'ChatFileCard':

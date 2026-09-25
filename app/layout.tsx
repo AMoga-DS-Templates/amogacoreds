@@ -12,6 +12,11 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
   title: 'Amoga App - System Design',
   description: 'System Design Gallery and Component Suite',
+  icons: {
+    icon: '/images/favicon.svg',
+    shortcut: '/images/favicon.svg',
+    apple: '/images/favicon.png',
+  },
 }
 
 export default function RootLayout({
