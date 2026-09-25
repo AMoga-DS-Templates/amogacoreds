@@ -808,14 +808,18 @@ export function GalleryPage() {
 
                         {/* Live Component Render inside device frame */}
                         <div className={`flex min-h-[440px] flex-1 h-full w-full max-w-full items-start justify-center overflow-auto p-3 sm:p-4 ${['new-order', 'order-table', 'order-approved', 'order-view', 'order-pdf-view'].includes(selectedEntry.id) ? '!pt-0 sm:!pt-0' : 'pt-16 sm:pt-16'}`}>
-                          {selectedEntry.renderPreview(stateIndex, { viewport, isMobileView: true })}
+                          <div className={cn(selectedEntry.name.startsWith('Stats') ? 'w-full max-w-[1200px]' : 'w-fit max-w-full')}>
+                            {selectedEntry.renderPreview(stateIndex, { viewport, isMobileView: true })}
+                          </div>
                         </div>
                       </div>
                     </div>
                   ) : (
                     /* Desktop Full-View: Clean, Borderless, Natural Page Flow */
-                    <div className={`flex min-h-[calc(100vh-9rem)] h-full w-full max-w-full flex-col items-center justify-start overflow-auto p-0 ${['new-order', 'order-table', 'order-approved', 'order-view', 'order-pdf-view'].includes(selectedEntry.id) ? 'pt-0' : 'pt-16'}`}>
-                      {selectedEntry.renderPreview(stateIndex, { viewport, isMobileView: false })}
+                    <div className={`flex min-h-[calc(100vh-9rem)] h-full w-full max-w-full flex-col items-center justify-start overflow-auto px-4 sm:px-6 ${['new-order', 'order-table', 'order-approved', 'order-view', 'order-pdf-view'].includes(selectedEntry.id) ? 'pt-0' : 'pt-16'}`}>
+                      <div className={cn(selectedEntry.name.startsWith('Stats') ? 'w-full max-w-[1200px]' : 'w-fit max-w-full')}>
+                        {selectedEntry.renderPreview(stateIndex, { viewport, isMobileView: false })}
+                      </div>
                     </div>
                   )
                 ) : (
