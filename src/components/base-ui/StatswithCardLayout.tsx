@@ -1,0 +1,5 @@
+import { Card, CardContent } from '@/components/ui/card'
+
+type Item = { name?: string; label?: string; stat?: string; value?: string | number; change?: string; changeType?: 'positive' | 'negative' | 'neutral'; description?: string }
+export function StatswithCardLayout({ data, summary = [] }: { data?: Item[]; summary?: Item[] }) { const items = data ?? summary; return <dl className='grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4'>{items.map((item, index) => <Card key={index} className='min-w-0 shadow-sm ring-1 ring-border/60'><CardContent className='p-4'><dt className='bg-gradient-to-r from-primary via-chart-1 to-chart-2 bg-clip-text text-sm font-extrabold text-transparent'>{item.name ?? item.label ?? `Metric ${index + 1}`}</dt><dd className='mt-2 text-xl font-semibold'>{String(item.stat ?? item.value ?? 0)}</dd>{(item.change ?? item.description) ? <span className={item.changeType === 'negative' ? 'text-sm font-medium text-red-700' : item.changeType === 'positive' ? 'text-sm font-medium text-green-700' : 'text-sm text-muted-foreground'}>{item.change ?? item.description}</span> : null}</CardContent></Card>)}</dl> }
+export default StatswithCardLayout

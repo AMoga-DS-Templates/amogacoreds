@@ -87,6 +87,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   'Order Custom UI': 'bg-orange-500/10 text-orange-600 border-orange-200/50 dark:border-orange-900/40 dark:text-orange-400',
   'Zrimo Viewer': 'bg-cyan-500/10 text-cyan-600 border-cyan-200/50 dark:border-cyan-900/40 dark:text-cyan-400',
   'Base Components': 'bg-slate-500/10 text-slate-600 border-slate-200/50 dark:border-slate-800 dark:text-slate-400',
+  'Custom UI': 'bg-fuchsia-500/10 text-fuchsia-600 border-fuchsia-200/50 dark:border-fuchsia-900/40 dark:text-fuchsia-400',
 }
 
 // ─── Category icons & styles matching Message Page CategoryToolbar ────────────
@@ -235,6 +236,12 @@ const CATEGORY_CONFIG: Record<
     activeClass:
       'bg-slate-500/15 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700 font-semibold shadow-2xs',
     badgeClass: 'bg-slate-500/20 text-slate-700 dark:text-slate-300',
+  },
+  'Custom UI': {
+    icon: Sparkles,
+    activeClass:
+      'bg-fuchsia-500/15 text-fuchsia-600 dark:bg-fuchsia-950/40 dark:text-fuchsia-400 border-fuchsia-300/60 dark:border-fuchsia-800/40 font-semibold shadow-2xs',
+    badgeClass: 'bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400',
   },
 }
 

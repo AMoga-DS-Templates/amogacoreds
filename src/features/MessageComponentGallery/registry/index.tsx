@@ -140,6 +140,10 @@ import {
   CalendarRangePreview,
   CalendarEventsPreview,
 } from '../previews/DatePickerAndCalendarPreviews'
+import {
+  CustomUiPreview,
+  type CustomUiComponentName,
+} from '../previews/CustomUiPreviews'
 
 import {
   AreaChart,
@@ -211,6 +215,7 @@ export type GalleryCategory =
   | 'Order Custom UI'
   | 'Zrimo Viewer'
   | 'Base Components'
+  | 'Custom UI'
 
 export interface ComponentState {
   label: string
@@ -239,6 +244,56 @@ const baseComponentGalleryEntries: GalleryEntry[] = baseComponents.map(([name, f
   states: [{ label: name, description: `Imported ${name} preview` }],
   renderPreview: () => <BaseComponentPreview name={name} />,
   usageCode: () => `import { ${name.replace(/\s+/g, '')} } from '@/components/ui/${file.replace(/\.tsx$/, '')}'`,
+}))
+
+const customUiComponents: Array<{
+  name: CustomUiComponentName
+  exportName: string
+  file: string
+}> = [
+  { name: 'AlertDialogBlock', exportName: 'AlertDialogBlock', file: 'alert-dialog-block.tsx' },
+  { name: 'Buttons', exportName: 'Buttons', file: 'buttons.tsx' },
+  { name: 'CalendarBlock', exportName: 'CalendarBlock', file: 'calendar-block.tsx' },
+  { name: 'CheckBoxGroup', exportName: 'CheckBoxGroup', file: 'checkbox-group.tsx' },
+  { name: 'CardHeader', exportName: 'CardHeader', file: 'card-header.tsx' },
+  { name: 'ChatFileCard', exportName: 'ChatFileCard', file: 'chat-file-card.tsx' },
+  { name: 'CodeBlock', exportName: 'CodeBlock', file: 'code-block.tsx' },
+  { name: 'DialogBlock', exportName: 'DialogBlock', file: 'dialog-block.tsx' },
+  { name: 'DownloadViewCard', exportName: 'DownloadViewCard', file: 'download-view-card.tsx' },
+  { name: 'DrawerBlock', exportName: 'DrawerBlock', file: 'drawer-block.tsx' },
+  { name: 'FollowUpBlock', exportName: 'FollowUpBlock', file: 'follow-up-block.tsx' },
+  { name: 'FormControl', exportName: 'FormControl', file: 'form-control.tsx' },
+  { name: 'HorizontalAlternateTimeline', exportName: 'HorizontalAlternateTimeline', file: 'HorizontalAlternateTimeline.tsx' },
+  { name: 'Image', exportName: 'Image', file: 'image.tsx' },
+  { name: 'MarkDownRenderer', exportName: 'MarkDownRenderer', file: 'markdown-renderer.tsx' },
+  { name: 'PaginationBlock', exportName: 'PaginationBlock', file: 'pagination-block.tsx' },
+  { name: 'ProductCard', exportName: 'ProductCard', file: 'product-card.tsx' },
+  { name: 'StatswithBadges', exportName: 'StatswithBadges', file: 'StatswithBadges.tsx' },
+  { name: 'StatswithBorders', exportName: 'StatswithBorders', file: 'StatswithBorders.tsx' },
+  { name: 'StatswithCardLayout', exportName: 'StatswithCardLayout', file: 'StatswithCardLayout.tsx' },
+  { name: 'StatswithCircularProgress', exportName: 'StatswithCircularProgress', file: 'StatswithCircularProgress.tsx' },
+  { name: 'StatswithLinks', exportName: 'StatswithLinks', file: 'StatswithLinks.tsx' },
+  { name: 'StatswithMap', exportName: 'StatswithMap', file: 'StatswithMap.tsx' },
+  { name: 'StatswithStatus', exportName: 'StatswithStatus', file: 'StatswithStatus.tsx' },
+  { name: 'StatswithTrending', exportName: 'StatswithTrending', file: 'StatswithTrending.tsx' },
+  { name: 'SwitchGroup', exportName: 'SwitchGroup', file: 'switch-group.tsx' },
+  { name: 'TablewithAccordion', exportName: 'TablewithAccordion', file: 'TablewithAccordion.tsx' },
+  { name: 'TagBlock', exportName: 'TagBlock', file: 'tag.tsx' },
+  { name: 'TextContent', exportName: 'TextContent', file: 'text-content.tsx' },
+  { name: 'Typography', exportName: 'Heading', file: 'typography.tsx' },
+  { name: 'VerticalTimeline', exportName: 'VerticalTimeline', file: 'verticleTimeline.tsx' },
+]
+
+const customUiGalleryEntries: GalleryEntry[] = customUiComponents.map(({ name, exportName, file }) => ({
+  id: `custom-ui-${file.replace(/\.tsx$/, '').toLowerCase()}`,
+  name,
+  category: 'Custom UI',
+  badge: 'Custom UI',
+  description: `${name} from the individual src/components/base-ui/${file} component file.`,
+  filePath: `src/components/base-ui/${file}`,
+  states: [{ label: name, description: `Interactive ${name} preview` }],
+  renderPreview: () => <CustomUiPreview component={name} />,
+  usageCode: () => `import { ${exportName} } from '@/components/base-ui/${file.replace(/\.tsx$/, '')}'`,
 }))
 
 // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Shared no-op helpers Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
@@ -458,6 +513,7 @@ const baseChartGalleryEntries: GalleryEntry[] = baseChartGallerySpecs.map((spec)
 })
 
 const registeredGalleryEntries: GalleryEntry[] = [
+  ...customUiGalleryEntries,
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ TASK SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
   {
@@ -3158,4 +3214,5 @@ export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'Order Custom UI',
   'Zrimo Viewer',
   'Base Components',
+  'Custom UI',
 ]
