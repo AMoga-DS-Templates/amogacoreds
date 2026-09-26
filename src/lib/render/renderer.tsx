@@ -34,6 +34,43 @@ const fallbackRenderer = (renderProps: { element: { type: string } }) => (
 );
 
 /**
+ * Recover tab panels that an AI placed in `elements` but forgot to attach to
+ * the Tabs element's children. The visibility expressions still identify the
+ * correct tab, so these panels can be safely attached before rendering.
+ */
+function normalizeSpec(spec: Spec): Spec {
+  const source = spec as any;
+  const elements = source.elements as Record<string, any> | undefined;
+  if (!elements) return spec;
+
+  let changed = false;
+  const normalizedElements = { ...elements };
+
+  for (const [id, element] of Object.entries(elements)) {
+    if (element?.type !== "Tabs" || element.children?.length) continue;
+
+    const tabs = element.props?.tabs;
+    if (!Array.isArray(tabs) || !tabs.length) continue;
+
+    const panelIds = tabs.flatMap((tab: any) =>
+      Object.entries(elements)
+        .filter(([childId, child]: [string, any]) => {
+          if (childId === id || !child?.visible) return false;
+          return child.visible.eq === tab.value;
+        })
+        .map(([childId]) => childId),
+    );
+
+    if (panelIds.length) {
+      normalizedElements[id] = { ...element, children: panelIds };
+      changed = true;
+    }
+  }
+
+  return changed ? ({ ...source, elements: normalizedElements } as Spec) : spec;
+}
+
+/**
  * Inner component that sits inside ValidationProvider so it can call
  * useValidation() and wire validateAll into the formSubmit action handler.
  *
@@ -81,20 +118,22 @@ export function PlaygroundRenderer({
 }: PlaygroundRendererProps): ReactNode {
   if (!spec) return null;
 
+  const normalizedSpec = normalizeSpec(spec);
+
   return (
-    <StateProvider initialState={data ?? spec.state}>
+    <StateProvider initialState={data ?? normalizedSpec.state}>
       <VisibilityProvider>
         <ValidationProvider>
           <ValidatedActions>
             <Renderer
-              spec={spec}
+              spec={normalizedSpec}
               registry={registry}
               fallback={fallbackRenderer}
               loading={loading}
             />
             {devtools ? (
               <JsonRenderDevtools
-                spec={spec}
+                spec={normalizedSpec}
                 catalog={playgroundCatalog as unknown as Catalog}
               />
             ) : null}

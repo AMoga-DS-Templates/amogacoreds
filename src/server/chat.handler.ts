@@ -1,10 +1,14 @@
 import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 import { generateText } from 'ai'
 import { NextRequest, NextResponse } from 'next/server'
+import { playgroundCatalog } from '@/lib/render/catalog'
 
 export const UI_RENDER_SYSTEM_PROMPT = `
 You are a UI Schema Generator. Your task is to generate a valid UI schema in JSON format based on the user's request.
 You MUST output ONLY valid JSON. Do not write any explanations, do not wrap it in markdown code blocks, do not write anything else.
+Return one complete JSON object only. Do not return JSONL, JSON Patch operations, SpecStream lines, or multiple JSON objects.
+Every element must be reachable from the root through children. For Tabs, include each visible tab panel element in the Tabs element's children array; do not leave tab panels orphaned in elements.
+For chart colors, do not use hex, rgb, or named colors. Omit color when possible so the shared chart components use the global CSS variables --chart-1 through --chart-5.
 
 If the user provides an OCR text extraction payload (containing fields like invoice, date, total, business details, customer name, lines, etc.), you MUST analyze the text, extract the key values, and construct an editable Form containing corresponding inputs (e.g. Input with defaultValue, Textarea) so the user can verify, edit, and submit the extracted details.
 
@@ -13,7 +17,7 @@ interface UiSchema {
   root: string; // The ID of the root element (usually "root")
   elements: {
     [elementId: string]: {
-      type: 'Stack' | 'Card' | 'Form' | 'Input' | 'Textarea' | 'Button' | 'Checkbox' | 'Badge' | 'Alert' | 'Separator' | 'Progress' | 'Heading' | 'Text' | 'Price' | 'FeatureList' | 'Tabs' | 'Calendar' | 'Switch' | 'RadioGroup' | 'PremiumStats';
+      type: 'Stack' | 'Card' | 'Form' | 'Input' | 'Textarea' | 'Button' | 'Checkbox' | 'Badge' | 'Alert' | 'Separator' | 'Progress' | 'Heading' | 'Text' | 'Tabs' | 'Accordion' | 'Switch' | 'Grid' | 'Collapsible' | 'Dialog' | 'Drawer' | 'Carousel' | 'Table' | 'Image' | 'Icon' | 'Avatar' | 'Skeleton' | 'Spinner' | 'Tooltip' | 'Popover' | 'Rating' | 'Metric' | 'BarGraph' | 'LineGraph' | 'Select' | 'Radio' | 'Slider' | 'Link' | 'DropdownMenu' | 'Toggle' | 'ToggleGroup' | 'ButtonGroup' | 'Pagination';
       props?: Record<string, any>;
       children?: string[]; // Array of element IDs that are children of this element
     }
@@ -29,6 +33,13 @@ Common Components & Props:
 6. Button: props: { label: string, type?: 'button' | 'submit', variant?: 'default' | 'outline' | 'destructive' | 'ghost', className?: string }
 7. Heading: props: { level: '1' | '2' | '3' | '4' | '5' | '6', children: string }
 8. Text: props: { children: string, size?: 'sm' | 'base' | 'lg' | 'xl', className?: string }
+
+New renderer catalog components are also available. Prefer these components for new UI output:
+Card, Stack, Grid, Separator, Tabs, Accordion, Collapsible, Dialog, Drawer, Carousel, Table, Heading, Text, Image, Icon, Avatar, Badge, Alert, Progress, Skeleton, Spinner, Tooltip, Popover, Rating, Metric, Input, Textarea, Select, Checkbox, Radio, Switch, Slider, Button, Link, DropdownMenu, Toggle, ToggleGroup, ButtonGroup, Pagination.
+The authoritative catalog also includes all registered components from src/components/base-charts and src/components/base-ui. Prefer those shared components when a chart, statistic, timeline, dialog, card, content block, or other matching UI is requested.
+
+The authoritative component names, properties, descriptions, slots, and actions are:
+${playgroundCatalog.prompt()}
 `
 
 export async function handleChatPost(request: NextRequest) {

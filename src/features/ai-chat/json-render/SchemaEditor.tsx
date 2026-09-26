@@ -6,7 +6,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Code, Eye, X } from 'lucide-react'
-import { JsonRenderer } from './JsonRenderer'
+import { PlaygroundRenderer } from '@/lib/render/renderer'
 
 interface SchemaEditorProps {
   schema: any
@@ -87,9 +87,9 @@ export function SchemaEditor({ schema, onSchemaChange, onAction, onClose }: Sche
             )}
           </div>
         ) : (
-          <div className="h-full border rounded-lg p-4 overflow-y-auto bg-background">
+          <div className="h-full overflow-y-auto">
             {localSchema ? (
-              <JsonRenderer schema={localSchema} onAction={onAction} />
+              <PlaygroundRenderer spec={localSchema} />
             ) : (
               <div className="text-muted-foreground text-center py-8">
                 No schema to preview.

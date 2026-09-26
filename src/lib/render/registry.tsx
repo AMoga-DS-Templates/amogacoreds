@@ -106,6 +106,67 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { icons as lucideIcons } from "lucide-react";
+import {
+  AreaChart,
+  AreaChartAxes,
+  AreaChartCondensed,
+  AreaChartGradient,
+  BarChart,
+  BarChartCondensed,
+  BarChartMixed,
+  BarChartMultiple,
+  GanttTaskChart,
+  GaugeChartLiveUpdates,
+  GaugeChartTwentyLevels,
+  LineChart,
+  LineChartCondensed,
+  LineChartDotsColors,
+  LineChartLabel,
+  PieChart,
+  PieChartDonut,
+  PieChartDonutActive,
+  RadarChart,
+  RadialChart,
+  RadialChartStacked,
+  RadialChartText,
+  ScatterChart,
+  StatsUsageDashboard,
+  StatswithAreaChart,
+  StatswithBarChart,
+  StatswithLineChart,
+  StatswithPieChart,
+} from "@/components/base-charts";
+import { AlertDialogBlock } from "@/components/base-ui/alert-dialog-block";
+import { Buttons } from "@/components/base-ui/buttons";
+import { CalendarBlock } from "@/components/base-ui/calendar-block";
+import { CardHeader as BaseCardHeader } from "@/components/base-ui/card-header";
+import { ChatFileCard, ChatFileCardAction } from "@/components/base-ui/chat-file-card";
+import { CheckBoxGroup, CheckBoxItem } from "@/components/base-ui/checkbox-group";
+import { CodeBlock } from "@/components/base-ui/code-block";
+import { DialogBlock } from "@/components/base-ui/dialog-block";
+import { DownloadViewCard, DownloadViewCardBlock } from "@/components/base-ui/download-view-card";
+import { DrawerBlock } from "@/components/base-ui/drawer-block";
+import { FollowUpBlock, FollowUpItem } from "@/components/base-ui/follow-up-block";
+import { FormControl } from "@/components/base-ui/form-control";
+import { HorizontalAlternateTimeline } from "@/components/base-ui/HorizontalAlternateTimeline";
+import { Image as BaseImage, ImageBlock } from "@/components/base-ui/image";
+import { MarkDownRenderer } from "@/components/base-ui/markdown-renderer";
+import { PaginationBlock } from "@/components/base-ui/pagination-block";
+import { ProductCard } from "@/components/base-ui/product-card";
+import { StatswithBadges } from "@/components/base-ui/StatswithBadges";
+import { StatswithBorders } from "@/components/base-ui/StatswithBorders";
+import { StatswithCardLayout } from "@/components/base-ui/StatswithCardLayout";
+import { StatswithCircularProgress } from "@/components/base-ui/StatswithCircularProgress";
+import { StatswithLinks } from "@/components/base-ui/StatswithLinks";
+import { StatswithMap } from "@/components/base-ui/StatswithMap";
+import { StatswithStatus } from "@/components/base-ui/StatswithStatus";
+import { StatswithTrending } from "@/components/base-ui/StatswithTrending";
+import { SwitchGroup, SwitchItem } from "@/components/base-ui/switch-group";
+import { TablewithAccordion } from "@/components/base-ui/TablewithAccordion";
+import { Tag, TagBlock } from "@/components/base-ui/tag";
+import { TextContent } from "@/components/base-ui/text-content";
+import { Blockquote, Heading as BaseHeading, InlineCode } from "@/components/base-ui/typography";
+import { VerticalTimeline } from "@/components/base-ui/verticleTimeline";
 
 // =============================================================================
 // Registry — components + actions, types inferred from catalog
@@ -121,8 +182,8 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
           ? "max-w-xs sm:min-w-[280px]"
           : props.maxWidth === "md"
             ? "max-w-sm sm:min-w-[320px]"
-            : props.maxWidth === "lg"
-              ? "max-w-md sm:min-w-[360px]"
+          : props.maxWidth === "lg"
+              ? "max-w-lg sm:min-w-[440px]"
               : "w-full";
       const centeredClass = props.centered ? "mx-auto" : "";
 
@@ -208,6 +269,18 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
       );
     },
 
+    Form: ({ props, children, emit }) => (
+      <form
+        className={`w-full space-y-4 ${props.className ?? ""}`}
+        onSubmit={(event) => {
+          event.preventDefault();
+          emit("submit");
+        }}
+      >
+        {children}
+      </form>
+    ),
+
     Grid: ({ props, children }) => {
       const childCount = Array.isArray(children)
         ? children.length
@@ -242,7 +315,7 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
       />
     ),
 
-    Tabs: ({ props, bindings, emit }) => {
+    Tabs: ({ props, bindings, emit, children }) => {
       const tabs = props.tabs ?? [];
       const [boundValue, setBoundValue] = useBoundProp<string>(
         props.value as string | undefined,
@@ -270,6 +343,7 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
               </TabsTrigger>
             ))}
           </TabsList>
+          <div className="mt-4 w-full space-y-4">{children}</div>
         </TabsPrimitive>
       );
     },
@@ -410,8 +484,8 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
       });
 
       return (
-        <div className="w-full rounded-md border border-border overflow-hidden">
-          <TablePrimitive>
+        <div className="w-full max-w-full overflow-x-auto rounded-md border border-border">
+          <TablePrimitive className="min-w-max">
             {props.caption && <TableCaption>{props.caption}</TableCaption>}
             <TableHeader>
               <TableRow>
@@ -434,22 +508,7 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
       );
     },
 
-    Heading: ({ props }) => {
-      const level = props.level ?? "h2";
-      const headingClass =
-        level === "h1"
-          ? "text-2xl font-bold tracking-tight"
-          : level === "h3"
-            ? "text-base font-semibold tracking-tight"
-            : level === "h4"
-              ? "text-sm font-medium uppercase tracking-wider text-muted-foreground"
-              : "text-xl font-semibold tracking-tight";
-
-      if (level === "h1") return <h1 className={headingClass}>{props.text}</h1>;
-      if (level === "h3") return <h3 className={headingClass}>{props.text}</h3>;
-      if (level === "h4") return <h4 className={headingClass}>{props.text}</h4>;
-      return <h2 className={headingClass}>{props.text}</h2>;
-    },
+    Heading: ({ props, children }) => <BaseHeading {...(props as any)}>{children}</BaseHeading>,
 
     Text: ({ props }) => {
       const textClass =
@@ -819,183 +878,79 @@ export const { registry, executeAction } = defineRegistry(playgroundCatalog, {
 
     // ── Charts ────────────────────────────────────────────────────────
 
-    BarGraph: ({ props }) => {
-      const data = props.data || [];
-      const maxValue = Math.max(...data.map((d) => d.value), 1);
-      const barColors = [
-        "bg-primary",
-        "bg-primary/80",
-        "bg-primary/60",
-        "bg-primary/70",
-        "bg-primary/90",
-        "bg-primary/50",
-      ];
+    BarChart: ({ props }) => <BarChart {...(props as any)} />,
+    BarChartCondensed: ({ props }) => <BarChartCondensed {...(props as any)} />,
+    BarChartMixed: ({ props }) => <BarChartMixed {...(props as any)} />,
+    BarChartMultiple: ({ props }) => <BarChartMultiple {...(props as any)} />,
+    LineChart: ({ props }) => <LineChart {...(props as any)} />,
+    LineChartCondensed: ({ props }) => <LineChartCondensed {...(props as any)} />,
+    LineChartDotsColors: ({ props }) => <LineChartDotsColors {...(props as any)} />,
+    LineChartLabel: ({ props }) => <LineChartLabel {...(props as any)} />,
+    AreaChart: ({ props }) => <AreaChart {...(props as any)} />,
+    AreaChartCondensed: ({ props }) => <AreaChartCondensed {...(props as any)} />,
+    AreaChartAxes: ({ props }) => <AreaChartAxes {...(props as any)} />,
+    AreaChartGradient: ({ props }) => <AreaChartGradient {...(props as any)} />,
+    RadarChart: ({ props }) => <RadarChart {...(props as any)} />,
+    PieChart: ({ props }) => <PieChart {...(props as any)} />,
+    PieChartDonut: ({ props }) => <PieChartDonut {...(props as any)} />,
+    PieChartDonutActive: ({ props }) => <PieChartDonutActive {...(props as any)} />,
+    RadialChart: ({ props }) => <RadialChart {...(props as any)} />,
+    RadialChartStacked: ({ props }) => <RadialChartStacked {...(props as any)} />,
+    RadialChartText: ({ props }) => <RadialChartText {...(props as any)} />,
+    ScatterChart: ({ props }) => <ScatterChart {...(props as any)} />,
+    GaugeChartLiveUpdates: ({ props }) => <GaugeChartLiveUpdates {...(props as any)} />,
+    GaugeChartTwentyLevels: ({ props }) => <GaugeChartTwentyLevels {...(props as any)} />,
+    GanttTaskChart: ({ props }) => <GanttTaskChart {...(props as any)} />,
+    StatsUsageDashboard: ({ props }) => <StatsUsageDashboard {...(props as any)} />,
+    StatswithAreaChart: ({ props }) => <StatswithAreaChart {...(props as any)} />,
+    StatswithBarChart: ({ props }) => <StatswithBarChart {...(props as any)} />,
+    StatswithLineChart: ({ props }) => <StatswithLineChart {...(props as any)} />,
+    StatswithPieChart: ({ props }) => <StatswithPieChart {...(props as any)} />,
 
-      return (
-        <div className="space-y-3">
-          {props.title && (
-            <div className="text-sm font-medium">{props.title}</div>
-          )}
-          <div className="flex items-end gap-2" style={{ height: 160 }}>
-            {data.map((d, i) => (
-              <div
-                key={i}
-                className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group"
-              >
-                <div className="text-[11px] font-medium text-muted-foreground tabular-nums">
-                  {d.value}
-                </div>
-                <div className="w-full flex-1 flex items-end">
-                  <div
-                    className={`w-full ${barColors[i % barColors.length]} rounded-t-md transition-all group-hover:opacity-80`}
-                    style={{
-                      height: `${(d.value / maxValue) * 100}%`,
-                      minHeight: 4,
-                    }}
-                  />
-                </div>
-                <div className="text-[11px] text-muted-foreground truncate w-full text-center">
-                  {d.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    },
-
-    LineGraph: ({ props }) => {
-      const data = props.data || [];
-      const maxValue = Math.max(...data.map((d) => d.value));
-      const minValue = Math.min(...data.map((d) => d.value));
-      const range = maxValue - minValue || 1;
-
-      const width = 300;
-      const height = 140;
-      const padding = { top: 12, right: 12, bottom: 12, left: 12 };
-      const chartWidth = width - padding.left - padding.right;
-      const chartHeight = height - padding.top - padding.bottom;
-
-      const points = data.map((d, i) => {
-        const x =
-          padding.left +
-          (data.length > 1
-            ? (i / (data.length - 1)) * chartWidth
-            : chartWidth / 2);
-        const y =
-          padding.top +
-          chartHeight -
-          ((d.value - minValue) / range) * chartHeight;
-        return { x, y, ...d };
-      });
-
-      // Build smooth cubic bezier curve through points
-      let smoothPath = "";
-      let areaPath = "";
-      if (points.length > 1) {
-        const first = points[0]!;
-        const last = points[points.length - 1]!;
-        smoothPath = `M ${first.x} ${first.y}`;
-        for (let i = 0; i < points.length - 1; i++) {
-          const curr = points[i]!;
-          const next = points[i + 1]!;
-          const cpx = (curr.x + next.x) / 2;
-          smoothPath += ` C ${cpx} ${curr.y}, ${cpx} ${next.y}, ${next.x} ${next.y}`;
-        }
-        const bottomY = height - padding.bottom;
-        areaPath = `${smoothPath} L ${last.x} ${bottomY} L ${first.x} ${bottomY} Z`;
-      } else if (points.length === 1) {
-        const only = points[0]!;
-        smoothPath = `M ${only.x} ${only.y}`;
-      }
-
-      const gradientId = `line-gradient-${Math.random().toString(36).slice(2, 8)}`;
-
-      return (
-        <div className="space-y-3">
-          {props.title && (
-            <div className="text-sm font-medium">{props.title}</div>
-          )}
-          <div className="relative" style={{ height: 160 }}>
-            <svg
-              viewBox={`0 0 ${width} ${height}`}
-              className="w-full h-full"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="0%"
-                    stopColor="currentColor"
-                    stopOpacity="0.15"
-                  />
-                  <stop
-                    offset="100%"
-                    stopColor="currentColor"
-                    stopOpacity="0"
-                  />
-                </linearGradient>
-              </defs>
-              {[0, 0.25, 0.5, 0.75, 1].map((frac) => (
-                <line
-                  key={frac}
-                  x1={padding.left}
-                  y1={padding.top + chartHeight * frac}
-                  x2={width - padding.right}
-                  y2={padding.top + chartHeight * frac}
-                  stroke="currentColor"
-                  strokeOpacity="0.07"
-                  vectorEffect="non-scaling-stroke"
-                  strokeWidth="1"
-                />
-              ))}
-              {areaPath && (
-                <path
-                  d={areaPath}
-                  fill={`url(#${gradientId})`}
-                  className="text-primary"
-                />
-              )}
-              {smoothPath && (
-                <path
-                  d={smoothPath}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                  className="text-primary"
-                />
-              )}
-            </svg>
-            {points.map((p, i) => (
-              <div
-                key={i}
-                className="absolute w-[7px] h-[7px] rounded-full bg-primary -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  left: `${(p.x / width) * 100}%`,
-                  top: `${(p.y / height) * 100}%`,
-                }}
-              />
-            ))}
-          </div>
-          {points.length > 0 && (
-            <div className="relative h-4">
-              {points.map((p, i) => (
-                <span
-                  key={i}
-                  className="absolute text-[11px] text-muted-foreground -translate-x-1/2"
-                  style={{ left: `${(p.x / width) * 100}%` }}
-                >
-                  {data[i]?.label}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    },
+    AlertDialogBlock: ({ props, children }) => <AlertDialogBlock {...(props as any)}>{children}</AlertDialogBlock>,
+    Buttons: ({ props, children }) => <Buttons {...(props as any)}>{children}</Buttons>,
+    CalendarBlock: ({ props }) => <CalendarBlock {...(props as any)} />,
+    CardHeader: ({ props, children }) => <BaseCardHeader {...(props as any)}>{children}</BaseCardHeader>,
+    ChatFileCard: ({ props, children }) => <ChatFileCard {...(props as any)}>{children}</ChatFileCard>,
+    ChatFileCardAction: ({ props }) => <ChatFileCardAction {...(props as any)} />,
+    CheckBoxItem: ({ props }) => <CheckBoxItem {...(props as any)} />,
+    CheckBoxGroup: ({ props }) => <CheckBoxGroup {...(props as any)} />,
+    CodeBlock: ({ props, children }) => <CodeBlock {...(props as any)}>{children}</CodeBlock>,
+    DialogBlock: ({ props, children }) => <DialogBlock {...(props as any)}>{children}</DialogBlock>,
+    DownloadViewCard: ({ props }) => <DownloadViewCard {...(props as any)} />,
+    DownloadViewCardBlock: ({ props }) => <DownloadViewCardBlock {...(props as any)} />,
+    DrawerBlock: ({ props, children }) => <DrawerBlock {...(props as any)}>{children}</DrawerBlock>,
+    FollowUpItem: ({ props }) => (
+      <FollowUpItem
+        {...(props as any)}
+        label={(props as any).label ?? (props as any).title}
+        text={(props as any).text ?? (props as any).description}
+      />
+    ),
+    FollowUpBlock: ({ props, children }) => <FollowUpBlock {...(props as any)}>{children}</FollowUpBlock>,
+    FormControl: ({ props, children }) => <FormControl {...(props as any)}>{children}</FormControl>,
+    HorizontalAlternateTimeline: ({ props }) => <HorizontalAlternateTimeline {...(props as any)} />,
+    ImageBlock: ({ props }) => <ImageBlock {...(props as any)} />,
+    MarkDownRenderer: ({ props }) => <MarkDownRenderer {...(props as any)} />,
+    PaginationBlock: ({ props }) => <PaginationBlock {...(props as any)} />,
+    ProductCard: ({ props, children }) => <ProductCard {...(props as any)}>{children}</ProductCard>,
+    StatswithBadges: ({ props }) => <StatswithBadges {...(props as any)} />,
+    StatswithBorders: ({ props }) => <StatswithBorders {...(props as any)} />,
+    StatswithCardLayout: ({ props }) => <StatswithCardLayout {...(props as any)} />,
+    StatswithCircularProgress: ({ props }) => <StatswithCircularProgress {...(props as any)} />,
+    StatswithLinks: ({ props }) => <StatswithLinks {...(props as any)} />,
+    StatswithMap: ({ props }) => <StatswithMap {...(props as any)} />,
+    StatswithStatus: ({ props }) => <StatswithStatus {...(props as any)} />,
+    StatswithTrending: ({ props }) => <StatswithTrending {...(props as any)} />,
+    SwitchItem: ({ props }) => <SwitchItem {...(props as any)} />,
+    SwitchGroup: ({ props }) => <SwitchGroup {...(props as any)} />,
+    TablewithAccordion: ({ props }) => <TablewithAccordion {...(props as any)} />,
+    Tag: ({ props, children }) => <Tag {...(props as any)}>{children}</Tag>,
+    TagBlock: ({ props, children }) => <TagBlock {...(props as any)}>{children}</TagBlock>,
+    TextContent: ({ props, children }) => <TextContent {...(props as any)}>{children}</TextContent>,
+    Blockquote: ({ props, children }) => <Blockquote {...(props as any)}>{children}</Blockquote>,
+    InlineCode: ({ props, children }) => <InlineCode {...(props as any)}>{children}</InlineCode>,
+    VerticalTimeline: ({ props }) => <VerticalTimeline {...(props as any)} />,
 
     // ── Form Inputs ───────────────────────────────────────────────────
 

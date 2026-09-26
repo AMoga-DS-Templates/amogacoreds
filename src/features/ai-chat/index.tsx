@@ -6,6 +6,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable no-console */
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { compileSpecStream } from '@json-render/core'
 import { AppHeader } from '@/components/layout/app-header'
 import { Main } from '@/components/layout/main'
 import { ImageModal } from './components/ImageModal'
@@ -49,6 +50,7 @@ export function AiChat() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const accumulatedTranscriptRef = useRef<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesScrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (activeAiAccount?.model) {
@@ -56,9 +58,18 @@ export function AiChat() {
     }
   }, [activeAiAccount?.model])
 
-  // Auto-scroll to bottom when messages change
+  // Auto-scroll only the chat message pane. Do not use scrollIntoView here,
+  // because it can scroll the entire page and move the UI preview.
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const messagePane = messagesScrollRef.current
+    if (!messagePane) return
+
+    requestAnimationFrame(() => {
+      messagePane.scrollTo({
+        top: messagePane.scrollHeight,
+        behavior: 'smooth',
+      })
+    })
   }, [messages])
 
   // Close dropdowns when clicking outside
@@ -176,7 +187,20 @@ Instructions:
               cleanedText = cleanedText.substring(firstBrace, lastBrace + 1);
             }
 
-            const schema = JSON.parse(cleanedText)
+            let schema: any
+
+            try {
+              schema = JSON.parse(cleanedText)
+            } catch (jsonError) {
+              // json-render may return a JSONL SpecStream containing one
+              // JSON patch per line instead of one complete JSON object.
+              try {
+                schema = compileSpecStream<any>(cleanedText)
+              } catch {
+                throw jsonError
+              }
+            }
+
             setUiSchema(schema)
             setShowSchemaEditor(true)
             setActiveMobileTab('preview') // Auto-switch to preview tab on mobile view
@@ -379,7 +403,7 @@ Instructions:
           </div>
         )}
 
-        <div className='flex h-[calc(100vh-56px)] w-full overflow-hidden flex-col lg:flex-row'>
+        <div className='flex min-h-0 flex-1 w-full overflow-hidden flex-col lg:flex-row'>
           {/* Left panel: Chat History & Input */}
           <div
             className={`flex flex-col h-full border-r border-border transition-all duration-300 ${
@@ -393,7 +417,7 @@ Instructions:
             }`}
           >
             {/* Chat messages area */}
-            <div className='flex-1 overflow-y-auto px-4 py-4'>
+            <div ref={messagesScrollRef} className='flex-1 min-h-0 overflow-y-auto px-4 py-4'>
               <MessageList
                 messages={messages}
                 loading={loading}
@@ -441,13 +465,15 @@ Instructions:
                 activeMobileTab !== 'preview' ? 'hidden lg:flex' : 'flex'
               }`}
             >
-              <div className='flex-1 bg-background rounded-xl border border-border shadow-sm overflow-hidden flex flex-col p-4 lg:p-6'>
-                <SchemaEditor
-                  schema={uiSchema}
-                  onSchemaChange={(newSchema) => setUiSchema(newSchema)}
-                  onAction={handleSchemaAction}
-                  onClose={handleCloseSchemaEditor}
-                />
+              <div className='flex-1 min-h-0 overflow-y-auto'>
+                <div className='min-h-[520px] overflow-hidden flex flex-col'>
+                  <SchemaEditor
+                    schema={uiSchema}
+                    onSchemaChange={(newSchema) => setUiSchema(newSchema)}
+                    onAction={handleSchemaAction}
+                    onClose={handleCloseSchemaEditor}
+                  />
+                </div>
               </div>
             </div>
           )}

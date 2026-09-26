@@ -61,6 +61,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test:json-render": "node scripts/check-json-render-registry.mjs",
     "consumers:status": "node scripts/track-consumers.mjs",
     "consumers:upgrade": "node scripts/upgrade-consumers.mjs"
   },
