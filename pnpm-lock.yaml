@@ -90,11 +90,14 @@ importers:
         specifier: ^5.2.2
         version: 5.9.1(@standard-schema/spec@1.1.0)(react-hook-form@7.88.0(react@19.3.0))(zod@4.6.5)
       '@json-render/core':
-        specifier: ^0.19.0
-        version: 0.19.0(zod@4.6.5)
+        specifier: ^0.21.0
+        version: 0.21.0(zod@4.6.5)
+      '@json-render/devtools-react':
+        specifier: ^0.21.0
+        version: 0.21.0(react@19.3.0)(zod@4.6.5)
       '@json-render/react':
-        specifier: ^0.19.0
-        version: 0.19.0(react@19.3.0)(zod@4.6.5)
+        specifier: ^0.21.0
+        version: 0.21.0(react@19.3.0)(zod@4.6.5)
       '@next/third-parties':
         specifier: ^16.2.10
         version: 16.3.5(next@16.3.5(@opentelemetry/api@1.9.1)(@types/node@25.9.8)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)
@@ -1469,13 +1472,21 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@json-render/core@0.19.0':
-    resolution: {integrity: sha512-vvcyZ+10EDZKbEyB1J2kXOGfDaiZR2LurZGSqi2r5STHyKr+Te85DWaBxTwRGgM7U1LtIvNx85BzzjElRKoAIg==}
+  '@json-render/core@0.21.0':
+    resolution: {integrity: sha512-vysEbTjO1y8mEgAsp0tztRyaWCkNsBrG8MhAqbndGK3qmMXjMRdCNtk21+AQRNKdRelFGVAwBgtUNW8tfjQlsw==}
     peerDependencies:
       zod: ^4.0.0
 
-  '@json-render/react@0.19.0':
-    resolution: {integrity: sha512-kTW6b6cSNRrlEfCUf/69SLoLn+CufC968ruge9tnQlp9pDTGG/SK8pgM541FdgwMFA4zm3s5mpM3G8rdODKc/A==}
+  '@json-render/devtools-react@0.21.0':
+    resolution: {integrity: sha512-jLZnppKNgZbXKhYaOAyGpvc/5hXVKlYySrONsKwj+BH4czsqcLmK+0uAqn1JZmJmUVmFGWCojYYSECm4PJobQw==}
+    peerDependencies:
+      react: ^19.2.3
+
+  '@json-render/devtools@0.21.0':
+    resolution: {integrity: sha512-KFP9l2Ekubkb9a1kjuhk9hly2oOmpJFJlQL0bAKz4j/wYrqXxztHB4EA8Aon+ZRbFgJWugjQjujGlpbW2NrGrg==}
+
+  '@json-render/react@0.21.0':
+    resolution: {integrity: sha512-z/fZg0L8fJe2dnnQjWkmMw409iBclSWcOqdjoBy8eLHeBr/7F7VipzkY1CfgA2Fa5uW+zxZ54OvWMtdDcsp/yg==}
     peerDependencies:
       react: ^19.2.3
 
@@ -8017,13 +8028,28 @@ snapshots:
   '@js-sdsl/ordered-map@4.4.2':
     optional: true
 
-  '@json-render/core@0.19.0(zod@4.6.5)':
+  '@json-render/core@0.21.0(zod@4.6.5)':
     dependencies:
       zod: 4.6.5
 
-  '@json-render/react@0.19.0(react@19.3.0)(zod@4.6.5)':
+  '@json-render/devtools-react@0.21.0(react@19.3.0)(zod@4.6.5)':
     dependencies:
-      '@json-render/core': 0.19.0(zod@4.6.5)
+      '@json-render/core': 0.21.0(zod@4.6.5)
+      '@json-render/devtools': 0.21.0(zod@4.6.5)
+      '@json-render/react': 0.21.0(react@19.3.0)(zod@4.6.5)
+      react: 19.3.0
+    transitivePeerDependencies:
+      - zod
+
+  '@json-render/devtools@0.21.0(zod@4.6.5)':
+    dependencies:
+      '@json-render/core': 0.21.0(zod@4.6.5)
+    transitivePeerDependencies:
+      - zod
+
+  '@json-render/react@0.21.0(react@19.3.0)(zod@4.6.5)':
+    dependencies:
+      '@json-render/core': 0.21.0(zod@4.6.5)
       react: 19.3.0
     transitivePeerDependencies:
       - zod
