@@ -25,6 +25,7 @@ export type OrderPanelProps = {
   };
   showEmptyState?: boolean;
   onNewOrder?: () => void;
+  onSearchChange?: (query: string) => void;
   onSelectRecord?: (record: OrderPanelRecord, section: OrderPanelSection) => void;
   className?: string;
 };

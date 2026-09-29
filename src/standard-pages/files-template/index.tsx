@@ -52,6 +52,7 @@ export function FilesTemplatePage({ data }: FilesTemplatePageProps) {
     return { ...folder, fileCount: matchingFiles.length }
   })
   const [selectedFolder, setSelectedFolder] = useState<FileExplorerFolder | null>(folders[0] ?? null)
+  const [rightPanelSearch, setRightPanelSearch] = useState('')
   return (
     <main className="relative flex h-svh max-h-svh min-h-0 w-full overflow-hidden bg-background">
       <aside className="flex h-full min-h-0 w-full max-w-md shrink-0 flex-col overflow-hidden border-r border-border bg-background">
@@ -69,6 +70,7 @@ export function FilesTemplatePage({ data }: FilesTemplatePageProps) {
             labels={{
               searchPlaceholder: 'Search App Files...',
             }}
+            onSearchChange={setRightPanelSearch}
           />
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto">
@@ -90,6 +92,7 @@ export function FilesTemplatePage({ data }: FilesTemplatePageProps) {
             } as any}
             files={getFilesForFolder(selectedFolder)}
             showCategoryFilters
+            externalSearchQuery={rightPanelSearch}
             initialCategory={selectedFolder.level >= 2 ? selectedFolder.name : 'all'}
             onCategoryChange={(category) => {
               const rootId = getRootId(selectedFolder)

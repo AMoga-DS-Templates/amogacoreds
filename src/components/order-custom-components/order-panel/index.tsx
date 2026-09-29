@@ -87,6 +87,7 @@ export function OrderPanel({
   counts,
   showEmptyState = true,
   onNewOrder,
+  onSearchChange,
   onSelectRecord,
   className,
 }: OrderPanelProps) {
@@ -111,7 +112,7 @@ export function OrderPanel({
           ))}
         </div>
         <div className="flex items-center gap-2 p-3">
-          <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={labels.searchPlaceholder} className="h-9 min-w-0 flex-1 rounded-md bg-muted/20 text-xs" />
+          <Input value={query} onChange={(event) => { const nextQuery = event.target.value; setQuery(nextQuery); onSearchChange?.(nextQuery); }} placeholder={labels.searchPlaceholder} className="h-9 min-w-0 flex-1 rounded-md bg-muted/20 text-xs" />
           {onNewOrder ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild><Button type="button" variant="outline" size="sm" className="h-9 gap-1 text-xs"><Plus className="size-3.5" /> New <ChevronDown className="size-3.5" /></Button></DropdownMenuTrigger>

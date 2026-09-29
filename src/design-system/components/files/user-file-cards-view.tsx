@@ -53,6 +53,7 @@ export interface UserFileCardsViewProps {
   showCategoryFilters?: boolean
   initialCategory?: string
   onCategoryChange?: (category: string) => void
+  externalSearchQuery?: string
   className?: string
 }
 
@@ -72,6 +73,7 @@ export function UserFileCardsView({
   showCategoryFilters = false,
   initialCategory = 'all',
   onCategoryChange,
+  externalSearchQuery = '',
   className,
 }: UserFileCardsViewProps) {
   const [searchQuery, setSearchQuery] = useState('')
@@ -119,9 +121,14 @@ export function UserFileCardsView({
 
       // 3. Search Filter
       const matchSearch =
-        !searchQuery.trim() ||
-        f.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (f.folderPath && f.folderPath.toLowerCase().includes(searchQuery.toLowerCase()))
+        [externalSearchQuery, searchQuery].every((query) => {
+          const normalizedQuery = query.trim().toLowerCase()
+          return (
+            !normalizedQuery ||
+            f.fileName.toLowerCase().includes(normalizedQuery) ||
+            (f.folderPath && f.folderPath.toLowerCase().includes(normalizedQuery))
+          )
+        })
 
       return matchCategory && matchSearch
     })
