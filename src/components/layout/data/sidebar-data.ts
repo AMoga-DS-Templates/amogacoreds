@@ -11,6 +11,7 @@ import {
   Link,
   Ticket,
   ClipboardList,
+  FolderOpen,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -57,6 +58,11 @@ export const sidebarData: SidebarData = {
           title: 'Order Template',
           url: '/ordertemplate',
           icon: ClipboardList,
+        },
+        {
+          title: 'Files Template',
+          url: '/filestempalte',
+          icon: FolderOpen,
         },
         {
           title: 'AI Chat',

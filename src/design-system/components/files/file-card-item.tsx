@@ -48,6 +48,7 @@ export interface FileItemData {
   senderName?: string
   senderEmail?: string
   section?: string
+  requiresAction?: boolean
 }
 
 export interface FileCardItemProps {

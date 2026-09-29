@@ -10,6 +10,7 @@
 import React from 'react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import { FileExplorer } from '@/components/base-ui/file-explorer'
 import { OrderRecords } from '@/components/order-custom-components/order-table'
 import { OrderApprovedRecords } from '@/components/order-custom-components/order-table/approved'
 import { OrderPanel } from '@/components/order-custom-components/order-panel'
@@ -867,6 +868,55 @@ export default function FolderTreeDemo() {
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ KANBAN BOARD SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
   {
+    id: 'file-explorer',
+    name: 'File Explorer',
+    category: 'Files',
+    badge: 'Custom File Explorer',
+    description: 'Compact nested file explorer matching the Message page file category, with expandable folders, file counts, search state, and active-folder highlighting.',
+    filePath: 'src/components/base-ui/file-explorer.tsx',
+    states: [
+      { label: 'Expanded Folder Tree', description: 'Three-level Chat, user workspace, and category folder navigation' },
+      { label: 'Active Folder', description: 'Selected folder with indigo highlight and left accent bar' },
+      { label: 'Search Empty State', description: 'No matching folders message for filtered results' },
+      { label: 'Video Folder Selected', description: 'Selected Videos category matching the supplied reference design' },
+    ],
+    renderPreview: (si) => {
+      const sampleFolders = [
+        { id: 'Chat', name: 'Chat', fileCount: 7, level: 0 },
+        { id: 'user-email', name: 'n.rajukrishna@gmail.com', fileCount: 7, parentId: 'Chat', level: 1 },
+        { id: 'Images', name: 'Images', fileCount: 0, parentId: 'user-email', level: 2 },
+        { id: 'Pdf', name: 'Pdf', fileCount: 0, parentId: 'user-email', level: 2 },
+        { id: 'Doc', name: 'Doc', fileCount: 0, parentId: 'user-email', level: 2 },
+        { id: 'Xls', name: 'Xls', fileCount: 0, parentId: 'user-email', level: 2 },
+        { id: 'Videos', name: 'Videos', fileCount: 0, parentId: 'user-email', level: 2 },
+      ]
+
+      return (
+        <div className='mx-auto my-auto w-full max-w-sm rounded-2xl border border-border/80 bg-background p-2 shadow-md'>
+          <FileExplorer
+            folders={sampleFolders}
+            selectedFolderId={si === 3 ? 'Videos' : si === 1 ? 'Pdf' : null}
+            defaultExpandedFolderIds={['Chat', 'user-email']}
+            isSearching={si === 2}
+            searchQuery='Invoices'
+            onToggleExpand={(id) => { toast.info(`Toggle folder: ${id}`) }}
+            onSelectFolder={(folder) => { toast.info(`Selected folder: ${folder.name}`) }}
+          />
+        </div>
+      )
+    },
+    usageCode: () => `import { FileExplorer } from '@/components/base-ui/file-explorer'
+
+<FileExplorer
+  folders={folders}
+  selectedFolderId={selectedFolderId}
+  expandedFolderIds={expandedFolderIds}
+  onToggleExpand={(folderId) => toggleFolder(folderId)}
+  onSelectFolder={(folder) => selectFolder(folder)}
+/>`,
+  },
+
+  {
     id: 'complete-kanban-board',
     name: 'Complete Kanban Board Template',
     category: 'Kanban Board',
@@ -949,12 +999,12 @@ export default function NewVoucherPage() {
     description: 'Reusable Purchase Order and Approved panel with sticky controls and independently scrolling cards.',
     filePath: 'src/components/order-custom-components/order-panel/index.tsx',
     states: [{ label: 'Order Card Panel', description: 'Sticky tabs, search, New action, filters, and mock financial-year cards' }],
-    renderPreview: () => <div className='mx-auto h-[620px] w-full max-w-md overflow-hidden rounded-xl border'><OrderPanel records={mockOrderPanelRecords} approvedRecords={mockApprovedOrderPanelRecords} /></div>,
+    renderPreview: () => <div className='mx-auto h-[620px] w-full max-w-md overflow-hidden rounded-xl border'><OrderPanel records={mockOrderPanelRecords} approvedRecords={mockApprovedOrderPanelRecords} tabs={[{ value: 'purchase-order', label: 'Purchase Order' }, { value: 'approved', label: 'Approved' }]} labels={{ searchPlaceholder: 'Search PurchaseOrder...', newAction: 'Purchase Order' }} /></div>,
     usageCode: () => `import { OrderPanel } from '@/components/order-custom-components/order-panel'
 import { mockOrderPanelRecords, mockApprovedOrderPanelRecords } from '@/features/MessageComponentGallery/mocks/order-panel.mock'
 
 export default function OrderPanelExample() {
-  return <div className='h-[620px]'><OrderPanel records={mockOrderPanelRecords} approvedRecords={mockApprovedOrderPanelRecords} /></div>
+  return <div className='h-[620px]'><OrderPanel records={mockOrderPanelRecords} approvedRecords={mockApprovedOrderPanelRecords} tabs={[{ value: 'purchase-order', label: 'Purchase Order' }, { value: 'approved', label: 'Approved' }]} labels={{ searchPlaceholder: 'Search PurchaseOrder...', newAction: 'Purchase Order' }} /></div>
 }`,
   },
 

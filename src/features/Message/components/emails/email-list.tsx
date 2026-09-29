@@ -8,9 +8,9 @@ import {
   Sparkles,
   Bot,
   ClipboardList,
-  FolderOpen,
   FileText,
 } from 'lucide-react'
+import { FileExplorer } from '@/components/base-ui/file-explorer'
 import { useNotificationStore, DbNotification } from '@/stores/notification-store'
 import { useVoucherStore, SavedVoucher } from '@/stores/voucher-store'
 import { Conversation } from '@/features/chattemplate/chat/types/chat.types'
@@ -30,7 +30,6 @@ import {
   NotificationCardItem,
   AiCardItem,
   TaskCardItem,
-  FolderTreeItem,
 } from '../sidebar'
 
 interface EmailListProps {
@@ -722,20 +721,6 @@ export function EmailList({
               {/* Storage Folders List for File Tab (File Explorer) */}
               {categoryFilter === 'vouchers' && onSelectFile && (
                 <>
-                  {!isCollapsed && (
-                    <div className='flex items-center justify-between px-3 pt-2 pb-0.5'>
-                      <div className='flex items-center gap-1.5'>
-                        <FolderOpen className='h-3 w-3 shrink-0 text-indigo-500' />
-                        <span className='text-[10px] font-semibold text-muted-foreground/60 uppercase'>
-                          File Explorer
-                        </span>
-                      </div>
-                      <span className='text-[10px] text-muted-foreground/50'>
-                        {userFolders.length}
-                      </span>
-                    </div>
-                  )}
-
                   {activeTab === 'file-recent' ? (
                     <div className='mx-3 my-2 rounded-xl border border-dashed border-border/80 bg-muted/20 px-4 py-6 text-center text-xs text-muted-foreground'>
                       <FileText className='mx-auto h-7 w-7 opacity-30 mb-2 text-indigo-500' />
@@ -747,46 +732,19 @@ export function EmailList({
                       </p>
                     </div>
                   ) : (
-                    <div className='flex flex-col gap-0.5 px-2 py-1'>
-                      {filteredUserFolders.length === 0 && isSearchingFolders ? (
-                        <div className='py-4 px-3 text-center text-xs text-muted-foreground'>
-                          No folders matching "{searchQuery}"
-                        </div>
-                      ) : (
-                        filteredUserFolders.map((folder) => {
-                          const isFolderActive =
-                            selectedFolderId === folder.id
-                          const isLevel0 = folder.level === 0
-                          const isLevel1 = folder.level === 1
-                          const isLevel2 = folder.level === 2
-
-                          const isExpanded = expandedFolderIds.has(folder.id)
-                          const isVisible =
-                            isSearchingFolders ||
-                            isLevel0 ||
-                            (isLevel1 && expandedFolderIds.has('Chat')) ||
-                            (isLevel2 &&
-                              expandedFolderIds.has('Chat') &&
-                              expandedFolderIds.has(folder.parentId || ''))
-
-                          if (!isVisible) return null
-
-                          return (
-                            <FolderTreeItem
-                              key={folder.id}
-                              folder={folder}
-                              isFolderActive={isFolderActive}
-                              isExpanded={isExpanded}
-                              onToggleExpand={toggleFolderExpand}
-                              onSelectFolder={(f) => {
-                                onSelectFolder?.(f)
-                                onSelectFile?.()
-                              }}
-                            />
-                          )
-                        })
-                      )}
-                    </div>
+                    <FileExplorer
+                      folders={filteredUserFolders}
+                      selectedFolderId={selectedFolderId}
+                      expandedFolderIds={expandedFolderIds}
+                      showHeader={!isCollapsed}
+                      isSearching={isSearchingFolders}
+                      searchQuery={searchQuery}
+                      onToggleExpand={toggleFolderExpand}
+                      onSelectFolder={(folder) => {
+                        onSelectFolder?.(folder)
+                        onSelectFile?.()
+                      }}
+                    />
                   )}
                 </>
               )}

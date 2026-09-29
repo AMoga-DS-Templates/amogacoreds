@@ -50,6 +50,9 @@ export interface UserFileCardsViewProps {
   onUploadClick?: () => void
   onBack?: () => void
   onClose?: () => void
+  showCategoryFilters?: boolean
+  initialCategory?: string
+  onCategoryChange?: (category: string) => void
   className?: string
 }
 
@@ -66,10 +69,13 @@ export function UserFileCardsView({
   onUploadClick,
   onBack,
   onClose,
+  showCategoryFilters = false,
+  initialCategory = 'all',
+  onCategoryChange,
   className,
 }: UserFileCardsViewProps) {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory)
   const [sortBy, setSortBy] = useState<'date' | 'name' | 'size'>('date')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid')
@@ -336,7 +342,7 @@ export function UserFileCardsView({
       </div>
 
       {/* ── 2.5 CATEGORY PILLS BAR ─────────────────────────────────────────── */}
-      {(!folder || folder.level < 2) && (
+      {(showCategoryFilters || !folder || folder.level < 2) && (
         <div className="overflow-x-auto px-4 pb-2 no-scrollbar shrink-0">
           <ToggleGroup
             type="single"
@@ -344,6 +350,7 @@ export function UserFileCardsView({
             onValueChange={(value) => {
               if (!value) return
               setSelectedCategory(value)
+              onCategoryChange?.(value)
               setCurrentPage(1)
             }}
             spacing={2}

@@ -339,6 +339,8 @@ export function OrderTemplateWorkspace({
           <OrderPanel
             records={panelRecords}
             approvedRecords={panelApprovedRecords}
+            tabs={[{ value: "purchase-order", label: "Purchase Order" }, { value: "approved", label: "Approved" }]}
+            labels={{ searchPlaceholder: "Search PurchaseOrder...", newAction: "Purchase Order" }}
             onNewOrder={() => startVoucherCreation("manual")}
             onSelectRecord={(record, section) => {
               if (section === "purchase-order") {
