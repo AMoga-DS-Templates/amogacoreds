@@ -12,6 +12,7 @@ import {
   Ticket,
   ClipboardList,
   FolderOpen,
+  CalendarDays,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -34,6 +35,11 @@ export const sidebarData: SidebarData = {
     {
       title: 'Menu',
       items: [
+        {
+          title: 'Big Calendar',
+          url: '/big-calendar',
+          icon: CalendarDays,
+        },
         {
           title: 'Message',
           url: '/message',
