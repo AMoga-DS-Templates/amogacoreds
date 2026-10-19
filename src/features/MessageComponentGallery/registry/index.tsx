@@ -30,6 +30,13 @@ import {
   OrderViewPreview,
 } from '@/components/order-custom-components/order-table/gallery-previews'
 import MockZrimoViewer from '@/components/zrimo-viewer/MockZrimoViewer'
+import {
+  QuestionnaireAnswerShortcuts,
+  QuestionnaireControlledNavigation,
+  QuestionnaireExplicitSkip,
+  QuestionnaireFreeformAnswer,
+  QuestionnaireMultipleSelection,
+} from '@/components/ui/questionnaire'
 import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
   X,
@@ -195,6 +202,7 @@ import {
 export type GalleryCategory =
   | 'All'
   | 'Wizards'
+  | 'Questions UI'
   | 'Vouchers'
   | 'Kanban Board'
   | 'Data Cards'
@@ -3012,6 +3020,82 @@ export default function QuestionnairePage() {
 }`,
   },
 
+  {
+    id: 'questionnaire-multiple-selection',
+    name: 'Questionnaire - Multiple Selection',
+    category: 'Questions UI',
+    badge: 'Multiple Selection',
+    description: 'Select multiple context sources that may affect the implementation.',
+    filePath: 'src/components/ui/questionnaire/multiple-selection.tsx',
+    states: [{ label: 'Multiple Selection', description: 'Checkbox choices with a Share context action.' }],
+    renderPreview: () => <QuestionnaireMultipleSelection />,
+    usageCode: () => `import { QuestionnaireMultipleSelection } from '@/components/ui/questionnaire'
+
+export default function MultipleSelectionPage() {
+  return <QuestionnaireMultipleSelection />
+}`,
+  },
+  {
+    id: 'questionnaire-freeform-answer',
+    name: 'Questionnaire - Freeform Answer',
+    category: 'Questions UI',
+    badge: 'Freeform Answer',
+    description: 'Fixed choices combined with a custom freeform answer input.',
+    filePath: 'src/components/ui/questionnaire/freeform-answer.tsx',
+    states: [{ label: 'Freeform Answer', description: 'Choices plus a Describe another approach input.' }],
+    renderPreview: () => <QuestionnaireFreeformAnswer />,
+    usageCode: () => `import { QuestionnaireFreeformAnswer } from '@/components/ui/questionnaire'
+
+export default function FreeformAnswerPage() {
+  return <QuestionnaireFreeformAnswer />
+}`,
+  },
+  {
+    id: 'questionnaire-explicit-skip',
+    name: 'Questionnaire - Explicit Skip',
+    category: 'Questions UI',
+    badge: 'Explicit Skip',
+    description: 'Optional questionnaire step that can be intentionally skipped.',
+    filePath: 'src/components/ui/questionnaire/explicit-skip.tsx',
+    states: [{ label: 'Explicit Skip', description: 'Three-step flow with an optional constraints step.' }],
+    renderPreview: () => <QuestionnaireExplicitSkip />,
+    usageCode: () => `import { QuestionnaireExplicitSkip } from '@/components/ui/questionnaire'
+
+export default function ExplicitSkipPage() {
+  return <QuestionnaireExplicitSkip />
+}`,
+  },
+  {
+    id: 'questionnaire-answer-shortcuts',
+    name: 'Questionnaire - Answer Shortcuts',
+    category: 'Questions UI',
+    badge: 'Answer Shortcuts',
+    description: 'Keyboard letter shortcuts for selecting questionnaire answers.',
+    filePath: 'src/components/ui/questionnaire/answer-shortcuts.tsx',
+    states: [{ label: 'Answer Shortcuts', description: 'Use A or B to select an answer.' }],
+    renderPreview: () => <QuestionnaireAnswerShortcuts />,
+    usageCode: () => `import { QuestionnaireAnswerShortcuts } from '@/components/ui/questionnaire'
+
+export default function AnswerShortcutsPage() {
+  return <QuestionnaireAnswerShortcuts />
+}`,
+  },
+  {
+    id: 'questionnaire-controlled-navigation',
+    name: 'Questionnaire - Controlled Navigation',
+    category: 'Questions UI',
+    badge: 'Controlled Navigation',
+    description: 'Host-controlled active question state with Previous, Next, and Submit actions.',
+    filePath: 'src/components/ui/questionnaire/controlled-navigation.tsx',
+    states: [{ label: 'Controlled Navigation', description: 'The host owns the active questionnaire item.' }],
+    renderPreview: () => <QuestionnaireControlledNavigation />,
+    usageCode: () => `import { QuestionnaireControlledNavigation } from '@/components/ui/questionnaire'
+
+export default function ControlledNavigationPage() {
+  return <QuestionnaireControlledNavigation />
+}`,
+  },
+
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ DATE PICKER SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   {
     id: 'date-picker-simple',
@@ -3243,6 +3327,7 @@ export const galleryRegistry: GalleryEntry[] = registeredGalleryEntries.filter((
 export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'All',
   'Wizards',
+  'Questions UI',
   'Vouchers',
   'Kanban Board',
   'Data Cards',

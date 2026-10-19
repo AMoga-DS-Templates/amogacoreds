@@ -28,6 +28,7 @@ import {
   MoreHorizontal,
   CalendarDays,
   Wand2,
+  ListChecks,
   Kanban,
   Ticket,
   BarChart3,
@@ -66,6 +67,7 @@ const VIEWPORT_WIDTHS: Record<Viewport, number | null> = {
 // ─── Category badge colors (shadcn design tokens) ────────────────────────────
 const CATEGORY_COLORS: Record<string, string> = {
   Wizards: 'bg-violet-500/10 text-violet-600 border-violet-200/50 dark:border-violet-900/40 dark:text-violet-400',
+  'Questions UI': 'bg-fuchsia-500/10 text-fuchsia-600 border-fuchsia-200/50 dark:border-fuchsia-900/40 dark:text-fuchsia-400',
   Vouchers: 'bg-indigo-500/10 text-indigo-600 border-indigo-200/50 dark:border-indigo-900/40 dark:text-indigo-400',
   'Kanban Board': 'bg-emerald-500/10 text-emerald-600 border-emerald-200/50 dark:border-emerald-900/40 dark:text-emerald-400',
   'Data Cards': 'bg-teal-500/10 text-teal-600 border-teal-200/50 dark:border-teal-900/40 dark:text-teal-400',
@@ -110,6 +112,12 @@ const CATEGORY_CONFIG: Record<
     activeClass:
       'bg-violet-500/15 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400 border-violet-300/60 dark:border-violet-800/40 font-semibold shadow-2xs',
     badgeClass: 'bg-violet-500/20 text-violet-600 dark:text-violet-400',
+  },
+  'Questions UI': {
+    icon: ListChecks,
+    activeClass:
+      'bg-fuchsia-500/15 text-fuchsia-600 dark:bg-fuchsia-950/40 dark:text-fuchsia-400 border-fuchsia-300/60 dark:border-fuchsia-800/40 font-semibold shadow-2xs',
+    badgeClass: 'bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400',
   },
   Vouchers: {
     icon: Ticket,
