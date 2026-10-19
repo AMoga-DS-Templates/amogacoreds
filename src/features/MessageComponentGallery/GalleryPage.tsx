@@ -76,6 +76,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Charts: 'bg-amber-500/10 text-amber-600 border-amber-200/50 dark:border-amber-900/40 dark:text-amber-400',
   Maps: 'bg-emerald-500/10 text-emerald-600 border-emerald-200/50 dark:border-emerald-900/40 dark:text-emerald-400',
   Mail: 'bg-indigo-500/10 text-indigo-600 border-indigo-200/50 dark:border-indigo-900/40 dark:text-indigo-400',
+  'AI Category': 'bg-amber-500/10 text-amber-600 border-amber-200/50 dark:border-amber-900/40 dark:text-amber-400',
   AI: 'bg-amber-500/10 text-amber-600 border-amber-200/50 dark:border-amber-900/40 dark:text-amber-400',
   Chat: 'bg-emerald-500/10 text-emerald-600 border-emerald-200/50 dark:border-emerald-900/40 dark:text-emerald-400',
   Task: 'bg-purple-500/10 text-purple-600 border-purple-200/50 dark:border-purple-900/40 dark:text-purple-400',
@@ -185,6 +186,12 @@ const CATEGORY_CONFIG: Record<
       'bg-violet-500/15 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400 border-violet-300/60 dark:border-violet-800/40 font-semibold shadow-2xs',
     badgeClass: 'bg-violet-500/20 text-violet-600 dark:text-violet-400',
   },
+  'AI Category': {
+    icon: Sparkles,
+    activeClass:
+      'bg-violet-500/15 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400 border-violet-300/60 dark:border-violet-800/40 font-semibold shadow-2xs',
+    badgeClass: 'bg-violet-500/20 text-violet-600 dark:text-violet-400',
+  },
   Notifications: {
     icon: Bell,
     activeClass:
@@ -289,13 +296,11 @@ export function GalleryPage() {
     return galleryRegistry.filter((entry) => {
       const matchesCategory =
         activeCategory === 'All' || entry.category === activeCategory
-      const q = searchQuery.trim().toLowerCase()
-      const matchesSearch =
-        !q ||
-        entry.name.toLowerCase().includes(q) ||
-        entry.category.toLowerCase().includes(q) ||
-        entry.description.toLowerCase().includes(q) ||
-        entry.id.toLowerCase().includes(q)
+      const terms = searchQuery.trim().toLowerCase().split(/\s+/).filter(Boolean)
+      const searchableText = [entry.name, entry.category, entry.description, entry.id, entry.filePath]
+        .join(' ')
+        .toLowerCase()
+      const matchesSearch = terms.every((term) => searchableText.includes(term))
       return matchesCategory && matchesSearch
     })
   }, [activeCategory, searchQuery])

@@ -46,6 +46,29 @@ import {
   QuestionnaireNavigationState,
   QuestionnaireResume,
 } from '@/components/ui/questionnaire'
+import {
+  AiChainOfThoughtPreview as AiChainOfThought,
+  AiChatPreview as AiChat,
+  AiCheckpointPreview as AiCheckpoint,
+  AiConfirmationPreview as AiConfirmation,
+  AiContextPreview as AiContext,
+  AiFileTreePreview as AiFileTree,
+  AiInlineCitationPreview as AiInlineCitation,
+  AiMessagePreview as AiMessage,
+  AiModelSelectorPreview as AiModelSelector,
+  AiPlanPreview as AiPlan,
+  AiPromptInputPreview as AiPromptInput,
+  AiQueuePreview as AiQueue,
+  AiReasoningPreview as AiReasoning,
+  AiSourcesPreview as AiSources,
+  AiStackTracePreview as AiStackTrace,
+  AiSubagentPreview as AiSubagent,
+  AiSuggestionPreview as AiSuggestion,
+  AiTaskPreview as AiTask,
+  AiTerminalPreview as AiTerminal,
+  AiTestResultsPreview as AiTestResults,
+  AiToolPreview as AiTool,
+} from '@/features/MessageComponentGallery/previews/ai-elements'
 import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
   X,
@@ -224,6 +247,7 @@ export type GalleryCategory =
   | 'Notifications'
   | 'Files'
   | 'Chat'
+  | 'AI Category'
   | 'AI'
   | 'Shared'
   | 'Date Picker'
@@ -312,6 +336,67 @@ const customUiGalleryEntries: GalleryEntry[] = customUiComponents.map(({ name, e
   states: [{ label: name, description: `Interactive ${name} preview` }],
   renderPreview: () => <CustomUiPreview component={name} />,
   usageCode: () => `import { ${exportName} } from '@/components/base-ui/${file.replace(/\.tsx$/, '')}'`,
+}))
+
+const aiElementSpecs: Array<{
+  id: string
+  name: string
+  file: string
+  description: string
+  component: React.ComponentType
+}> = [
+  { id: 'ai-chain-of-thought', name: 'Chain of Thought', file: 'chain-of-thought', description: 'Expandable summary of the steps an agent took.', component: AiChainOfThought },
+  { id: 'ai-chat', name: 'Chat', file: 'chat', description: 'Threaded conversation with user and assistant turns.', component: AiChat },
+  { id: 'ai-checkpoint', name: 'Checkpoint', file: 'checkpoint', description: 'A saved point in a conversation that can be restored.', component: AiCheckpoint },
+  { id: 'ai-confirmation', name: 'Confirmation', file: 'confirmation', description: 'Approve or deny a tool call before it runs.', component: AiConfirmation },
+  { id: 'ai-context', name: 'Context', file: 'context', description: 'Context window usage with a progress indicator.', component: AiContext },
+  { id: 'ai-file-tree', name: 'File Tree', file: 'file-tree', description: 'Compact tree of files changed by the agent.', component: AiFileTree },
+  { id: 'ai-inline-citation', name: 'Inline Citation', file: 'inline-citation', description: 'A source marker that opens its reference inline.', component: AiInlineCitation },
+  { id: 'ai-message', name: 'Message', file: 'message', description: 'One user turn and one assistant response with actions.', component: AiMessage },
+  { id: 'ai-model-selector', name: 'Model Selector', file: 'model-selector', description: 'Picker for the model used by the agent.', component: AiModelSelector },
+  { id: 'ai-plan', name: 'Plan', file: 'plan', description: 'Agent plan with progress and step statuses.', component: AiPlan },
+  { id: 'ai-prompt-input', name: 'Prompt Input', file: 'prompt-input', description: 'Composer with attachments, voice, and send actions.', component: AiPromptInput },
+  { id: 'ai-queue', name: 'Queue', file: 'queue', description: 'Queued, active, and removable agent tasks.', component: AiQueue },
+  { id: 'ai-reasoning', name: 'Reasoning', file: 'reasoning', description: 'Expandable reasoning summary for a streaming response.', component: AiReasoning },
+  { id: 'ai-sources', name: 'Sources', file: 'sources', description: 'Referenced sources displayed as compact cards.', component: AiSources },
+  { id: 'ai-stack-trace', name: 'Stack Trace', file: 'stack-trace', description: 'Tool failure with expandable stack frames.', component: AiStackTrace },
+  { id: 'ai-subagent', name: 'Subagent', file: 'subagent', description: 'Nested agent run with status and result.', component: AiSubagent },
+  { id: 'ai-suggestion', name: 'Suggestion', file: 'suggestion', description: 'One-click prompts for common agent actions.', component: AiSuggestion },
+  { id: 'ai-task', name: 'Task', file: 'task', description: 'Live timeline of the work an agent is doing.', component: AiTask },
+  { id: 'ai-terminal', name: 'Terminal', file: 'terminal', description: 'Streaming terminal command and output panel.', component: AiTerminal },
+  { id: 'ai-test-results', name: 'Test Results', file: 'test-results', description: 'Test suite summary with pass and failure states.', component: AiTestResults },
+  { id: 'ai-tool', name: 'Tool', file: 'tool', description: 'Tool call with input, output, and execution status.', component: AiTool },
+]
+
+const aiElementGalleryEntries: GalleryEntry[] = aiElementSpecs.map((spec) => ({
+  id: `ai-element-${spec.file}`,
+  name: `AI Element - ${spec.name}`,
+  category: 'AI Category',
+  badge: 'AI Element',
+  description: spec.description,
+  filePath: `src/components/ai-category/${spec.file}.tsx`,
+  states: [{ label: spec.name, description: spec.description }],
+  renderPreview: () => (
+    <div className='flex w-full items-center justify-center p-4 sm:p-8'>
+      <spec.component />
+    </div>
+  ),
+  usageCode: () => {
+    const name = `Ai${spec.file.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join('')}`
+    const props: Record<string, string> = {
+      context: 'usage={usage}',
+      'file-tree': 'files={files} selected={selectedPath} onSelect={setSelectedPath}',
+      'inline-citation': 'paragraphs={paragraphs}',
+      message: 'prompt={prompt} reply={reply}',
+      'model-selector': 'providers={providers} efforts={efforts} onSend={handleSend}',
+      'prompt-input': 'providers={providers} efforts={efforts} onSend={handleSend}',
+      suggestion: 'suggestions={suggestions} turn={turn} onSend={handleSend}',
+      chat: 'messages={messages} status={status} onSend={handleSend}',
+      confirmation: 'messages={messages} status={status} onApprovalResponse={handleApproval}',
+      checkpoint: 'messages={messages} status={status} onRestore={handleRestore}',
+    }
+    return `import { ${name} } from '@/components/ai-category/${spec.file}'\n\n<${name} ${props[spec.file] ?? 'messages={messages} status={status}'} />`
+  },
 }))
 
 // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Shared no-op helpers Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
@@ -532,6 +617,7 @@ const baseChartGalleryEntries: GalleryEntry[] = baseChartGallerySpecs.map((spec)
 
 const registeredGalleryEntries: GalleryEntry[] = [
   ...customUiGalleryEntries,
+  ...aiElementGalleryEntries,
   // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ TASK SECTION Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
   {
@@ -3470,6 +3556,7 @@ export const galleryRegistry: GalleryEntry[] = registeredGalleryEntries.filter((
 
 export const GALLERY_CATEGORIES: GalleryCategory[] = [
   'All',
+  'AI Category',
   'Wizards',
   'Questions UI',
   'Vouchers',
