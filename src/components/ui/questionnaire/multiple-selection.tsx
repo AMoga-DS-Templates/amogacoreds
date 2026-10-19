@@ -2,6 +2,11 @@
 
 import * as React from 'react'
 import { Questionnaire } from '@shadcn/react/questionnaire'
+import {
+  questionnaireActionsClassName,
+  questionnaireCardClassName,
+  questionnairePrimaryButtonClassName,
+} from './styles'
 
 const CONTEXT_CHOICES = [
   { value: 'relevant-source-files', label: 'Relevant source files' },
@@ -17,7 +22,7 @@ export function QuestionnaireMultipleSelection() {
   const [selectedAnswers, setSelectedAnswers] = React.useState<string[]>([])
 
   return (
-    <div className='w-full max-w-xl rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6'>
+    <div className={questionnaireCardClassName}>
       <Questionnaire.Root
         items={[
           {
@@ -61,8 +66,8 @@ export function QuestionnaireMultipleSelection() {
           <Questionnaire.Error />
         </Questionnaire.Item>
 
-        <div className='flex justify-end'>
-          <Questionnaire.Submit className='inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90'>
+        <div className={questionnaireActionsClassName}>
+          <Questionnaire.Submit className={questionnairePrimaryButtonClassName}>
             Share context
           </Questionnaire.Submit>
         </div>

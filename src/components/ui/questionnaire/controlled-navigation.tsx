@@ -2,6 +2,12 @@
 
 import * as React from 'react'
 import { Questionnaire } from '@shadcn/react/questionnaire'
+import {
+  questionnaireActionsClassName,
+  questionnaireCardClassName,
+  questionnairePrimaryButtonClassName,
+  questionnaireSecondaryButtonClassName,
+} from './styles'
 
 const SCOPE_CHOICES = [
   { value: 'target', label: 'Only the target component' },
@@ -23,7 +29,7 @@ export function QuestionnaireControlledNavigation() {
   const [submitted, setSubmitted] = React.useState(false)
 
   return (
-    <div className='w-full max-w-xl rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6'>
+    <div className={questionnaireCardClassName}>
       <Questionnaire.Root
         item={item}
         onItemChange={setItem}
@@ -69,10 +75,10 @@ export function QuestionnaireControlledNavigation() {
           <Questionnaire.Error />
         </Questionnaire.Item>
 
-        <div className='flex items-center justify-end gap-2'>
-          <Questionnaire.Previous />
-          <Questionnaire.Next>Next</Questionnaire.Next>
-          <Questionnaire.Submit>Save workflow</Questionnaire.Submit>
+        <div className={questionnaireActionsClassName}>
+          <Questionnaire.Previous className={questionnaireSecondaryButtonClassName} />
+          <Questionnaire.Next className={questionnairePrimaryButtonClassName}>Next</Questionnaire.Next>
+          <Questionnaire.Submit className={questionnairePrimaryButtonClassName}>Save workflow</Questionnaire.Submit>
         </div>
       </Questionnaire.Root>
 

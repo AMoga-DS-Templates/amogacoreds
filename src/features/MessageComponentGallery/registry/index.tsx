@@ -32,10 +32,19 @@ import {
 import MockZrimoViewer from '@/components/zrimo-viewer/MockZrimoViewer'
 import {
   QuestionnaireAnswerShortcuts,
+  QuestionnaireAnimatedItems,
+  QuestionnaireBasic,
+  QuestionnaireCard,
+  QuestionnaireConditionalItems,
   QuestionnaireControlledNavigation,
+  QuestionnaireCustomProgress,
+  QuestionnaireCustomValidation,
+  QuestionnaireDialog,
   QuestionnaireExplicitSkip,
   QuestionnaireFreeformAnswer,
   QuestionnaireMultipleSelection,
+  QuestionnaireNavigationState,
+  QuestionnaireResume,
 } from '@/components/ui/questionnaire'
 import { BaseComponentPreview, baseComponents } from '@/features/basecomponents/BaseComponentsGallery'
 import {
@@ -3021,6 +3030,21 @@ export default function QuestionnairePage() {
   },
 
   {
+    id: 'questionnaire-basic',
+    name: 'Questionnaire - Basic Usage',
+    category: 'Questions UI',
+    badge: 'Basic Usage',
+    description: 'A complete three-step questionnaire with required, multiple-selection, freeform, and skippable answers.',
+    filePath: 'src/components/ui/questionnaire/basic.tsx',
+    states: [{ label: 'Basic Usage', description: 'Build direction, progress update, and start timing questions.' }],
+    renderPreview: () => <QuestionnaireBasic />,
+    usageCode: () => `import { QuestionnaireBasic } from '@/components/ui/questionnaire'
+
+export default function QuestionnaireBasicPage() {
+  return <QuestionnaireBasic />
+}`,
+  },
+  {
     id: 'questionnaire-multiple-selection',
     name: 'Questionnaire - Multiple Selection',
     category: 'Questions UI',
@@ -3093,6 +3117,126 @@ export default function AnswerShortcutsPage() {
 
 export default function ControlledNavigationPage() {
   return <QuestionnaireControlledNavigation />
+}`,
+  },
+  {
+    id: 'questionnaire-custom-validation',
+    name: 'Questionnaire - Custom Validation',
+    category: 'Questions UI',
+    badge: 'Custom Validation',
+    description: 'External validation returns the user to the invalid questionnaire item and displays a custom error.',
+    filePath: 'src/components/ui/questionnaire/custom-validation.tsx',
+    states: [{ label: 'Custom Validation', description: 'Complete answers require a public audience.' }],
+    renderPreview: () => <QuestionnaireCustomValidation />,
+    usageCode: () => `import { QuestionnaireCustomValidation } from '@/components/ui/questionnaire'
+
+export default function CustomValidationPage() {
+  return <QuestionnaireCustomValidation />
+}`,
+  },
+  {
+    id: 'questionnaire-resume',
+    name: 'Questionnaire - Resume',
+    category: 'Questions UI',
+    badge: 'Resume',
+    description: 'Restores a saved active question and default answers with a reset action.',
+    filePath: 'src/components/ui/questionnaire/resume.tsx',
+    states: [{ label: 'Resumed Draft', description: 'Saved choices, note, active step, and reset action.' }],
+    renderPreview: () => <QuestionnaireResume />,
+    usageCode: () => `import { QuestionnaireResume } from '@/components/ui/questionnaire'
+
+export default function ResumePage() {
+  return <QuestionnaireResume />
+}`,
+  },
+  {
+    id: 'questionnaire-conditional-items',
+    name: 'Questionnaire - Conditional Items',
+    category: 'Questions UI',
+    badge: 'Conditional Items',
+    description: 'Disables a cloud-only question until the earlier runtime answer requires it.',
+    filePath: 'src/components/ui/questionnaire/conditional-items.tsx',
+    states: [{ label: 'Conditional Items', description: 'Cloud workspace adds an environment question to the flow.' }],
+    renderPreview: () => <QuestionnaireConditionalItems />,
+    usageCode: () => `import { QuestionnaireConditionalItems } from '@/components/ui/questionnaire'
+
+export default function ConditionalItemsPage() {
+  return <QuestionnaireConditionalItems />
+}`,
+  },
+  {
+    id: 'questionnaire-navigation-state',
+    name: 'Questionnaire - Navigation State',
+    category: 'Questions UI',
+    badge: 'Navigation State',
+    description: 'Uses the active item status to disable Next until the current question is answered.',
+    filePath: 'src/components/ui/questionnaire/navigation-state.tsx',
+    states: [{ label: 'Navigation State', description: 'Next stays disabled while the active question is unanswered.' }],
+    renderPreview: () => <QuestionnaireNavigationState />,
+    usageCode: () => `import { QuestionnaireNavigationState } from '@/components/ui/questionnaire'
+
+export default function NavigationStatePage() {
+  return <QuestionnaireNavigationState />
+}`,
+  },
+  {
+    id: 'questionnaire-custom-progress',
+    name: 'Questionnaire - Custom Progress',
+    category: 'Questions UI',
+    badge: 'Custom Progress',
+    description: 'Uses the Progress render state to display a custom checkpoint indicator.',
+    filePath: 'src/components/ui/questionnaire/custom-progress.tsx',
+    states: [{ label: 'Custom Progress', description: 'Four-step workflow with a Checkpoint X of Y indicator.' }],
+    renderPreview: () => <QuestionnaireCustomProgress />,
+    usageCode: () => `import { QuestionnaireCustomProgress } from '@/components/ui/questionnaire'
+
+export default function CustomProgressPage() {
+  return <QuestionnaireCustomProgress />
+}`,
+  },
+  {
+    id: 'questionnaire-animated-items',
+    name: 'Questionnaire - Animated Items',
+    category: 'Questions UI',
+    badge: 'Animated Items',
+    description: 'Animates the active question while keeping progress and navigation stationary.',
+    filePath: 'src/components/ui/questionnaire/animated-items.tsx',
+    states: [{ label: 'Animated Items', description: 'The active question fades and slides in when navigation changes.' }],
+    renderPreview: () => <QuestionnaireAnimatedItems />,
+    usageCode: () => `import { QuestionnaireAnimatedItems } from '@/components/ui/questionnaire'
+
+export default function AnimatedItemsPage() {
+  return <QuestionnaireAnimatedItems />
+}`,
+  },
+  {
+    id: 'questionnaire-card',
+    name: 'Questionnaire - Card',
+    category: 'Questions UI',
+    badge: 'Card',
+    description: 'Composes Questionnaire with Card sections while preserving semantic titles and descriptions.',
+    filePath: 'src/components/ui/questionnaire/card.tsx',
+    states: [{ label: 'Card Composition', description: 'Card header, content, action, and footer slots around the questionnaire.' }],
+    renderPreview: () => <QuestionnaireCard />,
+    usageCode: () => `import { QuestionnaireCard } from '@/components/ui/questionnaire'
+
+export default function QuestionnaireCardPage() {
+  return <QuestionnaireCard />
+}`,
+  },
+  {
+    id: 'questionnaire-dialog',
+    name: 'Questionnaire - Dialog',
+    category: 'Questions UI',
+    badge: 'Dialog',
+    description: 'Composes Questionnaire inside a Dialog while keeping cancellation separate from Skip and navigation.',
+    filePath: 'src/components/ui/questionnaire/dialog.tsx',
+    states: [{ label: 'Dialog Composition', description: 'Open a clarification flow inside a dismissible dialog.' }],
+    renderPreview: () => <QuestionnaireDialog />,
+    usageCode: () => `import { QuestionnaireDialog } from '@/components/ui/questionnaire'
+
+export default function QuestionnaireDialogPage() {
+  return <QuestionnaireDialog />
 }`,
   },
 

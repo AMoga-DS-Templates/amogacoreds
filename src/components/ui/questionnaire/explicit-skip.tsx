@@ -5,6 +5,12 @@ import {
   Questionnaire,
   type QuestionnaireItemStatus,
 } from '@shadcn/react/questionnaire'
+import {
+  questionnaireActionsClassName,
+  questionnaireCardClassName,
+  questionnairePrimaryButtonClassName,
+  questionnaireSecondaryButtonClassName,
+} from './styles'
 
 const CHANGE_CHOICES = [
   { value: 'new-feature', label: 'New feature' },
@@ -33,7 +39,7 @@ export function QuestionnaireExplicitSkip() {
   const [submitted, setSubmitted] = React.useState(false)
 
   return (
-    <div className='w-full max-w-xl rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6'>
+    <div className={questionnaireCardClassName}>
       <Questionnaire.Root
         items={[
           { name: 'change', required: true, choices: CHANGE_CHOICES },
@@ -105,11 +111,11 @@ export function QuestionnaireExplicitSkip() {
           <Questionnaire.Error />
         </Questionnaire.Item>
 
-        <div className='flex items-center justify-end gap-2'>
-          <Questionnaire.Previous />
-          <Questionnaire.Skip>Skip</Questionnaire.Skip>
-          <Questionnaire.Next>Next</Questionnaire.Next>
-          <Questionnaire.Submit>Submit brief</Questionnaire.Submit>
+        <div className={questionnaireActionsClassName}>
+          <Questionnaire.Previous className={questionnaireSecondaryButtonClassName} />
+          <Questionnaire.Skip className={questionnaireSecondaryButtonClassName}>Skip</Questionnaire.Skip>
+          <Questionnaire.Next className={questionnairePrimaryButtonClassName}>Next</Questionnaire.Next>
+          <Questionnaire.Submit className={questionnairePrimaryButtonClassName}>Submit brief</Questionnaire.Submit>
         </div>
       </Questionnaire.Root>
 

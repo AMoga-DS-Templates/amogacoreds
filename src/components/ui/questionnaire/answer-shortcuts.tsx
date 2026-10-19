@@ -2,6 +2,11 @@
 
 import * as React from 'react'
 import { Questionnaire } from '@shadcn/react/questionnaire'
+import {
+  questionnaireActionsClassName,
+  questionnaireCardClassName,
+  questionnairePrimaryButtonClassName,
+} from './styles'
 
 const REVIEW_CHOICES = [
   { value: 'api', label: 'Public API' },
@@ -12,7 +17,7 @@ export function QuestionnaireAnswerShortcuts() {
   const [selectedAnswer, setSelectedAnswer] = React.useState<string | null>(null)
 
   return (
-    <div className='w-full max-w-xl rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6'>
+    <div className={questionnaireCardClassName}>
       <Questionnaire.Root
         shortcuts='letters'
         items={[{ name: 'review', required: true, choices: REVIEW_CHOICES }]}
@@ -43,8 +48,8 @@ export function QuestionnaireAnswerShortcuts() {
           </Questionnaire.Choices>
           <Questionnaire.Error />
         </Questionnaire.Item>
-        <div className='flex justify-end'>
-          <Questionnaire.Submit className='inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90'>
+        <div className={questionnaireActionsClassName}>
+          <Questionnaire.Submit className={questionnairePrimaryButtonClassName}>
             Confirm action
           </Questionnaire.Submit>
         </div>
